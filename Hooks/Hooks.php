@@ -1,0 +1,183 @@
+<?php
+
+//aqui van los hooks
+
+$courrentClass = '';
+
+function cm_page($array){
+    $views = new Views();
+
+    array_key_exists('page_title',$array) ? $data['page_title'] = $array['page_title'] : "Pagina sin nombre";
+    array_key_exists('page_id',$array) ? $data['page_id'] = $array['page_id'] : 0;
+    if (array_key_exists('script',$array)) {
+        $data['script'] = $array['script'];
+    }
+    
+    if (array_key_exists('view',$array) && array_key_exists('class',$array)) {
+        $courrentClass = $array['class'];
+        if (isset($data)) {
+            $views->getView($courrentClass,$array['view'], $data);
+        }else{
+            //$views->getView($array['class'],$array['view']);
+        }
+    }
+}
+
+// Sección controllers
+
+function cm_get($array){
+
+    if (array_key_exists('model',$array)){
+        $arrData = $array['model'];
+    }else{
+        $arrData = array('status' => false, 'msg' => 'undefined model');
+    }
+
+    echo json_encode($arrData, JSON_UNESCAPED_UNICODE);
+} 
+
+function cm_model($array){
+
+    if (array_key_exists('model',$array)){
+
+        if(array_key_exists('return', $array)){
+            if (array_key_exists('true', $array['return'])) {
+                $responseType = gettype($array['model']);
+
+                if ($responseType == 'boolean') {
+                    if ($array['model']) {
+                        $arrData = array('status' => true, 'msg' => $array['return']['true']['msg'], 'data' => $array['model']);
+                    }else{
+                        $arrData = array('status' => false, 'msg' => $array['return']['false']['msg']);
+                    }
+                }
+
+                if ($responseType == 'array') {
+                    if ($array['model']['status']) {
+                        if (array_key_exists('showData', $array['return']['true'])) {
+                            $array['return']['true']['showData'] == 'true' ? $data = $array['model'] : $data = '';
+                            $arrData = array('status' => true, 'msg' => $array['return']['true']['msg'], 'data' => $data);
+                        }else{
+                            $arrData = array('status' => true, 'msg' => $array['return']['true']['msg']);
+                        }
+                    }else{
+                        if (array_key_exists('showData', $array['return']['false'])) {
+                            $array['return']['false']['showData'] == 'true' ? $data = $array['model'] : $data = '';
+                            $arrData = array('status' => false, 'msg' => $array['return']['false']['msg'], 'data' => $data);
+                        }else{
+                            $arrData = array('status' => false, 'msg' => $array['return']['false']['msg']);
+                        }
+                    }
+                }
+
+                if ($responseType == 'integer') {
+                    if ($array['model'] > 0) {
+                        $arrData = array('status' => true, 'msg' => $array['return']['true']['msg'], 'data' => $array['model']);
+                    }else{
+                        $arrData = array('status' => false, 'msg' => $array['return']['false']['msg']);
+                    }
+                }
+
+                if ($responseType == 'string') {
+                    try {
+                        $res = intval($array['model']);
+                        if ($res == 0) {
+                            if (array_key_exists('showData', $array['return']['true'])) {
+                                $array['return']['true']['showData'] == 'true' ? $data = $array['model'] : $data = '';
+                                $arrData = array('status' => true, 'msg' => $array['return']['true']['msg'], 'data' => $data);
+                            }else{
+                                $arrData = array('status' => true, 'msg' => $array['return']['true']['msg']);
+                            }
+                        }
+                        
+                    }catch(Exception $e){
+                        $arrData = $array['model'];
+                    }
+                }
+            }
+        }else{
+            $arrData = $array['model'];
+        }
+    }else{
+        $arrData = array('status' => false, 'msg' => 'undefined model');
+    }
+    echo json_encode($arrData, JSON_UNESCAPED_UNICODE);
+}
+
+function cm_set($array){
+
+    if (array_key_exists('type',$array) && $array['type'] == 'post') {
+        $data = $array['data'];
+        $fields = array();
+        $requiredFields = array();
+        $requiredFieldsCount = 0;
+        foreach ($data as $key => $value) {
+            if ($value['required'] == true) {
+                $requiredFieldsCount++;
+                if (check_post($key)) {
+                    array_push($fields, $_POST[$key]);
+                    array_push($requiredFields, $_POST[$key]);
+                }
+            }else{
+                if (array_key_exists('value',$value)) {
+                    array_push($fields, $value['value']);
+                }
+            }
+        }
+
+        if (count($requiredFields) != $requiredFieldsCount) {
+            if (array_key_exists('error_required_msg',$array)) {
+                $arrData = array('status' => false, 'msg' => $array['error_required_msg']);
+            }else{
+                $arrData = array('status' => false, 'msg' => 'Debe llenar todos los campos');
+            }
+        }else{
+            if (array_key_exists('mysql_type',$array)) {
+                $mysql = new Mysql();
+                if ($array['mysql_type'] == 'insert') {
+                    $arrData = $mysql->insert($array['sql'], $fields);
+                }
+                if ($array['mysql_type'] == 'update') {
+                    $arrData = $mysql->update($array['sql'], $fields);
+                }
+            }
+        }
+    }else{
+        $arrData = array('status' => false, 'msg' => 'undefined');
+    }
+    return $arrData;
+} 
+
+
+//Seccion models
+
+function cm_select($array){
+    if (array_key_exists('all',$array) && array_key_exists('sql',$array)) {
+        $mysql = new Mysql();
+        if ($array['all'] == 'true') {
+            $request = $mysql->select_all($array['sql']);
+        }else{
+            $request = $mysql->select($array['sql']);
+        }
+    }
+    return $request;
+}
+
+//Actualizar registro
+function cm_update($array){
+    if (array_key_exists('sql',$array) && array_key_exists('arrData',$array)) {
+        $mysql = new Mysql();
+        $request = $mysql->update($array['sql'], $array['arrData']);
+    }
+    return $request;
+}
+
+//eliminar registro
+function cm_delete($array){
+    if (array_key_exists('sql',$array)) {
+        $mysql = new Mysql();
+        $request = $mysql->delete($array['sql']);
+    }
+    return $request;
+}
+

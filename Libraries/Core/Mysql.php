@@ -40,6 +40,15 @@ class Mysql extends Conexion{
         return $data;
     }
 
+    public function select_values(string $query, array $arrValues){
+        $this->strquery = $query;
+        $this->arrValues = $arrValues;
+        $result = $this->conexion->prepare($this->strquery);
+        $result->execute($this->arrValues);
+        $data = $result->fetch(PDO::FETCH_ASSOC);
+        return $data;
+    }
+
     public function update(string $query, array $arrValues){
         $this->strquery = $query;
         $this->arrValues = $arrValues;

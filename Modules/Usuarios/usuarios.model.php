@@ -7,11 +7,19 @@ function insertUsuario(){
         'data' => array(
             'id' => array('required' => false, 'value' => uniqid('',true)),
             'txtDocumento' => array('required' => true),
+            'tipoDocumento' => array('required' => true),
             'txtNombre' => array('required' => true),
             'txtApellido' => array('required' => true),
+            'txtEmail' => array('required' => true),
+            'txtPass' => array('required' => true, 'encrypt' => true),
             'status' => array('required' => false, 'value' => 1),
         ),
-        'sql' => "INSERT INTO usuarios (id, documento,nombres, apellidos, status) VALUES (?, ?, ?, ?, ?)",
+        'prevent_exist' => array(
+            'data' => array('txtDocumento','txtEmail'),
+            'query' => "SELECT * FROM usuarios WHERE documento = ? OR email = ?",
+            'error_exist_msg' => 'Ya existe un usuario con ese documento o Correo electronico',
+        ),
+        'sql' => "INSERT INTO usuarios (id, documento, tipo_documento,nombres, apellidos, email, password, status) VALUES (?, ?, ?, ?, ?)",
         'error_required_msg' => 'Debe insertar todos los datos',
     ));
     return $setUsuario;
@@ -23,6 +31,30 @@ function getUsuarios(){
         'sql' => "SELECT * FROM usuarios WHERE status > 0",
     ));
     return $getUsuarios;
+}
+
+function getUsuario($id){
+    $getUsuario = cm_select(array(
+        'all' => 'true',
+        'sql' => "SELECT * FROM usuarios WHERE id = '$id' AND status > 0",
+    ));
+    return $getUsuario;
+}
+
+function updateUsuario($id){
+    $setUsuario = cm_set(array(
+        'type' => 'post',
+        'mysql_type' => 'update',
+        'data' => array(
+            'txtNombre' => array('required' => true),
+            'txtApellido' => array('required' => true),
+            'txtEmail' => array('required' => true),
+            'txtPass' => array('required' => true, 'encrypt' => true),
+        ),
+        'sql' => "UPDATE usuarios SET nombres = ?, apellidos = ?, email = ?, password = ? WHERE id = '$id'",
+        'error_required_msg' => 'Debe insertar todos los datos',
+    ));
+    return $setUsuario;
 }
 
 function deleteUsuario($id){

@@ -62,8 +62,11 @@ function cm_model($array){
                         }
                     }else{
                         if (array_key_exists('showData', $array['return']['false'])) {
-                            $array['return']['false']['showData'] == 'true' ? $data = $array['model'] : $data = '';
-                            $arrData = array('status' => false, 'msg' => $array['return']['false']['msg'], 'data' => $data);
+                            if ($array['return']['false']['showData'] == 'true') {
+                                $arrData = $array['model'];
+                            }else{
+                                $arrData = array('status' => false, 'msg' => $array['return']['false']['msg']);
+                            }
                         }else{
                             $arrData = array('status' => false, 'msg' => $array['return']['false']['msg']);
                         }
@@ -104,6 +107,9 @@ function cm_model($array){
     echo json_encode($arrData, JSON_UNESCAPED_UNICODE);
 }
 
+//TODO: SANITIZAR LOS $_POST
+//Analizar tema de campos no requeridos si guardan
+//hash de pasword
 function cm_set($array){
 
     if (array_key_exists('type',$array) && $array['type'] == 'post') {
@@ -134,11 +140,27 @@ function cm_set($array){
         }else{
             if (array_key_exists('mysql_type',$array)) {
                 $mysql = new Mysql();
-                if ($array['mysql_type'] == 'insert') {
-                    $arrData = $mysql->insert($array['sql'], $fields);
+                $exist = false;
+
+                if (array_key_exists('prevent_exist',$array)) {
+                    $prevent_data_fields = $array['prevent_exist']['data'];
+                    $prevent_fields = array();
+                    foreach ($prevent_data_fields as $key => $value) {
+                        array_push($prevent_fields, $_POST[$value]);
+                    }
+                    $query = $mysql->select_values($array['prevent_exist']['query'], $prevent_fields);
+                    empty($query) ? $exist = false : $exist = true;
                 }
-                if ($array['mysql_type'] == 'update') {
-                    $arrData = $mysql->update($array['sql'], $fields);
+
+                if (!$exist) {
+                    if ($array['mysql_type'] == 'insert') {
+                        $arrData = $mysql->insert($array['sql'], $fields);
+                    }
+                    if ($array['mysql_type'] == 'update') {
+                        $arrData = $mysql->update($array['sql'], $fields);
+                    }
+                }else{
+                    $arrData = array('status' => false, 'msg' => $array['prevent_exist']['error_exist_msg']);
                 }
             }
         }

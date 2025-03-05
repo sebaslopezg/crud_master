@@ -5,7 +5,7 @@ setModal({
     modal: 'crearUsuarioModal',
     ids: ['titleModal','btnEnviar'],
     values: ['Crear Usuario','Enviar'],
-    fields: ['txtDocumento','txtNombre','txtApellido'],
+    fields: ['txtDocumento','txtNombre','txtApellido','txtPass','txtEmail'],
 })
 
 setSubmit({
@@ -46,13 +46,21 @@ function actualizarTabla(){
                 }
             },
             update:{
-                src: '/',
+                src: '/usuarios/actualizarUsuario',
                 text: '',
                 icon:'pencil',
                 form: 'frmCrearUsuario',
                 modal:{
                     id:'crearUsuarioModal',
-                    src_element: '',
+                    src_element: '/usuarios/traerUsuario/',
+                    setValues:{
+                        ids:['txtDocumento','txtNombre','txtApellido','txtPass','txtEmail'],
+                        values:['documento','nombres','apellidos','password','email']
+                    },
+                    replace:{
+                        ids:['btnEnviar', 'titleModal'],
+                        values:['Actualizar', 'Actualizar Usuario']
+                      }
                 }
             },
         }

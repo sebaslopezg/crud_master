@@ -8,22 +8,41 @@
       </div>
       <div class="modal-body">
         <form id="frmCrearUsuario" method="POST">
-            <input type="hidden" name="idUsuario" id="idUsuario" value="0">
-
-            <div class="row">
-                <div class="mb-3 col-6">
-                    <label for="txtNombre" class="form-label">Documento</label>
-                    <input type="text" class="form-control" id="txtDocumento" name="txtDocumento">
-                </div>
-                <div class="mb-3 col-6">
-                    <label for="txtApellido" class="form-label">Nombre</label>
-                    <input type="text" class="form-control" id="txtNombre" name="txtNombre">
-                </div>
-                <div class="mb-3 col-6">
-                    <label for="txtApellido" class="form-label">Apellidos</label>
-                    <input type="text" class="form-control" id="txtApellido" name="txtApellido">
-                </div>
+          <div class="row">
+            <div class="mb-3 col-6">
+              <label for="txtNombre" class="form-label">Documento</label>
+              <input type="text" class="form-control" id="txtDocumento" name="txtDocumento">
             </div>
+            <div class="mb-3 col-6">
+              <label for="tipoDocumento" class="form-label">Tipo de documento</label>
+              <select class="form-control" name="tipoDocumento" id="tipoDocumento">
+                <option value="">Cedula</option>
+                <option value="">Tarjeta de identidad</option>
+                <option value="">Pasaporte</option>
+              </select>
+            </div>
+          </div>
+          <div class="row">
+              <div class="mb-3 col-6">
+                  <label for="txtApellido" class="form-label">Nombre</label>
+                  <input type="text" class="form-control" id="txtNombre" name="txtNombre">
+              </div>
+              <div class="mb-3 col-6">
+                  <label for="txtApellido" class="form-label">Apellidos</label>
+                  <input type="text" class="form-control" id="txtApellido" name="txtApellido">
+              </div>
+          </div>
+
+          <div class="row">
+            <div class="mb-3 col-6">
+              <label for="txtApellido" class="form-label">Correo Electronico</label>
+              <input type="text" class="form-control" id="txtEmail" name="txtEmail">
+            </div>
+            <div class="mb-3 col-6">
+              <label for="txtApellido" class="form-label">Contraseña</label>
+              <input type="password" class="form-control" id="txtPass" name="txtPass">
+            </div>
+          </div>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>

@@ -25,7 +25,7 @@ class Usuarios extends Controllers{
                 ),
                 'false' => array(
                     'msg' => 'No se pudo crear el usuario',
-                    'showData' => 'false',
+                    'showData' => 'true',
                 )
             )
         ));
@@ -40,6 +40,22 @@ class Usuarios extends Controllers{
     public function traerUsuario($id){
         cm_model(array(
             'model' => getUsuario($id),
+        ));
+    }
+
+    public function actualizarUsuario($id){
+        cm_model(array(
+            'model' => updateUsuario($id),
+            'return' => array(
+                'true' => array(
+                    'msg' => 'Registro actualizado',
+                    'showData' => 'true',
+                ),
+                'false' => array(
+                    'msg' => 'No se pudo actualizar el registro',
+                    'showData' => 'true',
+                )
+            )
         ));
     }
 

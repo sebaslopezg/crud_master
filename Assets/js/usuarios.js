@@ -54,8 +54,8 @@ function actualizarTabla(){
                     id:'crearUsuarioModal',
                     src_element: '/usuarios/traerUsuario/',
                     setValues:{
-                        ids:['txtDocumento','txtNombre','txtApellido','txtPass','txtEmail'],
-                        values:['documento','nombres','apellidos','password','email']
+                        ids:['txtDocumento','txtNombre','txtApellido','txtEmail'],
+                        values:['documento','nombres','apellidos','email']
                     },
                     replace:{
                         ids:['btnEnviar', 'titleModal'],

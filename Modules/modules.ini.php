@@ -14,6 +14,12 @@ $GLOBALS['navbar'] = array(
         'page_id' => 'usuarios',
     ),
     array(
+        'title' => 'Roles',
+        'icon' => 'file-person',
+        'url' => 'roles',
+        'page_id' => 'roles',
+    ),
+    array(
         'title' => 'Facturacion',
         'icon' => 'person-x',
         'url' => 'facturacion',

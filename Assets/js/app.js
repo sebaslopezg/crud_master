@@ -181,14 +181,29 @@ function setTableFromUri(params){
       }
       
       Object.entries(row).forEach(([key, value]) => {
+
+        let dataValue = value
+
+        if ('replaceData' in params) {
+          params.replaceData.forEach((el) =>{
+            if (key == el.column) {
+              el.values.forEach((elValue, index) =>{
+                if (elValue == value) {
+                  dataValue = el.newValues[index]
+                }
+              })
+            }
+          })
+        }
+
         if('columns' in params){
           params.columns.forEach((column) => {
             if(key == column){
-              html += `<td>${value}</td>`
+              html += `<td>${dataValue}</td>`
             }
           })
         }else{
-          html += `<td>${value}</td>`
+          html += `<td>${dataValue}</td>`
         }
       })
 

@@ -108,7 +108,6 @@ function cm_model($array){
 }
 
 //TODO: SANITIZAR LOS $_POST
-//Analizar tema de campos no requeridos si guardan
 //hash de pasword
 function cm_set($array){
 
@@ -117,16 +116,30 @@ function cm_set($array){
         $fields = array();
         $requiredFields = array();
         $requiredFieldsCount = 0;
+
         foreach ($data as $key => $value) {
-            if ($value['required'] == true) {
+
+            $fieldData;
+            
+            if (array_key_exists('value',$value)) {
+                array_push($fields, $value['value']);
+            }else{
+                if (array_key_exists('hash',$value)) {
+                    $fieldData = hash($value['hash'],strClean($_POST[$key]));
+                }else{
+                    $fieldData = strClean($_POST[$key]);
+                }
+            }
+
+            if ($value['required'] === true) {
                 $requiredFieldsCount++;
                 if (check_post($key)) {
-                    array_push($fields, $_POST[$key]);
-                    array_push($requiredFields, $_POST[$key]);
+                    array_push($fields, $fieldData);
+                    array_push($requiredFields, $fieldData);
                 }
             }else{
-                if (array_key_exists('value',$value)) {
-                    array_push($fields, $value['value']);
+                if (!array_key_exists('value',$value)) {
+                    array_push($fields, $fieldData);
                 }
             }
         }
@@ -146,7 +159,7 @@ function cm_set($array){
                     $prevent_data_fields = $array['prevent_exist']['data'];
                     $prevent_fields = array();
                     foreach ($prevent_data_fields as $key => $value) {
-                        array_push($prevent_fields, $_POST[$value]);
+                        array_push($prevent_fields, strClean($_POST[$value]));
                     }
                     $query = $mysql->select_values($array['prevent_exist']['query'], $prevent_fields);
                     empty($query) ? $exist = false : $exist = true;

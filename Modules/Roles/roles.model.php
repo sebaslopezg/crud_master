@@ -8,7 +8,7 @@ function insertRol(){
             'id' => array('required' => false, 'value' => uniqid('',true)),
             'txtNombre' => array('required' => true),
             'txtDescripcion' => array('required' => false),
-            'status' => array('required'=> false, 'value' => 1),
+            'selStatus' => array('required'=> true),
         ),
         'sql' => "INSERT INTO roles (id, nombre, descripcion, status) VALUES(?,?,?,?)",
         'error_required_msg' => 'Algunos campos son obligatorios',
@@ -39,8 +39,9 @@ function updateRol($id){
         'data' => array(
             'txtNombre' => array('required' => true),
             'txtDescripcion' => array('required' => false),
+            'selStatus' => array('required'=> true),
         ),
-        'sql' => "UPDATE roles SET nombre = ?, descripcion = ? WHERE id = '$id'",
+        'sql' => "UPDATE roles SET nombre = ?, descripcion = ?, status = ? WHERE id = '$id'",
         'error_required_msg' => 'Algunos campos son obligatorios',
     ));
     return $setRol;

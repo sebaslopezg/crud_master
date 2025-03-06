@@ -5,7 +5,7 @@ setModal({
     modal: 'crearRolModal',
     ids: ['titleModal','btnCrear'],
     values:['Crear Rol', 'Guardar'],
-    fields:['txtNombre', 'txtDescripcion'],
+    fields:['txtNombre', 'txtDescripcion','selStatus'],
 })
 
 setSubmit({
@@ -60,8 +60,8 @@ function actualizarTabla(){
                     id:'crearRolModal',
                     src_element:'/roles/listarRolId',
                     setValues:{
-                        ids:['txtNombre','txtDescripcion'],
-                        values:['nombre','descripcion']
+                        ids:['txtNombre','txtDescripcion','selStatus'],
+                        values:['nombre','descripcion','status']
                     },
                     replace:{
                         ids:['titleModal','btnCrear'],
@@ -69,6 +69,15 @@ function actualizarTabla(){
                     },
                 },
             },
+            buttons:[
+                {
+                    text:'',
+                    icon:'',
+                    modal:{
+                        
+                    }
+                }
+            ],
         }
     })
 }

@@ -21,6 +21,16 @@
                     <input type="text" class="form-control" id="txtDescripcion" name="txtDescripcion">
                 </div>
             </div>
+
+            <div class="row">
+                <div class="mb-3 col-12">
+                    <label for="txtDselStatusescripcion" class="form-label">Estado</label>
+                    <select class="form-control" name="selStatus" id="selStatus">
+                      <option value="1">Activo</option>
+                      <option value="2">Inactivo</option>
+                    </select>
+                </div>
+            </div>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>

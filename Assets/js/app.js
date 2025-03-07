@@ -1,6 +1,7 @@
 let submitSet
 let deleteParams = {}
 let updateParams = {}
+let buttonParams = null
 let modalParams = []
 let updating = {
   status: false,
@@ -30,6 +31,16 @@ document.addEventListener('click', (e)=>{
         
       }
     })
+
+    if (buttonParams) {
+      buttonParams.forEach(button =>{
+        if (target.dataset.action == button.btnName) {
+          if ('modal' in button) {
+            $('#'+button.modal.id).modal('show')
+          }
+        }
+      })
+    }
 
     if (target.dataset.action == 'delete'){
       Swal.fire({
@@ -217,6 +228,17 @@ function setTableFromUri(params){
         if ('update' in params.crud) {
           html += ' '
           html += `<button class="btn btn-primary" data-action="update" data-id="${rowId}"> <i class="bi bi-${'icon' in params.crud.update ? params.crud.update.icon : 'trash' }"></i>  ${ 'text' in params.crud.update ? params.crud.update.text : 'Update'}</button>` 
+        }
+
+        if ('buttons' in params.crud) {
+
+          buttonParams = params.crud.buttons
+         
+          params.crud.buttons.forEach(button =>{
+            html += ' '
+            html +=  `<button class="btn ${button.style}" data-action="${button.btnName}" data-id="${rowId}"><i class="bi bi-${button.icon}"></i> ${button.text}</button>`
+          })
+
         }
 
         html += `</td>`

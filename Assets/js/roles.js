@@ -71,10 +71,18 @@ function actualizarTabla(){
             },
             buttons:[
                 {
+                    btnName:'btnPermisosRol',
+                    src:'',
                     text:'',
-                    icon:'',
+                    icon:'key-fill',
+                    style:'btn-secondary',
                     modal:{
-                        
+                        id:'permisosRolModal',
+                        setTable:{
+                            src:'/',
+                            table:'tablePermisosRol',
+                            columns:[''],
+                        }
                     }
                 }
             ],

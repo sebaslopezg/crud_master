@@ -51,6 +51,8 @@
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
+        <form id="frmsetPermisos" method="POST">
+
         
       <table class="table table-striped">
             <thead>
@@ -63,13 +65,6 @@
                 </tr>
             </thead>
             <tbody id="tablePermisosRol">
-              <tr>
-                <td>Facturas</td>
-                <td><div class="form-check form-switch"><input class="form-check-input" type="checkbox" id="flexSwitchCheckChecked" checked=""></div></td>
-                <td><div class="form-check form-switch"><input class="form-check-input" type="checkbox" id="flexSwitchCheckChecked" checked=""></div></td>
-                <td><div class="form-check form-switch"><input class="form-check-input" type="checkbox" id="flexSwitchCheckChecked" checked=""></div></td>
-                <td><div class="form-check form-switch"><input class="form-check-input" type="checkbox" id="flexSwitchCheckChecked" checked=""></div></td>
-              </tr>
             </tbody>
 
         </table>
@@ -78,6 +73,7 @@
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
         <button type="submit" class="btn btn-primary">Guardar</button>
+        </form>
       </div>
     </div>
   </div>

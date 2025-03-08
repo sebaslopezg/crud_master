@@ -8,6 +8,9 @@ setModal({
     fields:['txtNombre', 'txtDescripcion','selStatus'],
 })
 
+//TODO: está facil...
+//Arreglar el submitset para que se pueda agregar varios formularios con varios submits...
+//con el evento e del submit se puede leer el formulario que se envia
 setSubmit({
     form:'frmCrearRol',
     uri:'/roles/crearRol',
@@ -79,9 +82,43 @@ function actualizarTabla(){
                     modal:{
                         id:'permisosRolModal',
                         setTable:{
-                            src:'/',
+                            src:'/permisos/getPermiso',
                             table:'tablePermisosRol',
-                            columns:[''],
+                            columns:['nombre','r','w','u','d'],
+                            replaceData:[
+                                {
+                                    column:'r',
+                                    values:['0','1'],
+                                    newValues:[
+                                        '<div class="form-check form-switch"><input name="r" class="form-check-input" type="checkbox"></div>',
+                                        '<div class="form-check form-switch"><input name="r" class="form-check-input" type="checkbox" checked=""></div>'
+                                    ],
+                                },
+                                {
+                                    column:'w',
+                                    values:['0','1'],
+                                    newValues:[
+                                        '<div class="form-check form-switch"><input name="w" class="form-check-input" type="checkbox"></div>',
+                                        '<div class="form-check form-switch"><input name="w" class="form-check-input" type="checkbox" checked=""></div>'
+                                    ],
+                                },
+                                {
+                                    column:'u',
+                                    values:['0','1'],
+                                    newValues:[
+                                        '<div class="form-check form-switch"><input name="u" class="form-check-input" type="checkbox"></div>',
+                                        '<div class="form-check form-switch"><input name="u" class="form-check-input" type="checkbox" checked=""></div>'
+                                    ],
+                                },
+                                {
+                                    column:'d',
+                                    values:['0','1'],
+                                    newValues:[
+                                        '<div class="form-check form-switch"><input name="d" class="form-check-input" type="checkbox"></div>',
+                                        '<div class="form-check form-switch"><input name="d" class="form-check-input" type="checkbox" checked=""></div>'
+                                    ],
+                                },
+                            ]
                         }
                     }
                 }

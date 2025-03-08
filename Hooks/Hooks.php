@@ -107,8 +107,6 @@ function cm_model($array){
     echo json_encode($arrData, JSON_UNESCAPED_UNICODE);
 }
 
-//TODO: SANITIZAR LOS $_POST
-//hash de pasword
 function cm_set($array){
 
     if (array_key_exists('type',$array) && $array['type'] == 'post') {

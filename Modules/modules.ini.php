@@ -21,19 +21,19 @@ $GLOBALS['navbar'] = array(
     ),
     array(
         'title' => 'Facturacion',
-        'icon' => 'person-x',
+        'icon' => 'receipt-cutoff',
         'url' => 'facturacion',
         'page_id' => 'facturacion',
     ),
     array(
         'title' => 'Inventario',
-        'icon' => 'person-x',
+        'icon' => 'box-seam',
         'url' => 'inventario',
         'page_id' => 'inventario',
     ),
     array(
         'title' => 'Registros',
-        'icon' => 'receipt-cutoff',
+        'icon' => 'journal-text',
         'url' => 'registros',
         'page_id' => 'registros',
     ),

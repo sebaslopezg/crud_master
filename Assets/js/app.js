@@ -1,4 +1,4 @@
-let submitSet
+let submitSet = {}
 let deleteParams = {}
 let updateParams = {}
 let buttonParams = null
@@ -37,6 +37,9 @@ document.addEventListener('click', (e)=>{
         if (target.dataset.action == button.btnName) {
           if ('modal' in button) {
             $('#'+button.modal.id).modal('show')
+            if ('setTable' in button.modal) {
+              setTableButtons(button.modal.setTable, button.modal.id)
+            }
           }
         }
       })
@@ -52,7 +55,6 @@ document.addEventListener('click', (e)=>{
         icon: deleteParams.dialog.icon
       }).then((result) => {
         if (result.isConfirmed) {
-          //Eliminar registro
           deleteFromUri(target.dataset.id, deleteParams.src)
         }
       })
@@ -93,6 +95,8 @@ document.addEventListener('click', (e)=>{
 document.addEventListener('submit', (e) => {
   e.preventDefault()
 
+  console.log(e)
+
   if (!updating.status){
     if ('form' in submitSet && 'uri' in submitSet){ 
       
@@ -125,7 +129,6 @@ document.addEventListener('submit', (e) => {
       
     }
   }else{
-    //aqui se actualiza el registro, se procede a llamar los updateParams
     let form =  new FormData(document.querySelector('#'+updateParams.form))
 
     fetch(base_url + updateParams.src + '/' + updating.id, {
@@ -157,8 +160,6 @@ document.addEventListener('submit', (e) => {
   
 })
 
-
-//funcion que me trae parametros del submit
 function setSubmit(params){
   submitSet = params
 }
@@ -167,7 +168,7 @@ function setModal(params){
   modalParams.push(params)
 }
 
-function setTableFromUri(params){
+function setTableFromUri(params, paramId){
 
   if ('crud' in params && 'delete' in params.crud){
     deleteParams = params.crud.delete
@@ -177,7 +178,10 @@ function setTableFromUri(params){
     updateParams = params.crud.update
   }
 
-  fetch(base_url + params.src)
+  let source
+  paramId == null ? source = params.src : source = params.src + '/' + paramId
+
+  fetch(base_url + source)
   .then((res) => res.json())
   .then((data) => {
     let table = document.getElementById(params.table)
@@ -233,7 +237,7 @@ function setTableFromUri(params){
         if ('buttons' in params.crud) {
 
           buttonParams = params.crud.buttons
-         
+          
           params.crud.buttons.forEach(button =>{
             html += ' '
             html +=  `<button class="btn ${button.style}" data-action="${button.btnName}" data-id="${rowId}"><i class="bi bi-${button.icon}"></i> ${button.text}</button>`
@@ -253,10 +257,7 @@ function setTableFromUri(params){
   })
 }   
 
-///funcion interna para eliminar registros
-
 function deleteFromUri(id, src){
-  console.log(base_url + src + '/' + id)
   fetch(base_url + src + '/' + id)
   .then((res) => res.json())
   .then((data) => {
@@ -278,4 +279,18 @@ function deleteFromUri(id, src){
       });
     }
   }) 
+}
+
+function setTableButtons(params, id){
+  setTableFromUri(params, id)
+/*   let source
+  id == null ? source = params.src : source = params.src + '/' + id
+   fetch(base_url + source)
+  .then((res) => res.json())
+  .then((data) =>{
+    console.log(data)
+    let table = document.getElementById(params.table)
+    let html = ''
+    let rowId = ''
+  }) */
 }

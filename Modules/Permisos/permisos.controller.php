@@ -5,13 +5,13 @@ class Permisos extends Controllers{
         parent::__construct();
     }
 
-    public function setPermisos(){
+    public function setPermisos($id){
         cm_model(array(
-            'model' => setPermisosModel(),
+            'model' => setPermisosModel($id),
             'return' => array(
                 'true' => array(
                     'msg' => 'Permisos Asignados',
-                    'ShowData' => 'true',
+                    'ShowData' => 'false',
                 ),
                 'false' => array(
                     'msg' => 'error al asignar permisos',

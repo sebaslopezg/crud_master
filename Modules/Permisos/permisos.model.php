@@ -1,19 +1,48 @@
 <?php
 
-function setPermisosModel(){
+function setPermisosModel($id){
+    $deletePermisos = cm_delete(array(
+        'sql' => "DELETE FROM permisos WHERE rol_id = '$id'",
+    ));
 
+    $modulos = $_POST['modulos'];
+    $idRol = $_POST['rolId'];
+
+     foreach ($modulos as $key => $value) {
+        $idModulo = $key;
+        $r = isset($value['r']) ? 1 : 0;
+        $w = isset($value['w']) ? 1 : 0;
+        $u = isset($value['u']) ? 1 : 0;
+        $d = isset($value['d']) ? 1 : 0;
+        $requestInsert = cm_set(array(
+            'type' => 'post',
+            'mysql_type' => 'insert',
+            'data' => array(
+                'id' => array('required' => false, 'value' => uniqid()),
+                'rol_id' => array('required' => false, 'value' => $idRol),
+                'modulo_id' => array('required' => false, 'value' => $idModulo),
+                'r' => array('required' => false, 'value' => $r),
+                'w' => array('required' => false, 'value' => $w),
+                'u' => array('required' => false, 'value' => $u),
+                'd' => array('required' => false, 'value' => $d),
+            ),
+            'sql' => "INSERT INTO permisos (id, rol_id, modulo_id, r, w, u, d) VALUES(?,?,?,?,?,?,?)",
+            'error_required_msg' => 'No es posible asignar los permisos',
+        ));
+    } 
+    return $requestInsert;
 }
 
 function selectPermisos($id){
     $response;
     $arrPermisosRol = cm_select(array(
         'all' => 'true',
-        'sql' => "SELECT * FROM permisos WHERE id = '$id'"
+        'sql' => "SELECT * FROM permisos WHERE rol_id = '$id'"
     ));
 
     $arrModulos = cm_select(array(
         'all' => 'true',
-        'sql' => "SELECT * FROM modulos WHERE status > 0"
+        'sql' => "SELECT * FROM modulos"
     ));
 
     $arrPermisos = array('r' => 0, 'w' => 0, 'u' => 0, 'd' => 0);

@@ -53,6 +53,7 @@
       <div class="modal-body">
         <form id="frmsetPermisos" method="POST">
 
+        <input type="hidden" id="rolId" name="rolId" value="">
         
       <table class="table table-striped">
             <thead>

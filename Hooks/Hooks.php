@@ -53,23 +53,30 @@ function cm_model($array){
                 }
 
                 if ($responseType == 'array') {
-                    if ($array['model']['status']) {
-                        if (array_key_exists('showData', $array['return']['true'])) {
-                            $array['return']['true']['showData'] == 'true' ? $data = $array['model'] : $data = '';
-                            $arrData = array('status' => true, 'msg' => $array['return']['true']['msg'], 'data' => $data);
+                    if (array_key_exists('status',$array['model'])) {
+                        if ($array['model']['status']) {
+                            if (array_key_exists('showData', $array['return']['true'])) {
+                                if ($array['return']['true']['showData'] == 'true') {
+                                    $arrData = $array['model'];
+                                }else{
+                                    $arrData = array('status' => false, 'msg' => $array['return']['true']['msg']);
+                                }
+                            }else{
+                                $arrData = array('status' => true, 'msg' => $array['return']['true']['msg']);
+                            }
                         }else{
-                            $arrData = array('status' => true, 'msg' => $array['return']['true']['msg']);
-                        }
-                    }else{
-                        if (array_key_exists('showData', $array['return']['false'])) {
-                            if ($array['return']['false']['showData'] == 'true') {
-                                $arrData = $array['model'];
+                            if (array_key_exists('showData', $array['return']['false'])) {
+                                if ($array['return']['false']['showData'] == 'true') {
+                                    $arrData = $array['model'];
+                                }else{
+                                    $arrData = array('status' => false, 'msg' => $array['return']['false']['msg']);
+                                }
                             }else{
                                 $arrData = array('status' => false, 'msg' => $array['return']['false']['msg']);
                             }
-                        }else{
-                            $arrData = array('status' => false, 'msg' => $array['return']['false']['msg']);
                         }
+                    }else{
+                        $arrData = $array['model'];
                     }
                 }
 
@@ -107,6 +114,8 @@ function cm_model($array){
     echo json_encode($arrData, JSON_UNESCAPED_UNICODE);
 }
 
+//TODO¬
+//Resolver empty values
 function cm_set($array){
 
     if (array_key_exists('type',$array) && $array['type'] == 'post') {
@@ -125,7 +134,7 @@ function cm_set($array){
                 if (array_key_exists('hash',$value)) {
                     $fieldData = hash($value['hash'],strClean($_POST[$key]));
                 }else{
-                    $fieldData = strClean($_POST[$key]);
+                    isset($_POST[$key]) ? $fieldData = strClean($_POST[$key]) : $fieldData = null;
                 }
             }
 

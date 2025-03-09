@@ -8,13 +8,17 @@ setModal({
     fields:['txtNombre', 'txtDescripcion','selStatus'],
 })
 
-//TODO: está facil...
-//Arreglar el submitset para que se pueda agregar varios formularios con varios submits...
-//con el evento e del submit se puede leer el formulario que se envia
 setSubmit({
     form:'frmCrearRol',
     uri:'/roles/crearRol',
     modal:'crearRolModal',
+    tableFunction:actualizarTabla
+})
+setSubmit({
+    form:'frmsetPermisos',
+    uri:'/permisos/setPermisos',
+    hiddenInput:'rolId',
+    modal:'permisosRolModal',
     tableFunction:actualizarTabla
 })
 
@@ -81,41 +85,51 @@ function actualizarTabla(){
                     style:'btn-secondary',
                     modal:{
                         id:'permisosRolModal',
+                        src_element:'/roles/listarRolId',
+                        setValues:{
+                            ids:['rolId'],
+                            values:['id']
+                        },
                         setTable:{
                             src:'/permisos/getPermiso',
+                            idParameter: true,
                             table:'tablePermisosRol',
                             columns:['nombre','r','w','u','d'],
                             replaceData:[
                                 {
                                     column:'r',
                                     values:['0','1'],
+                                    setIdValue:'idModulo',
                                     newValues:[
-                                        '<div class="form-check form-switch"><input name="r" class="form-check-input" type="checkbox"></div>',
-                                        '<div class="form-check form-switch"><input name="r" class="form-check-input" type="checkbox" checked=""></div>'
+                                        '<div class="form-check form-switch"><input name="modulos[idModulo][r]" class="form-check-input" type="checkbox"></div>',
+                                        '<div class="form-check form-switch"><input name="modulos[idModulo][r]" class="form-check-input" type="checkbox" checked></div>'
                                     ],
                                 },
                                 {
                                     column:'w',
                                     values:['0','1'],
+                                    setIdValue:'idModulo',
                                     newValues:[
-                                        '<div class="form-check form-switch"><input name="w" class="form-check-input" type="checkbox"></div>',
-                                        '<div class="form-check form-switch"><input name="w" class="form-check-input" type="checkbox" checked=""></div>'
+                                        '<div class="form-check form-switch"><input name="modulos[idModulo][w]" class="form-check-input" type="checkbox"></div>',
+                                        '<div class="form-check form-switch"><input name="modulos[idModulo][w]" class="form-check-input" type="checkbox" checked=""></div>'
                                     ],
                                 },
                                 {
                                     column:'u',
                                     values:['0','1'],
+                                    setIdValue:'idModulo',
                                     newValues:[
-                                        '<div class="form-check form-switch"><input name="u" class="form-check-input" type="checkbox"></div>',
-                                        '<div class="form-check form-switch"><input name="u" class="form-check-input" type="checkbox" checked=""></div>'
+                                        '<div class="form-check form-switch"><input name="modulos[idModulo][u]" class="form-check-input" type="checkbox"></div>',
+                                        '<div class="form-check form-switch"><input name="modulos[idModulo][u]" class="form-check-input" type="checkbox" checked=""></div>'
                                     ],
                                 },
                                 {
                                     column:'d',
                                     values:['0','1'],
+                                    setIdValue:'idModulo',
                                     newValues:[
-                                        '<div class="form-check form-switch"><input name="d" class="form-check-input" type="checkbox"></div>',
-                                        '<div class="form-check form-switch"><input name="d" class="form-check-input" type="checkbox" checked=""></div>'
+                                        '<div class="form-check form-switch"><input name="modulos[idModulo][d]" class="form-check-input" type="checkbox"></div>',
+                                        '<div class="form-check form-switch"><input name="modulos[idModulo][d]" class="form-check-input" type="checkbox" checked=""></div>'
                                     ],
                                 },
                             ]

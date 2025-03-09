@@ -1,4 +1,4 @@
-let submitSet = {}
+let submitParams = []
 let deleteParams = {}
 let updateParams = {}
 let buttonParams = null
@@ -13,6 +13,11 @@ document.addEventListener('click', (e)=>{
   let target = e.target.closest('button')
 
   if (target){
+
+    if (target.dataset.action != 'delete') {
+      updating.status = false
+      updating.id = null
+    }
 
     modalParams.forEach((modal) => {
       if (target.id == modal.trigger){
@@ -37,9 +42,31 @@ document.addEventListener('click', (e)=>{
         if (target.dataset.action == button.btnName) {
           if ('modal' in button) {
             $('#'+button.modal.id).modal('show')
-            if ('setTable' in button.modal) {
-              setTableButtons(button.modal.setTable, button.modal.id)
+
+            if ('src_element' in button.modal && 'setValues' in button.modal) {
+              let ids = button.modal.setValues.ids
+              let values = button.modal.setValues.values
+      
+              fetch(base_url + button.modal.src_element + '/' + target.dataset.id)
+              .then((res) => res.json())
+              .then((data) => {
+      
+                ids.forEach((id, index) => {
+                  let campo = document.querySelector('#'+id)
+                  campo.value = data[0][values[index]]
+                })
+      
+              })
             }
+
+            if ('setTable' in button.modal) {
+              if ('idParameter' in button.modal.setTable && button.modal.setTable.idParameter == true) {
+                setTableButtons(button.modal.setTable, target.dataset.id)
+              }else{
+                setTableButtons(button.modal.setTable)
+              }
+            }
+
           }
         }
       })
@@ -95,13 +122,27 @@ document.addEventListener('click', (e)=>{
 document.addEventListener('submit', (e) => {
   e.preventDefault()
 
-  console.log(e)
+  let submitSet = {}
 
-  if (!updating.status){
+  submitParams.forEach(submit => {
+    if (submit.form == e.target.id) {
+      submitSet = submit
+    }
+  })
+
+   if (!updating.status){
     if ('form' in submitSet && 'uri' in submitSet){ 
+
+      let route
+      if ('hiddenInput' in submitSet) {
+        let routeId = document.querySelector('#'+submitSet.hiddenInput)
+        route = submitSet.uri + '/' + routeId.value
+      }else{
+        route = submitSet.uri
+      }
       
       let form =  new FormData(document.querySelector('#'+submitSet.form))
-      fetch(base_url + submitSet.uri, {
+      fetch(base_url + route, {
         method: 'POST',
         body: form
       })
@@ -157,11 +198,10 @@ document.addEventListener('submit', (e) => {
       ///console.log(err)
     })
   }
-  
 })
 
 function setSubmit(params){
-  submitSet = params
+  submitParams.push(params)
 }
   
 function setModal(params){
@@ -187,6 +227,8 @@ function setTableFromUri(params, paramId){
     let table = document.getElementById(params.table)
     let html = ''
     let rowId = ''
+
+    console.log(data)
       
     data.forEach(row => {
       html += `<tr>`
@@ -204,7 +246,14 @@ function setTableFromUri(params, paramId){
             if (key == el.column) {
               el.values.forEach((elValue, index) =>{
                 if (elValue == value) {
-                  dataValue = el.newValues[index]
+                  if ('setIdValue' in el) {
+                    let stringValue = el.newValues[index]
+                    let replacedData
+                    replacedData = stringValue.replace(el.setIdValue,row.id)
+                    dataValue = replacedData
+                  }else{
+                    dataValue = el.newValues[index]
+                  }
                 }
               })
             }
@@ -283,14 +332,4 @@ function deleteFromUri(id, src){
 
 function setTableButtons(params, id){
   setTableFromUri(params, id)
-/*   let source
-  id == null ? source = params.src : source = params.src + '/' + id
-   fetch(base_url + source)
-  .then((res) => res.json())
-  .then((data) =>{
-    console.log(data)
-    let table = document.getElementById(params.table)
-    let html = ''
-    let rowId = ''
-  }) */
 }

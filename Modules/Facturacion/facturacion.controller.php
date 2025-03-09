@@ -44,6 +44,6 @@ class Facturacion extends Controllers{
             ),
         );
 
-        cm_set($myForm);
+        //cm_set($myForm);
     }
 }

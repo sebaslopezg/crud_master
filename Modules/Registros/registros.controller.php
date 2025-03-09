@@ -22,7 +22,7 @@ class Registros extends Controllers{
             'return' => array(
                 'true' => array(
                     'msg' => 'Registro creado',
-                    'showData' => 'true',
+                    'showData' => 'false',
                 ),
                 'false' => array(
                     'msg' => 'No se pudo crear el registro',

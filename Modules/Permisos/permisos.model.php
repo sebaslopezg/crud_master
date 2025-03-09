@@ -33,6 +33,7 @@ function setPermisosModel($id){
     return $requestInsert;
 }
 
+//TODO:: Corregir error en selectPermisoso
 function selectPermisos($id){
     $response;
     $arrPermisosRol = cm_select(array(
@@ -56,14 +57,27 @@ function selectPermisos($id){
     }else{
         for ($i=0; $i < count($arrModulos); $i++) { 
             $arrPermisos = array('r' => 0, 'w' => 0, 'u' => 0, 'd' => 0);
-            if (isset($arrPermisosRol[$i])) {
+            //if: isset($arrPermisosRol[$i])
+            foreach ($arrPermisosRol as $permiso) {
+                if ($permiso['modulo_id'] == $arrModulos['id']) {
+                    $arrPermisos = array(
+                        'r' => $arrPermisosRol[$i]['r'],
+                        'w' => $arrPermisosRol[$i]['w'],
+                        'u' => $arrPermisosRol[$i]['u'],
+                        'd' => $arrPermisosRol[$i]['d'],
+                    );
+                }
+            }
+
+/*             if (isset($arrPermisosRol[$i])) {
                 $arrPermisos = array(
                     'r' => $arrPermisosRol[$i]['r'],
                     'w' => $arrPermisosRol[$i]['w'],
                     'u' => $arrPermisosRol[$i]['u'],
                     'd' => $arrPermisosRol[$i]['d'],
                 );
-            }
+            }  */
+
             foreach ($arrPermisos as $key => $value) {
                 $arrModulos[$i][$key] = $value;
             } 

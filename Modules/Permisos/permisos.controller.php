@@ -5,6 +5,9 @@ class Permisos extends Controllers{
         parent::__construct();
     }
 
+    //TODO:
+    //Resolver problema con el seteo de modulos, tanto para cuando se setean swiches en cualquier parte de la tabla
+    //como también cuando no se setea nada y queda vacío.
     public function setPermisos($id){
         cm_model(array(
             'model' => setPermisosModel($id),

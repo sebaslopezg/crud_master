@@ -14,11 +14,6 @@ document.addEventListener('click', (e)=>{
 
   if (target){
 
-    if (target.dataset.action != 'delete') {
-      updating.status = false
-      updating.id = null
-    }
-
     modalParams.forEach((modal) => {
       if (target.id == modal.trigger){
         $('#'+modal.modal).modal('show')
@@ -198,6 +193,8 @@ document.addEventListener('submit', (e) => {
       ///console.log(err)
     })
   }
+  updating.status = false
+  updating.id = null
 })
 
 function setSubmit(params){
@@ -227,8 +224,6 @@ function setTableFromUri(params, paramId){
     let table = document.getElementById(params.table)
     let html = ''
     let rowId = ''
-
-    console.log(data)
       
     data.forEach(row => {
       html += `<tr>`
@@ -310,7 +305,6 @@ function deleteFromUri(id, src){
   fetch(base_url + src + '/' + id)
   .then((res) => res.json())
   .then((data) => {
-    console.log(data)
     if (data.status) {
       let dataText
       'text' in deleteParams.response.statusTrue ? dataText = deleteParams.response.statusTrue.text : dataText = data.msg
@@ -319,7 +313,7 @@ function deleteFromUri(id, src){
         text: dataText,
         icon: deleteParams.response.statusTrue.icon
       });
-      submitSet.tableFunction()
+      'tableFunction' in deleteParams ? deleteParams.tableFunction() : ''      
     }else{
       Swal.fire({
         title: "Error",

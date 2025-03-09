@@ -39,6 +39,7 @@ function actualizarTabla(){
                 src:'/roles/eliminarRol',
                 text:'',
                 icon:'trash',
+                tableFunction:actualizarTabla,
                 dialog:{
                     title:'Eliminar Rol',
                     text:'¿Desea eliminar el rol?',

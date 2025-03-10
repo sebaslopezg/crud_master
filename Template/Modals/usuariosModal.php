@@ -10,21 +10,21 @@
         <form id="frmCrearUsuario" method="POST">
           <div class="row">
             <div class="mb-3 col-6">
-              <label for="txtNombre" class="form-label">Documento</label>
+              <label for="txtDocumento" class="form-label">Documento</label>
               <input type="text" class="form-control" id="txtDocumento" name="txtDocumento">
             </div>
             <div class="mb-3 col-6">
               <label for="tipoDocumento" class="form-label">Tipo de documento</label>
               <select class="form-control" name="tipoDocumento" id="tipoDocumento">
-                <option value="">Cedula</option>
-                <option value="">Tarjeta de identidad</option>
-                <option value="">Pasaporte</option>
+                <option value="Cedula">Cedula</option>
+                <option value="Tarjeta de identidad">Tarjeta de identidad</option>
+                <option value="Pasaporte">Pasaporte</option>
               </select>
             </div>
           </div>
           <div class="row">
               <div class="mb-3 col-6">
-                  <label for="txtApellido" class="form-label">Nombre</label>
+                  <label for="txtNombre" class="form-label">Nombre</label>
                   <input type="text" class="form-control" id="txtNombre" name="txtNombre">
               </div>
               <div class="mb-3 col-6">
@@ -35,11 +35,11 @@
 
           <div class="row">
             <div class="mb-3 col-6">
-              <label for="txtApellido" class="form-label">Correo Electronico</label>
+              <label for="txtEmail" class="form-label">Correo Electronico</label>
               <input type="text" class="form-control" id="txtEmail" name="txtEmail">
             </div>
             <div class="mb-3 col-6">
-              <label for="txtApellido" class="form-label">Contraseña</label>
+              <label for="txtPass" class="form-label">Contraseña</label>
               <input type="password" class="form-control" id="txtPass" name="txtPass">
             </div>
           </div>

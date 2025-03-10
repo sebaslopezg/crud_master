@@ -7,7 +7,11 @@ function insertUsuario(){
         'data' => array(
             'id' => array('required' => false, 'value' => uniqid('',true)),
             'txtDocumento' => array('required' => true),
-            'tipoDocumento' => array('required' => false),
+            'tipoDocumento' => array('required' => true, 'required_values' => array(
+                'Cedula',
+                'Tarjeta de identidad',
+                'Pasaporte',
+            )),
             'txtNombre' => array('required' => true),
             'txtApellido' => array('required' => true),
             'txtEmail' => array('required' => true),
@@ -46,12 +50,17 @@ function updateUsuario($id){
         'type' => 'post',
         'mysql_type' => 'update',
         'data' => array(
+            'tipoDocumento' => array('required' => true, 'required_values' => array(
+                'Cedula',
+                'Tarjeta de identidad',
+                'Pasaporte',
+            )),
             'txtNombre' => array('required' => true),
             'txtApellido' => array('required' => true),
             'txtEmail' => array('required' => true),
             'txtPass' => array('required' => false, 'hash' => 'SHA256'),
         ),
-        'sql' => "UPDATE usuarios SET nombres = ?, apellidos = ?, email = ?, password = ? WHERE id = '$id'",
+        'sql' => "UPDATE usuarios SET tipo_documento = ?, nombres = ?, apellidos = ?, email = ?, password = ? WHERE id = '$id'",
         'error_required_msg' => 'Debe insertar todos los datos',
     ));
     return $setUsuario;

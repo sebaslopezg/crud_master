@@ -123,6 +123,7 @@ function cm_set($array){
         $fields = array();
         $requiredFields = array();
         $requiredFieldsCount = 0;
+        $requiredValueStatus = true;
 
         foreach ($data as $key => $value) {
 
@@ -149,9 +150,18 @@ function cm_set($array){
                     array_push($fields, $fieldData);
                 }
             }
+
+            if (array_key_exists('required_values',$value)) {
+                $requiredValueStatus = false;
+                foreach ($value['required_values'] as $requiredValue) {
+                    if ($fieldData == $requiredValue) {
+                        $requiredValueStatus = true;
+                    }
+                }
+            }
         }
 
-        if (count($requiredFields) != $requiredFieldsCount) {
+        if (count($requiredFields) != $requiredFieldsCount || $requiredValueStatus === false) {
             if (array_key_exists('error_required_msg',$array)) {
                 $arrData = array('status' => false, 'msg' => $array['error_required_msg']);
             }else{

@@ -5,7 +5,7 @@ setModal({
     modal: 'crearUsuarioModal',
     ids: ['titleModal','btnEnviar'],
     values: ['Crear Usuario','Enviar'],
-    fields: ['txtDocumento','txtNombre','txtApellido','txtPass','txtEmail'],
+    fields: ['txtDocumento','txtNombre','txtApellido','txtPass','txtEmail','tipoDocumento'],
 })
 
 setSubmit({
@@ -25,6 +25,7 @@ function actualizarTabla(){
             delete:{
                 src: '/usuarios/eliminarUsuario',
                 text: '',
+                tableFunction:actualizarTabla,
                 icon:'trash',
                 dialog:{
                     title: 'Eliminar Usuario',
@@ -54,8 +55,8 @@ function actualizarTabla(){
                     id:'crearUsuarioModal',
                     src_element: '/usuarios/traerUsuario/',
                     setValues:{
-                        ids:['txtDocumento','txtNombre','txtApellido','txtEmail'],
-                        values:['documento','nombres','apellidos','email']
+                        ids:['txtDocumento','txtNombre','txtApellido','txtEmail','tipoDocumento'],
+                        values:['documento','nombres','apellidos','email','tipo_documento']
                     },
                     replace:{
                         ids:['btnEnviar', 'titleModal'],

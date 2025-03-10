@@ -48,41 +48,34 @@ function selectPermisos($id){
 
     $arrPermisos = array('r' => 0, 'w' => 0, 'u' => 0, 'd' => 0);
 
-    if (empty($arrPermisosRol)) {
+     if (empty($arrPermisosRol)) {
+
         for ($i=0; $i < count($arrModulos); $i++) {
             foreach ($arrPermisos as $key => $value) {
                 $arrModulos[$i][$key] = $value;
             } 
         }
     }else{
-        for ($i=0; $i < count($arrModulos); $i++) { 
+         for ($i=0; $i < count($arrModulos); $i++) { 
             $arrPermisos = array('r' => 0, 'w' => 0, 'u' => 0, 'd' => 0);
-            //if: isset($arrPermisosRol[$i])
-            foreach ($arrPermisosRol as $permiso) {
-                if ($permiso['modulo_id'] == $arrModulos['id']) {
+            
+            foreach ($arrPermisosRol as $key => $value) {
+                if ($arrModulos[$i]['id'] == $value['modulo_id']) {
                     $arrPermisos = array(
-                        'r' => $arrPermisosRol[$i]['r'],
-                        'w' => $arrPermisosRol[$i]['w'],
-                        'u' => $arrPermisosRol[$i]['u'],
-                        'd' => $arrPermisosRol[$i]['d'],
+                        'r' => $value['r'],
+                        'w' => $value['w'],
+                        'u' => $value['u'],
+                        'd' => $value['d'],
                     );
+                    break;
                 }
             }
-
-/*             if (isset($arrPermisosRol[$i])) {
-                $arrPermisos = array(
-                    'r' => $arrPermisosRol[$i]['r'],
-                    'w' => $arrPermisosRol[$i]['w'],
-                    'u' => $arrPermisosRol[$i]['u'],
-                    'd' => $arrPermisosRol[$i]['d'],
-                );
-            }  */
 
             foreach ($arrPermisos as $key => $value) {
                 $arrModulos[$i][$key] = $value;
             } 
         }
-    }
+    } 
 
     $response = $arrModulos;
     return $response;

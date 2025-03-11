@@ -66,7 +66,7 @@ function actualizarTabla(){
                 form:'frmCrearRol',
                 modal:{
                     id:'crearRolModal',
-                    src_element:'/roles/listarRolId',
+                    srcElement:'/roles/listarRolId',
                     setValues:{
                         ids:['txtNombre','txtDescripcion','selStatus'],
                         values:['nombre','descripcion','status']
@@ -86,7 +86,7 @@ function actualizarTabla(){
                     style:'btn-secondary',
                     modal:{
                         id:'permisosRolModal',
-                        src_element:'/roles/listarRolId',
+                        srcElement:'/roles/listarRolId',
                         setValues:{
                             ids:['rolId'],
                             values:['id']

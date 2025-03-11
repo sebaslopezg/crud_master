@@ -54,7 +54,7 @@ function actualizarTabla(){
         form: 'frmCrearRetistro',
         modal: {
           id:'crearRegistroModal',
-          src_element: '/registros/getRegistrosById',
+          srcElement: '/registros/getRegistrosById',
           setValues:{
             ids:['txtNombre','txtApellido'],
             values:['nombre','apellido']

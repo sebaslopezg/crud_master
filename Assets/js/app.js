@@ -28,6 +28,19 @@ document.addEventListener('click', (e)=>{
           let campo = document.querySelector('#'+id)
           campo.innerText = modal.values[index]
         })
+
+        if ('setSelect' in modal) {
+          const select = document.querySelector(`#${modal.setSelect.id}`)
+          select.innerHTML = ''
+          fetch(base_url + modal.setSelect.src)
+          .then((res) => res.json())
+          .then((data) => {
+            data.forEach(value => {
+              let html = `<option value="${value[modal.setSelect.optionValue]}">${value[modal.setSelect.tagContent]}</option>` 
+              select.innerHTML += html
+            })
+          })
+        }
         
       }
     })
@@ -38,11 +51,11 @@ document.addEventListener('click', (e)=>{
           if ('modal' in button) {
             $('#'+button.modal.id).modal('show')
 
-            if ('src_element' in button.modal && 'setValues' in button.modal) {
+            if ('srcElement' in button.modal && 'setValues' in button.modal) {
               let ids = button.modal.setValues.ids
               let values = button.modal.setValues.values
       
-              fetch(base_url + button.modal.src_element + '/' + target.dataset.id)
+              fetch(base_url + button.modal.srcElement + '/' + target.dataset.id)
               .then((res) => res.json())
               .then((data) => {
       
@@ -97,7 +110,7 @@ document.addEventListener('click', (e)=>{
         let ids = updateParams.modal.setValues.ids
         let values = updateParams.modal.setValues.values
 
-        fetch(base_url + updateParams.modal.src_element + '/' + target.dataset.id)
+        fetch(base_url + updateParams.modal.srcElement + '/' + target.dataset.id)
         .then((res) => res.json())
         .then((data) => {
 
@@ -105,6 +118,23 @@ document.addEventListener('click', (e)=>{
             let campo = document.querySelector('#'+id)
             campo.value = data[0][values[index]]
           })
+
+          if ('setSelect' in updateParams.modal) {
+            console.log(updateParams.modal.setSelect)
+            const select = document.querySelector(`#${updateParams.modal.setSelect.id}`)
+            select.innerHTML = ''
+            fetch(base_url + updateParams.modal.setSelect.src)
+            .then((res) => res.json())
+            .then((dataSelect) => {
+              dataSelect.forEach(value => {
+                let html = `<option value="${value[updateParams.modal.setSelect.optionValue]}">${value[updateParams.modal.setSelect.tagContent]}</option>` 
+                select.innerHTML += html
+              })
+              if ('optionValueFromSrcElement' in updateParams.modal.setSelect) {
+                select.value = data[0][updateParams.modal.setSelect.optionValueFromSrcElement]
+              }
+            })
+          }
 
         })
         

@@ -18,6 +18,7 @@ getModal('usuariosModal', $data);
                     <th>Documento</th>
                     <th>Nombre</th>
                     <th>Apellido</th>
+                    <th>Rol</th>
                     <th>Acciones</th>
                 </tr>
             </thead>

@@ -16,6 +16,7 @@ function insertUsuario(){
             'txtApellido' => array('required' => true),
             'txtEmail' => array('required' => true),
             'txtPass' => array('required' => true, 'hash' => 'SHA256'),
+            'tipoRol' => array('required' => true),
             'status' => array('required' => false, 'value' => 1),
         ),
         'prevent_exist' => array(
@@ -23,7 +24,7 @@ function insertUsuario(){
             'query' => "SELECT * FROM usuarios WHERE documento = ? OR email = ?",
             'error_exist_msg' => 'Ya existe un usuario con ese documento o Correo electronico',
         ),
-        'sql' => "INSERT INTO usuarios (id, documento, tipo_documento,nombres, apellidos, email, password, status) VALUES (?, ?, ?, ?, ?, ?, ?, ?)",
+        'sql' => "INSERT INTO usuarios (id, documento, tipo_documento,nombres, apellidos, email, password, rol_id, status) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)",
         'error_required_msg' => 'Debe insertar todos los datos',
     ));
     return $setUsuario;
@@ -32,7 +33,7 @@ function insertUsuario(){
 function getUsuarios(){
     $getUsuarios = cm_select(array(
         'all' => 'true',
-        'sql' => "SELECT * FROM usuarios WHERE status > 0",
+        'sql' => "SELECT id, documento, nombres, apellidos, (SELECT nombre from roles where id = u.rol_id ) as rol FROM usuarios u WHERE status > 0",
     ));
     return $getUsuarios;
 }
@@ -40,7 +41,7 @@ function getUsuarios(){
 function getUsuario($id){
     $getUsuario = cm_select(array(
         'all' => 'true',
-        'sql' => "SELECT id, documento, tipo_documento,nombres, apellidos, email, status FROM usuarios WHERE id = '$id' AND status > 0",
+        'sql' => "SELECT id, documento, tipo_documento,nombres, apellidos, email, rol_id,status FROM usuarios WHERE id = '$id' AND status > 0",
     ));
     return $getUsuario;
 }
@@ -59,8 +60,9 @@ function updateUsuario($id){
             'txtApellido' => array('required' => true),
             'txtEmail' => array('required' => true),
             'txtPass' => array('required' => false, 'hash' => 'SHA256'),
+            'tipoRol' => array('required' => true),
         ),
-        'sql' => "UPDATE usuarios SET tipo_documento = ?, nombres = ?, apellidos = ?, email = ?, password = ? WHERE id = '$id'",
+        'sql' => "UPDATE usuarios SET tipo_documento = ?, nombres = ?, apellidos = ?, email = ?, password = ?, rol_id = ? WHERE id = '$id'",
         'error_required_msg' => 'Debe insertar todos los datos',
     ));
     return $setUsuario;

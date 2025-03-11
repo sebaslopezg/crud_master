@@ -5,7 +5,13 @@ setModal({
     modal: 'crearUsuarioModal',
     ids: ['titleModal','btnEnviar'],
     values: ['Crear Usuario','Enviar'],
-    fields: ['txtDocumento','txtNombre','txtApellido','txtPass','txtEmail','tipoDocumento'],
+    fields: ['txtDocumento','txtNombre','txtApellido','txtPass','txtEmail','tipoDocumento','tipoRol'],
+    setSelect:{
+        src:'/roles/listarRoles',
+        id:'tipoRol',
+        optionValue:'id',
+        tagContent:'nombre'
+    }
 })
 
 setSubmit({
@@ -19,7 +25,7 @@ function actualizarTabla(){
     setTableFromUri({
         src: '/usuarios/listarUsuarios',
         table: 'tableUsuarios',
-        columns: ['documento', 'nombres', 'apellidos'],
+        columns: ['documento', 'nombres', 'apellidos','rol'],
         crud:{
             id : 'id',
             delete:{
@@ -53,10 +59,17 @@ function actualizarTabla(){
                 form: 'frmCrearUsuario',
                 modal:{
                     id:'crearUsuarioModal',
-                    src_element: '/usuarios/traerUsuario/',
+                    srcElement: '/usuarios/traerUsuario/',
                     setValues:{
                         ids:['txtDocumento','txtNombre','txtApellido','txtEmail','tipoDocumento'],
                         values:['documento','nombres','apellidos','email','tipo_documento']
+                    },
+                    setSelect:{
+                        src:'/roles/listarRoles',
+                        id:'tipoRol',
+                        optionValue:'id',
+                        optionValueFromSrcElement:'rol_id',
+                        tagContent:'nombre'
                     },
                     replace:{
                         ids:['btnEnviar', 'titleModal'],

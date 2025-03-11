@@ -40,7 +40,14 @@
             </div>
             <div class="mb-3 col-6">
               <label for="txtPass" class="form-label">Contraseña</label>
-              <input type="password" class="form-control" id="txtPass" name="txtPass">
+              <input type="password" class="form-control" id="txtPass" name="txtPass" autocomplete="on">
+            </div>
+          </div>
+          <div class="row">
+            <div class="mb-3 col-6">
+              <label for="tipoRol" class="form-label">Rol de usuario</label>
+              <select class="form-control" name="tipoRol" id="tipoRol">
+              </select>
             </div>
           </div>
       </div>

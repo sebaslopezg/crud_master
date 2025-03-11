@@ -1,10 +1,10 @@
   <!-- ======= Footer ======= -->
   <footer id="footer" class="footer">
     <div class="copyright">
-      ADSO <strong><span>2827725</span></strong>. 2024
+    <strong>ECOSOFT</strong> 2025
     </div>
     <div class="credits">
-      <p>Proyecto creado con fines educativos, el repositorio se encuentra disponible en <a target="_blank" href="https://github.com/sebaslopezg/inasistencias">github</a></p>
+      <p>Framework Crud Master</p>
     </div>
   </footer><!-- End Footer -->
 

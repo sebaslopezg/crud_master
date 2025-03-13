@@ -8,6 +8,10 @@ class Inventario extends Controllers{
 
         cm_page(array(
             'class' => $this,
+            'login' => array(
+                'module' => 'inventario',
+                'relocate' => 'login',
+            ),
             'page_title' => 'Mis inventarios xD',
             'page_id' => 'inventario',
             'view' => 'inventario',

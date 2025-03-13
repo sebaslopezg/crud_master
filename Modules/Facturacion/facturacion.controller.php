@@ -9,10 +9,13 @@ class Facturacion extends Controllers{
 
         cm_page(array(
             'class' => $this,
+            'login' => array(
+                'module' => 'facturacion',
+                'relocate' => 'home',
+            ),
             'page_title' => 'Mis facturas',
             'page_id' => 'facturacion',
             'view' => 'facturacion',
-            'script' => 'facturacion',
         ));
     }
 
@@ -43,7 +46,5 @@ class Facturacion extends Controllers{
                 ),
             ),
         );
-
-        //cm_set($myForm);
     }
 }

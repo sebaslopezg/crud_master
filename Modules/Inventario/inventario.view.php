@@ -13,6 +13,7 @@
       </div>
 
         <p>Aqui se efectuará el sistema de Inventarios</p>
+        <?php dep($_SESSION) ?>
       </div>
   </div>
 

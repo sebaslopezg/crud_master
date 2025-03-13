@@ -81,3 +81,30 @@ function selectPermisos($id){
     return $response;
 }
 
+function permisosModulo($idRol){
+
+    $request = cm_select(array(
+        'all' => 'true',
+        'sql' => "SELECT p.rol_id,
+                p.modulo_id,
+                m.nombre as modulo,
+                p.r,
+                p.w,
+                p.u,
+                p.d
+                FROM permisos p
+                INNER JOIN modulos m
+                ON p.modulo_id = m.id
+                WHERE p.rol_id = '$idRol'"
+    ));
+
+     $arrPermisos = array();
+
+    for ($i=0; $i < count($request); $i++) { 
+        $arrPermisos[$request[$i]['modulo_id']] = $request[$i];
+    }
+
+    $arrPermisos = $request;
+
+    return $arrPermisos;
+}

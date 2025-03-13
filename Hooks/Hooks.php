@@ -1,26 +1,50 @@
 <?php
 
 //aqui van los hooks
+//TODO - terminar de setear los $permit en delete y algunos selects
 
-$courrentClass = '';
+$courrentClass;
+Global $permit;
+$permit = true;
 
 function cm_page($array){
-    $views = new Views();
 
-    array_key_exists('page_title',$array) ? $data['page_title'] = $array['page_title'] : "Pagina sin nombre";
-    array_key_exists('page_id',$array) ? $data['page_id'] = $array['page_id'] : 0;
-    if (array_key_exists('script',$array)) {
-        $data['script'] = $array['script'];
-    }
-    
-    if (array_key_exists('view',$array) && array_key_exists('class',$array)) {
-        $courrentClass = $array['class'];
-        if (isset($data)) {
-            $views->getView($courrentClass,$array['view'], $data);
+    $session = true;
+
+    if (array_key_exists('login',$array)) {
+        $session = false;
+        if (empty($_SESSION['login'])) {
         }else{
-            //$views->getView($array['class'],$array['view']);
+            $session = true;
+            if (array_key_exists('module',$array['login'])) {
+               getPermisos($array['login']['module']);
+            }
         }
     }
+
+    if ($session) {
+        $views = new Views();
+
+        array_key_exists('page_title',$array) ? $data['page_title'] = $array['page_title'] : "Pagina sin nombre";
+        array_key_exists('page_id',$array) ? $data['page_id'] = $array['page_id'] : 0;
+        if (array_key_exists('script',$array)) {
+            $data['script'] = $array['script'];
+        }
+        
+        if (array_key_exists('view',$array) && array_key_exists('class',$array)) {
+            $courrentClass = $array['class'];
+            if (isset($data)) {
+                $views->getView($courrentClass,$array['view'], $data);
+            }else{
+                //$views->getView($array['class'],$array['view']);
+            }
+        }
+    }else{
+        array_key_exists('login',$array) && array_key_exists('relocate',$array['login']) ? $route = $array['login']['relocate'] : 'home';
+        header('Location: ' . base_url()."/$route" );
+    }
+
+
 }
 
 // Sección controllers
@@ -37,85 +61,131 @@ function cm_get($array){
 } 
 
 function cm_model($array){
+    global $permit;
+    $permit = true;
+    $setPermit = false;
+    $permitType = null;
+    $crudType;
 
-    if (array_key_exists('model',$array)){
+    if (array_key_exists('permitRead',$array)) {
+        $permitType = 'permitRead';
+        $crudType = 'r';
+        $setPermit = true;
+    }
+    if (array_key_exists('permitCreate',$array)) {
+        $permitType = 'permitCreate';
+        $crudType = 'w';
+        $setPermit = true;
+    }
+    if (array_key_exists('permitUpdate',$array)) {
+        $permitType = 'permitUpdate';
+        $crudType = 'u';
+        $setPermit = true;
+    }
+    if (array_key_exists('permitDelete',$array)) {
+        $permitType = 'permitDelete';
+        $crudType = 'd';
+        $setPermit = true;
+    }
 
-        if(array_key_exists('return', $array)){
-            if (array_key_exists('true', $array['return'])) {
-                $responseType = gettype($array['model']);
-
-                if ($responseType == 'boolean') {
-                    if ($array['model']) {
-                        $arrData = array('status' => true, 'msg' => $array['return']['true']['msg'], 'data' => $array['model']);
-                    }else{
-                        $arrData = array('status' => false, 'msg' => $array['return']['false']['msg']);
-                    }
-                }
-
-                if ($responseType == 'array') {
-                    if (array_key_exists('status',$array['model'])) {
-                        if ($array['model']['status']) {
-                            if (array_key_exists('showData', $array['return']['true'])) {
-                                if ($array['return']['true']['showData'] == 'true') {
-                                    $arrData = $array['model'];
-                                }else{
-                                    $arrData = array('status' => false, 'msg' => $array['return']['true']['msg']);
-                                }
-                            }else{
-                                $arrData = array('status' => true, 'msg' => $array['return']['true']['msg']);
-                            }
-                        }else{
-                            if (array_key_exists('showData', $array['return']['false'])) {
-                                if ($array['return']['false']['showData'] == 'true') {
-                                    $arrData = $array['model'];
-                                }else{
-                                    $arrData = array('status' => false, 'msg' => $array['return']['false']['msg']);
-                                }
-                            }else{
-                                $arrData = array('status' => false, 'msg' => $array['return']['false']['msg']);
-                            }
-                        }
-                    }else{
-                        $arrData = $array['model'];
-                    }
-                }
-
-                if ($responseType == 'integer') {
-                    if ($array['model'] > 0) {
-                        $arrData = array('status' => true, 'msg' => $array['return']['true']['msg'], 'data' => $array['model']);
-                    }else{
-                        $arrData = array('status' => false, 'msg' => $array['return']['false']['msg']);
-                    }
-                }
-
-                if ($responseType == 'string') {
-                    try {
-                        $res = intval($array['model']);
-                        if ($res == 0) {
-                            if (array_key_exists('showData', $array['return']['true'])) {
-                                $array['return']['true']['showData'] == 'true' ? $data = $array['model'] : $data = '';
-                                $arrData = array('status' => true, 'msg' => $array['return']['true']['msg'], 'data' => $data);
-                            }else{
-                                $arrData = array('status' => true, 'msg' => $array['return']['true']['msg']);
-                            }
-                        }
-                        
-                    }catch(Exception $e){
-                        $arrData = $array['model'];
+    if ($permitType != null) {
+        if ($setPermit) {
+            $permit = false;
+            if (isset($_SESSION)) {
+                if (array_key_exists('permisosMod',$_SESSION)) {
+                    if ($_SESSION['permisosMod'][$crudType] == 1) {
+                        $permit = true;
                     }
                 }
             }
+        }
+    }
+
+    if ($permit) {
+        if (array_key_exists('model',$array)){
+    
+            if(array_key_exists('return', $array)){
+                if (array_key_exists('true', $array['return'])) {
+                    $responseType = gettype($array['model']);
+    
+                    if ($responseType == 'boolean') {
+                        if ($array['model']) {
+                            $arrData = array('status' => true, 'msg' => $array['return']['true']['msg'], 'data' => $array['model']);
+                        }else{
+                            $arrData = array('status' => false, 'msg' => $array['return']['false']['msg']);
+                        }
+                    }
+    
+                    if ($responseType == 'array') {
+                        if (array_key_exists('status',$array['model'])) {
+                            if ($array['model']['status']) {
+                                if (array_key_exists('showData', $array['return']['true'])) {
+                                    if ($array['return']['true']['showData'] == 'true') {
+                                        $arrData = $array['model'];
+                                    }else{
+                                        $arrData = array('status' => false, 'msg' => $array['return']['true']['msg']);
+                                    }
+                                }else{
+                                    $arrData = array('status' => true, 'msg' => $array['return']['true']['msg']);
+                                }
+                            }else{
+                                if (array_key_exists('showData', $array['return']['false'])) {
+                                    if ($array['return']['false']['showData'] == 'true') {
+                                        $arrData = $array['model'];
+                                    }else{
+                                        $arrData = array('status' => false, 'msg' => $array['return']['false']['msg']);
+                                    }
+                                }else{
+                                    $arrData = array('status' => false, 'msg' => $array['return']['false']['msg']);
+                                }
+                            }
+                        }else{
+                            $arrData = $array['model'];
+                        }
+                    }
+    
+                    if ($responseType == 'integer') {
+                        if ($array['model'] > 0) {
+                            $arrData = array('status' => true, 'msg' => $array['return']['true']['msg'], 'data' => $array['model']);
+                        }else{
+                            $arrData = array('status' => false, 'msg' => $array['return']['false']['msg']);
+                        }
+                    }
+    
+                    if ($responseType == 'string') {
+                        try {
+                            $res = intval($array['model']);
+                            if ($res == 0) {
+                                if (array_key_exists('showData', $array['return']['true'])) {
+                                    $array['return']['true']['showData'] == 'true' ? $data = $array['model'] : $data = '';
+                                    $arrData = array('status' => true, 'msg' => $array['return']['true']['msg'], 'data' => $data);
+                                }else{
+                                    $arrData = array('status' => true, 'msg' => $array['return']['true']['msg']);
+                                }
+                            }
+                            
+                        }catch(Exception $e){
+                            $arrData = $array['model'];
+                        }
+                    }
+                }
+            }else{
+                $arrData = $array['model'];
+            }
         }else{
-            $arrData = $array['model'];
+            $arrData = array('status' => false, 'msg' => 'undefined model');
         }
     }else{
-        $arrData = array('status' => false, 'msg' => 'undefined model');
+        $permitMessage;
+        $permitType == null ? $permitMessage = 'permission denied' : $permitMessage = $array[$permitType]['msg'];
+        $arrData = array('status' => false, 'msg' => $permitMessage);
     }
+
     echo json_encode($arrData, JSON_UNESCAPED_UNICODE);
 }
 
 //TODO¬
-//Resolver empty values
+//Resolver empty values en roles
 function cm_set($array){
 
     if (array_key_exists('type',$array) && $array['type'] == 'post') {
@@ -183,11 +253,16 @@ function cm_set($array){
                 }
 
                 if (!$exist) {
-                    if ($array['mysql_type'] == 'insert') {
-                        $arrData = $mysql->insert($array['sql'], $fields);
-                    }
-                    if ($array['mysql_type'] == 'update') {
-                        $arrData = $mysql->update($array['sql'], $fields);
+                    global $permit;
+                    if ($permit) {
+                        if ($array['mysql_type'] == 'insert') {
+                            $arrData = $mysql->insert($array['sql'], $fields);
+                        }
+                        if ($array['mysql_type'] == 'update') {
+                            $arrData = $mysql->update($array['sql'], $fields);
+                        }
+                    }else{
+                        $arrData = array('status' => false, 'msg' => 'permission denied');
                     }
                 }else{
                     $arrData = array('status' => false, 'msg' => $array['prevent_exist']['error_exist_msg']);

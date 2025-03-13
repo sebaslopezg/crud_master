@@ -37,4 +37,10 @@ $GLOBALS['navbar'] = array(
         'url' => 'registros',
         'page_id' => 'registros',
     ),
+    array(
+        'title' => 'Salir',
+        'icon' => 'box-arrow-right',
+        'url' => 'logout',
+        'page_id' => 'logout',
+    ),
 );

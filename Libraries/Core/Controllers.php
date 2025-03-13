@@ -4,6 +4,7 @@ class Controllers{
     public function __construct(){
         $this->views = new Views();
         $this->loadModel();
+        session_start();
     }
 
     public function loadModel(){

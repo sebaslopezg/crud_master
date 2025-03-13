@@ -25,9 +25,43 @@ function dep($data){
     return $format;
 }
 
+function dep_js($data){
+    ?>
+<script>
+    console.log(<?= $data ?>)
+</script>
+    <?php
+}
+
 function getModal(string $nameModal, $data){
     $view_modal = "Template/Modals/{$nameModal}.php";
     require_once $view_modal;
+}
+
+function getPermisos($idmodulo){
+    require_once("Modules/Permisos/permisos.model.php");
+    $idRol = $_SESSION['userData']['rol_id'];
+    $arrPermisos = permisosModulo($idRol);
+
+    $permisos = '';
+    $permisosMod = '';
+    $permisosModIsSet = false;
+
+    if (count($arrPermisos) > 0) {
+        $permisos = $arrPermisos;
+        foreach ($arrPermisos as $permiso) {
+            if ($permiso['modulo_id'] == $idmodulo) {
+                $permisosMod = $permiso;
+                $permisosModIsSet = true;
+            }
+        }
+        if (!$permisosModIsSet) {
+            $permisosMod = '';
+        }
+    }
+
+    $_SESSION['permisos'] = $permisos;
+    $_SESSION['permisosMod'] = $permisosMod;
 }
 
 function strClean($strCadena){

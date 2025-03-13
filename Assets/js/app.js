@@ -178,9 +178,10 @@ document.addEventListener('submit', (e) => {
             title: "Registro",
             text: data.msg,
             icon: "success"
-          });
-          'modal' in submitSet ? $('#'+submitSet.modal).modal('hide') : ''
-          'tableFunction' in submitSet ? submitSet.tableFunction() : ''
+          }).then((result) =>{
+            'modal' in submitSet ? $('#'+submitSet.modal).modal('hide') : ''
+            'tableFunction' in submitSet ? submitSet.tableFunction() : ''
+          })
         }else{
           Swal.fire({
             title: "Error",

@@ -5,10 +5,12 @@
 
 $courrentClass;
 Global $permit;
-$permit = true;
+//$permit = true;
 
 function cm_page($array){
-
+    $arrPermit = setPermit($array, $_SESSION);
+    $isPermit = $arrPermit['permit'];
+    $permitType = $arrPermit['permitType'];
     $session = true;
 
     if (array_key_exists('login',$array)) {
@@ -22,7 +24,7 @@ function cm_page($array){
         }
     }
 
-    if ($session) {
+    if ($session && $isPermit) {
         $views = new Views();
 
         array_key_exists('page_title',$array) ? $data['page_title'] = $array['page_title'] : "Pagina sin nombre";
@@ -40,15 +42,18 @@ function cm_page($array){
             }
         }
     }else{
-        array_key_exists('login',$array) && array_key_exists('relocate',$array['login']) ? $route = $array['login']['relocate'] : 'home';
-        header('Location: ' . base_url()."/$route" );
+        if ($session) {
+            array_key_exists('permitRead',$array) && array_key_exists('relocate',$array['permitRead']) ? $route = $array['permitRead']['relocate'] : 'home';
+            header('Location: ' . base_url()."/$route" );
+        }else{
+            array_key_exists('login',$array) && array_key_exists('relocate',$array['login']) ? $route = $array['login']['relocate'] : 'home';
+            header('Location: ' . base_url()."/$route" );
+        }
     }
-
-
+    dep($arrPermit['permit']);
 }
 
 // Sección controllers
-
 function cm_get($array){
 
     if (array_key_exists('model',$array)){
@@ -58,48 +63,13 @@ function cm_get($array){
     }
 
     echo json_encode($arrData, JSON_UNESCAPED_UNICODE);
-} 
+}
 
 function cm_model($array){
     global $permit;
-    $permit = true;
-    $setPermit = false;
-    $permitType = null;
-    $crudType;
-
-    if (array_key_exists('permitRead',$array)) {
-        $permitType = 'permitRead';
-        $crudType = 'r';
-        $setPermit = true;
-    }
-    if (array_key_exists('permitCreate',$array)) {
-        $permitType = 'permitCreate';
-        $crudType = 'w';
-        $setPermit = true;
-    }
-    if (array_key_exists('permitUpdate',$array)) {
-        $permitType = 'permitUpdate';
-        $crudType = 'u';
-        $setPermit = true;
-    }
-    if (array_key_exists('permitDelete',$array)) {
-        $permitType = 'permitDelete';
-        $crudType = 'd';
-        $setPermit = true;
-    }
-
-    if ($permitType != null) {
-        if ($setPermit) {
-            $permit = false;
-            if (isset($_SESSION)) {
-                if (array_key_exists('permisosMod',$_SESSION)) {
-                    if ($_SESSION['permisosMod'][$crudType] == 1) {
-                        $permit = true;
-                    }
-                }
-            }
-        }
-    }
+    $arrPermit = setPermit($array, $_SESSION);
+    $permitType = $arrPermit['permitType'];
+    $permit = $arrPermit['permit'];
 
     if ($permit) {
         if (array_key_exists('model',$array)){
@@ -279,31 +249,57 @@ function cm_set($array){
 //Seccion models
 
 function cm_select($array){
-    if (array_key_exists('all',$array) && array_key_exists('sql',$array)) {
-        $mysql = new Mysql();
-        if ($array['all'] == 'true') {
-            $request = $mysql->select_all($array['sql']);
-        }else{
-            $request = $mysql->select($array['sql']);
+    global $permit;
+    $arrPermit = setPermit($array, $_SESSION);
+    $permit = $arrPermit['permit'];
+
+    if ($permit) {
+        if (array_key_exists('all',$array) && array_key_exists('sql',$array)) {
+            $mysql = new Mysql();
+            if ($array['all'] == 'true') {
+                $request = $mysql->select_all($array['sql']);
+            }else{
+                $request = $mysql->select($array['sql']);
+            }
         }
+    }else{
+        $request = '';
     }
+
     return $request;
 }
 
 //Actualizar registro
 function cm_update($array){
-    if (array_key_exists('sql',$array) && array_key_exists('arrData',$array)) {
-        $mysql = new Mysql();
-        $request = $mysql->update($array['sql'], $array['arrData']);
+    global $permit;
+    $arrPermit = setPermit($array, $_SESSION);
+    $permit = $arrPermit['permit'];
+
+    if ($permit) {
+        if (array_key_exists('sql',$array) && array_key_exists('arrData',$array)) {
+            $mysql = new Mysql();
+            $request = $mysql->update($array['sql'], $array['arrData']);
+        }
+    }else{
+        $request = '';
     }
+
     return $request;
 }
 
 //eliminar registro
 function cm_delete($array){
-    if (array_key_exists('sql',$array)) {
-        $mysql = new Mysql();
-        $request = $mysql->delete($array['sql']);
+    global $permit;
+    $arrPermit = setPermit($array, $_SESSION);
+    $permit = $arrPermit['permit'];
+
+    if ($permit) {
+        if (array_key_exists('sql',$array)) {
+            $mysql = new Mysql();
+            $request = $mysql->delete($array['sql']);
+        }
+    }else{
+        $request = '';
     }
     return $request;
 }

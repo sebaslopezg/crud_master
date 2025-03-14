@@ -33,11 +33,58 @@ function dep_js($data){
     <?php
 }
 
+function setPermit($array, $arrSesion){
+    $permit = true;
+    $setPermit = false;
+    $permitType = null;
+    $crudType;
+    $permitReadExist = array_key_exists('permitRead',$array);
+
+    if (array_key_exists('permitRead',$array)) {
+        $permitType = 'permitRead';
+        $crudType = 'r';
+        $setPermit = true;
+    }
+    if (array_key_exists('permitCreate',$array)) {
+        $permitType = 'permitCreate';
+        $crudType = 'w';
+        $setPermit = true;
+    }
+    if (array_key_exists('permitUpdate',$array)) {
+        $permitType = 'permitUpdate';
+        $crudType = 'u';
+        $setPermit = true;
+    }
+    if (array_key_exists('permitDelete',$array)) {
+        $permitType = 'permitDelete';
+        $crudType = 'd';
+        $setPermit = true;
+    }
+
+    if ($permitType != null) {
+        if ($setPermit) {
+            $permit = false;
+             if (isset($_SESSION)) {
+                if (array_key_exists('permisosMod',$_SESSION)) {
+                    if (!empty($_SESSION['permisosMod'])) {
+                        if ($_SESSION['permisosMod'][$crudType] == 1) {
+                            $permit = true;
+                        }
+                    }
+                }
+            }
+        }
+    } 
+    $arrResponse = array('permit' => $permit, 'permitType' => $permitType);
+    return $arrResponse;
+}
+
 function getModal(string $nameModal, $data){
     $view_modal = "Template/Modals/{$nameModal}.php";
     require_once $view_modal;
 }
 
+//Revisar esta funcion
 function getPermisos($idmodulo){
     require_once("Modules/Permisos/permisos.model.php");
     $idRol = $_SESSION['userData']['rol_id'];

@@ -14,7 +14,7 @@ class Registros extends Controllers{
                 'relocate' => 'login',
             ),
             'permitRead' => array(
-                'relocate' => '/',
+                'relocate' => 'home',
             ),
             'page_title' => 'Los registros',
             'page_id' => 'registros',

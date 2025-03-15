@@ -1,16 +1,15 @@
 <?php
 
 //aqui van los hooks
-//TODO - terminar de setear los $permit en delete y algunos selects
+//TODO - terminar de setear los $permit en delete
 
 $courrentClass;
 Global $permit;
-//$permit = true;
+$permit = true;
 
 function cm_page($array){
-    $arrPermit = setPermit($array, $_SESSION);
-    $isPermit = $arrPermit['permit'];
-    $permitType = $arrPermit['permitType'];
+
+    $isPermit = true;
     $session = true;
 
     if (array_key_exists('login',$array)) {
@@ -19,7 +18,12 @@ function cm_page($array){
         }else{
             $session = true;
             if (array_key_exists('module',$array['login'])) {
-               getPermisos($array['login']['module']);
+                $idModuloActual = $array['login']['module'];
+               getPermisos($idModuloActual);
+
+               $arrPermit = setPermit($array);
+               $isPermit = $arrPermit['permit'];
+               //$permitType = $arrPermit['permitType'];
             }
         }
     }
@@ -50,7 +54,6 @@ function cm_page($array){
             header('Location: ' . base_url()."/$route" );
         }
     }
-    dep($arrPermit['permit']);
 }
 
 // Sección controllers
@@ -67,7 +70,7 @@ function cm_get($array){
 
 function cm_model($array){
     global $permit;
-    $arrPermit = setPermit($array, $_SESSION);
+    $arrPermit = setPermit($array);
     $permitType = $arrPermit['permitType'];
     $permit = $arrPermit['permit'];
 
@@ -133,7 +136,6 @@ function cm_model($array){
                                     $arrData = array('status' => true, 'msg' => $array['return']['true']['msg']);
                                 }
                             }
-                            
                         }catch(Exception $e){
                             $arrData = $array['model'];
                         }
@@ -250,7 +252,7 @@ function cm_set($array){
 
 function cm_select($array){
     global $permit;
-    $arrPermit = setPermit($array, $_SESSION);
+    $arrPermit = setPermit($array);
     $permit = $arrPermit['permit'];
 
     if ($permit) {
@@ -272,7 +274,7 @@ function cm_select($array){
 //Actualizar registro
 function cm_update($array){
     global $permit;
-    $arrPermit = setPermit($array, $_SESSION);
+    $arrPermit = setPermit($array);
     $permit = $arrPermit['permit'];
 
     if ($permit) {
@@ -290,7 +292,7 @@ function cm_update($array){
 //eliminar registro
 function cm_delete($array){
     global $permit;
-    $arrPermit = setPermit($array, $_SESSION);
+    $arrPermit = setPermit($array);
     $permit = $arrPermit['permit'];
 
     if ($permit) {

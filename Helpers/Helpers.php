@@ -33,7 +33,7 @@ function dep_js($data){
     <?php
 }
 
-function setPermit($array, $arrSesion){
+function setPermit($array){
     $permit = true;
     $setPermit = false;
     $permitType = null;
@@ -74,7 +74,7 @@ function setPermit($array, $arrSesion){
                 }
             }
         }
-    } 
+    }
     $arrResponse = array('permit' => $permit, 'permitType' => $permitType);
     return $arrResponse;
 }

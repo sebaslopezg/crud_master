@@ -25,20 +25,47 @@ function dep($data){
     return $format;
 }
 
-function dep_js($data){
+function depjs($data){
     ?>
 <script>
-    console.log(<?= $data ?>)
+    console.log(`<?php print_r($data); ?>`)
 </script>
     <?php
 }
 
-function setPermit($array){
+function setPermit($array, $getLogin = false){
     $permit = true;
     $setPermit = false;
     $permitType = null;
     $crudType;
-    $permitReadExist = array_key_exists('permitRead',$array);
+
+    if (isset($_SESSION)) {
+        if (isset($_SESSION['permisosMod'])) {
+            if (isset($_SESSION['permisosMod']['modulo_id'])) {
+                $moduloId = $_SESSION['permisosMod']['modulo_id'];
+                //getPermisos($moduloId);
+                depjs($moduloId);
+            }
+        }
+    }
+
+    if (false) {
+        # code...
+        if (array_key_exists('login',$array)) {
+           if (empty($_SESSION['login'])) {
+               $permit = false;
+           }else{
+               if (array_key_exists('module',$array['login'])) {
+                   $idModuloActual = $array['login']['module'];
+                  getPermisos($idModuloActual);
+   
+                  $arrPermit = setPermit($array, false);
+                  $isPermit = $arrPermit['permit'];
+               }
+           }
+       }
+    }
+
 
     if (array_key_exists('permitRead',$array)) {
         $permitType = 'permitRead';

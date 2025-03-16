@@ -1,5 +1,4 @@
 <?php
-
 //aqui van los hooks
 //TODO - terminar de setear los $permit en delete
 
@@ -21,9 +20,8 @@ function cm_page($array){
                 $idModuloActual = $array['login']['module'];
                getPermisos($idModuloActual);
 
-               $arrPermit = setPermit($array);
+               $arrPermit = setPermit($array, false);
                $isPermit = $arrPermit['permit'];
-               //$permitType = $arrPermit['permitType'];
             }
         }
     }
@@ -70,8 +68,8 @@ function cm_get($array){
 
 function cm_model($array){
     global $permit;
-    $arrPermit = setPermit($array);
-    $permitType = $arrPermit['permitType'];
+    //$arrPermit = setPermit($array, false);
+    $arrPermit = setPermit($array, false);
     $permit = $arrPermit['permit'];
 
     if ($permit) {
@@ -252,10 +250,11 @@ function cm_set($array){
 
 function cm_select($array){
     global $permit;
-    $arrPermit = setPermit($array);
-    $permit = $arrPermit['permit'];
+    //$arrPermit = setPermit($array);
+    //$permit = $arrPermit['permit'];
+    $permit = true;
 
-    if ($permit) {
+     if ($permit) {
         if (array_key_exists('all',$array) && array_key_exists('sql',$array)) {
             $mysql = new Mysql();
             if ($array['all'] == 'true') {
@@ -266,7 +265,9 @@ function cm_select($array){
         }
     }else{
         $request = '';
-    }
+    } 
+
+    //$request = array('status' => false, 'data' => $permit);
 
     return $request;
 }
@@ -305,4 +306,3 @@ function cm_delete($array){
     }
     return $request;
 }
-

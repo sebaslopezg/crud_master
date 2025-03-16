@@ -1,7 +1,7 @@
   <!-- ======= Footer ======= -->
   <footer id="footer" class="footer">
     <div class="copyright">
-    <strong>ECOSOFT</strong> 2025
+    <!--<strong>ECOSOFT</strong> 2025-->
     </div>
     <div class="credits">
       <p>Framework Crud Master</p>

@@ -5,7 +5,6 @@
 $courrentClass;
 Global $permit;
 $permit = true;
-
 function cm_page($array){
 
     $isPermit = true;
@@ -22,6 +21,8 @@ function cm_page($array){
 
                $arrPermit = setPermit($array, false);
                $isPermit = $arrPermit['permit'];
+               global $permit;
+               $permit = $isPermit;
             }
         }
     }
@@ -67,20 +68,28 @@ function cm_get($array){
 }
 
 function cm_model($array){
-    global $permit;
-    //$arrPermit = setPermit($array, false);
-    $arrPermit = setPermit($array, false);
+
+    $permit = true;
+    $arrPermit = setPermit($array);
     $permit = $arrPermit['permit'];
+    $permitType = $arrPermit['permitType'];
 
     if ($permit) {
         if (array_key_exists('model',$array)){
+
+            if (array_key_exists('args',$array)) {
+                $model = call_user_func_array($array['model'], $array['args']);
+            }else{
+                $model = call_user_func($array['model']);
+            }
+
     
             if(array_key_exists('return', $array)){
                 if (array_key_exists('true', $array['return'])) {
-                    $responseType = gettype($array['model']);
+                    $responseType = gettype($model);
     
                     if ($responseType == 'boolean') {
-                        if ($array['model']) {
+                        if ($model) {
                             $arrData = array('status' => true, 'msg' => $array['return']['true']['msg'], 'data' => $array['model']);
                         }else{
                             $arrData = array('status' => false, 'msg' => $array['return']['false']['msg']);
@@ -88,11 +97,11 @@ function cm_model($array){
                     }
     
                     if ($responseType == 'array') {
-                        if (array_key_exists('status',$array['model'])) {
+                        if (array_key_exists('status',$model)) {
                             if ($array['model']['status']) {
                                 if (array_key_exists('showData', $array['return']['true'])) {
                                     if ($array['return']['true']['showData'] == 'true') {
-                                        $arrData = $array['model'];
+                                        $arrData = $model;
                                     }else{
                                         $arrData = array('status' => false, 'msg' => $array['return']['true']['msg']);
                                     }
@@ -102,7 +111,7 @@ function cm_model($array){
                             }else{
                                 if (array_key_exists('showData', $array['return']['false'])) {
                                     if ($array['return']['false']['showData'] == 'true') {
-                                        $arrData = $array['model'];
+                                        $arrData = $model;
                                     }else{
                                         $arrData = array('status' => false, 'msg' => $array['return']['false']['msg']);
                                     }
@@ -111,13 +120,13 @@ function cm_model($array){
                                 }
                             }
                         }else{
-                            $arrData = $array['model'];
+                            $arrData = $model;
                         }
                     }
     
                     if ($responseType == 'integer') {
-                        if ($array['model'] > 0) {
-                            $arrData = array('status' => true, 'msg' => $array['return']['true']['msg'], 'data' => $array['model']);
+                        if ($model > 0) {
+                            $arrData = array('status' => true, 'msg' => $array['return']['true']['msg'], 'data' => $model);
                         }else{
                             $arrData = array('status' => false, 'msg' => $array['return']['false']['msg']);
                         }
@@ -125,22 +134,22 @@ function cm_model($array){
     
                     if ($responseType == 'string') {
                         try {
-                            $res = intval($array['model']);
+                            $res = intval($model);
                             if ($res == 0) {
                                 if (array_key_exists('showData', $array['return']['true'])) {
-                                    $array['return']['true']['showData'] == 'true' ? $data = $array['model'] : $data = '';
+                                    $array['return']['true']['showData'] == 'true' ? $data = $model : $data = '';
                                     $arrData = array('status' => true, 'msg' => $array['return']['true']['msg'], 'data' => $data);
                                 }else{
                                     $arrData = array('status' => true, 'msg' => $array['return']['true']['msg']);
                                 }
                             }
                         }catch(Exception $e){
-                            $arrData = $array['model'];
+                            $arrData = $model;
                         }
                     }
                 }
             }else{
-                $arrData = $array['model'];
+                $arrData = $model;
             }
         }else{
             $arrData = array('status' => false, 'msg' => 'undefined model');
@@ -223,8 +232,7 @@ function cm_set($array){
                 }
 
                 if (!$exist) {
-                    global $permit;
-                    if ($permit) {
+                    if (true) {
                         if ($array['mysql_type'] == 'insert') {
                             $arrData = $mysql->insert($array['sql'], $fields);
                         }
@@ -242,6 +250,7 @@ function cm_set($array){
     }else{
         $arrData = array('status' => false, 'msg' => 'undefined');
     }
+    //$arrData = array('status' => false, 'msg' => $arrPermit['permit']);
     return $arrData;
 } 
 
@@ -249,12 +258,11 @@ function cm_set($array){
 //Seccion models
 
 function cm_select($array){
-    global $permit;
-    //$arrPermit = setPermit($array);
-    //$permit = $arrPermit['permit'];
-    $permit = true;
+/*     $permit = true;
+    $arrPermit = setPermit($array);
+    $permit = $arrPermit['permit']; */
 
-     if ($permit) {
+     if (true) {
         if (array_key_exists('all',$array) && array_key_exists('sql',$array)) {
             $mysql = new Mysql();
             if ($array['all'] == 'true') {
@@ -267,16 +275,15 @@ function cm_select($array){
         $request = '';
     } 
 
-    //$request = array('status' => false, 'data' => $permit);
-
     return $request;
 }
 
 //Actualizar registro
 function cm_update($array){
-    global $permit;
-    $arrPermit = setPermit($array);
-    $permit = $arrPermit['permit'];
+
+/*     $arrPermit = setPermit($array);
+    $permit = $arrPermit['permit']; */
+    $permit = true;
 
     if ($permit) {
         if (array_key_exists('sql',$array) && array_key_exists('arrData',$array)) {
@@ -292,9 +299,9 @@ function cm_update($array){
 
 //eliminar registro
 function cm_delete($array){
-    global $permit;
     $arrPermit = setPermit($array);
     $permit = $arrPermit['permit'];
+    $permit = true;
 
     if ($permit) {
         if (array_key_exists('sql',$array)) {

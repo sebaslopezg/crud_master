@@ -8,7 +8,14 @@ class Roles extends Controllers{
     public function roles(){
         cm_page(array(
             'class' => $this,
-            'page_title' => 'Roles',
+            'login' => array(
+                'module' => 'roles',
+                'relocate' => 'login',
+            ),
+            'permitRead' => array(
+                'relocate' => 'home',
+            ),
+            'page_title' => 'Roles de usuario',
             'page_id' => 'roles',
             'view' => 'roles',
             'script' => 'roles',
@@ -17,7 +24,10 @@ class Roles extends Controllers{
 
     public function crearRol(){
         cm_model(array(
-            'model' => insertRol(),
+            'permitCreate' => array(
+                'msg' => 'No tiene permiso para crear roles',
+            ),
+            'model' => 'insertRol',
             'return' => array(
                 'true' => array(
                     'msg' => 'Rol creado exitosamente',
@@ -33,19 +43,30 @@ class Roles extends Controllers{
 
     public function listarRoles(){
         cm_model(array(
-            'model' => getRoles(),
+            'permitRead' => [
+                'msg' => 'No tiene permiso para ver esto',
+            ],
+            'model' => 'getRoles',
         ));
     }
 
     public function listarRolId($id){
         cm_model(array(
-            'model' => getRolId($id),
+            'permitRead' => [
+                'msg' => 'No tiene permiso para ver esto',
+            ],
+            'model' => 'getRolId',
+            'args' => [$id],
         ));
     }
 
     public function actualizarRol($id){
         cm_model(array(
-            'model' => updateRol($id),
+            'permitUpdate' => [
+                'msg' => 'No tiene permiso para actualizar los roles',
+            ],
+            'model' => 'updateRol',
+            'args' => [$id],
             'return' => array(
                 'true' => array(
                     'msg' => 'Rol actualizado exitosamente',
@@ -61,7 +82,11 @@ class Roles extends Controllers{
 
     public function eliminarRol($id){
         cm_model(array(
-            'model' => deleteRol($id),
+            'permitRead' => [
+                'msg' => 'No tiene permiso para eliminar roles',
+            ],
+            'model' => 'deleteRol',
+            'args' => [$id],
             'return' => array(
                 'true' => array(
                     'msg' => 'Rol eliminado exitosamente',

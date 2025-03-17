@@ -18,7 +18,8 @@ class Login extends Controllers{
     public function loginUser(){
         $post = $_POST;
          cm_model(array(
-            'model' => userLogin($post),
+            'model' => 'userLogin',
+            'args' => [$post],
             'response' => array(
                 'true' => array(
                     'msg' => 'Sesion iniciada',

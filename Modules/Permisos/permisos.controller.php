@@ -10,7 +10,8 @@ class Permisos extends Controllers{
     //como también cuando no se setea nada y queda vacío.
     public function setPermisos($id){
         cm_model(array(
-            'model' => setPermisosModel($id),
+            'model' => 'setPermisosModel',
+            'args' => [$id],
             'return' => array(
                 'true' => array(
                     'msg' => 'Permisos Asignados',
@@ -26,7 +27,8 @@ class Permisos extends Controllers{
 
     public function getPermiso($id){
         cm_model(array(
-            'model' => selectPermisos($id),
+            'model' => 'selectPermisos',
+            'args' => [$id],
         ));
     }
 }

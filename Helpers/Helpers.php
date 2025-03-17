@@ -26,14 +26,22 @@ function dep($data){
 }
 
 function depjs($data){
-    ?>
+?>
 <script>
     console.log(`<?php print_r($data); ?>`)
 </script>
-    <?php
+<?php
 }
 
-function setPermit($array, $getLogin = false){
+function getPermit(){
+    if (isset($_SESSION)) {
+        if (array_key_exists('permisosMod',$_SESSION)) {
+            # code...
+        }
+    }
+}
+
+function setPermit($array){
     $permit = true;
     $setPermit = false;
     $permitType = null;
@@ -41,68 +49,46 @@ function setPermit($array, $getLogin = false){
 
     if (isset($_SESSION)) {
         if (isset($_SESSION['permisosMod'])) {
-            if (isset($_SESSION['permisosMod']['modulo_id'])) {
-                $moduloId = $_SESSION['permisosMod']['modulo_id'];
-                //getPermisos($moduloId);
-                depjs($moduloId);
-            }
-        }
-    }
-
-    if (false) {
-        # code...
-        if (array_key_exists('login',$array)) {
-           if (empty($_SESSION['login'])) {
-               $permit = false;
-           }else{
-               if (array_key_exists('module',$array['login'])) {
-                   $idModuloActual = $array['login']['module'];
-                  getPermisos($idModuloActual);
-   
-                  $arrPermit = setPermit($array, false);
-                  $isPermit = $arrPermit['permit'];
-               }
-           }
-       }
-    }
+            if (array_key_exists('permisosMod',$_SESSION)) {
 
 
-    if (array_key_exists('permitRead',$array)) {
-        $permitType = 'permitRead';
-        $crudType = 'r';
-        $setPermit = true;
-    }
-    if (array_key_exists('permitCreate',$array)) {
-        $permitType = 'permitCreate';
-        $crudType = 'w';
-        $setPermit = true;
-    }
-    if (array_key_exists('permitUpdate',$array)) {
-        $permitType = 'permitUpdate';
-        $crudType = 'u';
-        $setPermit = true;
-    }
-    if (array_key_exists('permitDelete',$array)) {
-        $permitType = 'permitDelete';
-        $crudType = 'd';
-        $setPermit = true;
-    }
-
-    if ($permitType != null) {
-        if ($setPermit) {
-            $permit = false;
-             if (isset($_SESSION)) {
-                if (array_key_exists('permisosMod',$_SESSION)) {
-                    if (!empty($_SESSION['permisosMod'])) {
-                        if ($_SESSION['permisosMod'][$crudType] == 1) {
-                            $permit = true;
+                if (array_key_exists('permitRead',$array)) {
+                    $permitType = 'permitRead';
+                    $crudType = 'r';
+                    $setPermit = true;
+                }
+                if (array_key_exists('permitCreate',$array)) {
+                    $permitType = 'permitCreate';
+                    $crudType = 'w';
+                    $setPermit = true;
+                }
+                if (array_key_exists('permitUpdate',$array)) {
+                    $permitType = 'permitUpdate';
+                    $crudType = 'u';
+                    $setPermit = true;
+                }
+                if (array_key_exists('permitDelete',$array)) {
+                    $permitType = 'permitDelete';
+                    $crudType = 'd';
+                    $setPermit = true;
+                }
+            
+                if ($permitType != null) {
+                    if ($setPermit) {
+                        $permit = false;
+                        if (!empty($_SESSION['permisosMod'])) {
+                            if ($_SESSION['permisosMod'][$crudType] == 1) {
+                                $permit = true;
+                            }
                         }
                     }
                 }
             }
         }
     }
+
     $arrResponse = array('permit' => $permit, 'permitType' => $permitType);
+    $_SESSION['permit'] = $permit;
     return $arrResponse;
 }
 

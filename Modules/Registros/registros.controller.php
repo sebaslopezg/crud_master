@@ -26,9 +26,9 @@ class Registros extends Controllers{
     public function crearRegistro(){
         cm_model(array(
             'permitCreate' => array(
-                'msg' => 'No tiene permiso para crear registros',
+                'msg' => 'No tiene permiso para actualizar registros',
             ),
-            'model' => insertRegistro(),
+            'model' => 'insertRegistro',
             'return' => array(
                 'true' => array(
                     'msg' => 'Registro creado',
@@ -47,7 +47,8 @@ class Registros extends Controllers{
             'permitUpdate' => array(
                 'msg' => 'No tiene permiso para actualizar registros',
             ),
-            'model' => updateRegistro($id),
+            'model' => 'updateRegistro',
+            'args' => [$id],
             'return' => array(
                 'true' => array(
                     'msg' => 'Registro actualizado',
@@ -66,7 +67,7 @@ class Registros extends Controllers{
             'permitRead' => array(
                 'msg' => 'No tiene permiso para ver registros',
             ),
-            'model' => selectRegistros(),
+            'model' => 'selectRegistros',
         ));
     }
 
@@ -75,7 +76,8 @@ class Registros extends Controllers{
             'permitRead' => array(
                 'msg' => 'No tiene permiso para ver registros',
             ),
-            'model' => selectRegistrosById($id),
+            'model' => 'selectRegistrosById',
+            'args' => [$id],
         ));
     }
 
@@ -84,7 +86,8 @@ class Registros extends Controllers{
             'permitDelete' => array(
                 'msg' => 'No tiene permiso para eliminar registros',
             ),
-            'model' => deleteRegistro($id),
+            'model' => 'deleteRegistro',
+            'args' => [$id],
             'return' => array(
                 'true' => array(
                     'msg' => 'Registro eliminado',

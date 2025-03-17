@@ -3,4 +3,5 @@
     
   </main> -->
   home
+  <a href="<?= base_url() ?>/dashboard">Ingresar</a>
   <?php //footer_admin($data); ?>

@@ -8,6 +8,10 @@ class Usuarios extends Controllers{
 
         cm_page(array(
             'class' => $this,
+            'login' => [
+                'module' => 'usuarios',
+                'relocate' => 'login',
+            ],
             'page_title' => 'Usuarios',
             'page_id' => 'usuarios',
             'view' => 'usuarios',
@@ -17,7 +21,10 @@ class Usuarios extends Controllers{
 
     public function crearUsuario(){
         cm_model(array(
-            'model' => insertUsuario(),
+            'permitCreate' => [
+                'msg' => 'No tiene permiso para crear usuarios',
+            ],
+            'model' => 'insertUsuario',
             'return' => array(
                 'true' => array(
                     'msg' => 'Usuario creado',
@@ -33,19 +40,30 @@ class Usuarios extends Controllers{
 
     public function listarUsuarios(){
         cm_model(array(
-            'model' => getUsuarios(),
+            'permitRead' => [
+                'msg' => 'No tiene permisos para ver esto',
+            ],
+            'model' => 'getUsuarios',
         ));
     }
 
     public function traerUsuario($id){
         cm_model(array(
-            'model' => getUsuario($id),
+            'permitRead' => [
+                'msg' => 'No tiene permisos para ver esto',
+            ],
+            'model' => 'getUsuario',
+            'args' => [$id],
         ));
     }
 
     public function actualizarUsuario($id){
         cm_model(array(
-            'model' => updateUsuario($id),
+            'permitUpdate' => [
+                'msg' => 'No tiene permisos para actualizar usuarios',
+            ],
+            'model' => 'updateUsuario',
+            'args' => [$id],
             'return' => array(
                 'true' => array(
                     'msg' => 'Registro actualizado',
@@ -61,7 +79,11 @@ class Usuarios extends Controllers{
 
     public function eliminarUsuario($id){
         cm_model(array(
-            'model' => deleteUsuario($id),
+            'permitDelete' => [
+                'msg' => 'No tiene permisos para eliminar usuarios',
+            ],
+            'model' => 'deleteUsuario',
+            'args' => [$id],
             'return' => array(
                 'true' => array(
                     'msg' => 'Usuario eliminado',

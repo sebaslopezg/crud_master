@@ -20,16 +20,11 @@ $GLOBALS['navbar'] = array(
         'page_id' => 'roles',
     ),
     array(
-        'title' => 'Facturacion',
-        'icon' => 'receipt-cutoff',
-        'url' => 'facturacion',
-        'page_id' => 'facturacion',
-    ),
-    array(
-        'title' => 'Inventario',
+        'permit' => true,
+        'title' => 'Productos',
         'icon' => 'box-seam',
-        'url' => 'inventario',
-        'page_id' => 'inventario',
+        'url' => 'productos',
+        'page_id' => 'productos',
     ),
     array(
         'title' => 'Registros',

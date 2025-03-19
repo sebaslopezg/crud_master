@@ -315,8 +315,6 @@ function setTableFromUri(params, paramId){
           }
         }
 
-        console.log(permits.d)
-
         if (permits !== null && permits.u > 0) {          
           if ('update' in params.crud) {
             html += ' '

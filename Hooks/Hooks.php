@@ -1,6 +1,5 @@
 <?php
 //aqui van los hooks
-//TODO - terminar de setear los $permit en delete
 
 $courrentClass;
 Global $permit;

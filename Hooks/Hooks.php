@@ -231,15 +231,11 @@ function cm_set($array){
                 }
 
                 if (!$exist) {
-                    if (true) {
-                        if ($array['mysql_type'] == 'insert') {
-                            $arrData = $mysql->insert($array['sql'], $fields);
-                        }
-                        if ($array['mysql_type'] == 'update') {
-                            $arrData = $mysql->update($array['sql'], $fields);
-                        }
-                    }else{
-                        $arrData = array('status' => false, 'msg' => 'permission denied');
+                    if ($array['mysql_type'] == 'insert') {
+                        $arrData = $mysql->insert($array['sql'], $fields);
+                    }
+                    if ($array['mysql_type'] == 'update') {
+                        $arrData = $mysql->update($array['sql'], $fields);
                     }
                 }else{
                     $arrData = array('status' => false, 'msg' => $array['prevent_exist']['error_exist_msg']);

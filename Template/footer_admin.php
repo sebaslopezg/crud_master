@@ -20,9 +20,10 @@
   
   <script src="<?= media() ?>/vendor/tinymce/tinymce.min.js"></script>
   <script src="<?= media() ?>/vendor/sweetalert/sweetalert2.all.min.js"></script>
+
   
 <!--
-  <script src="<?= media() ?>/vendor/datatables/datatables.min.js"></script>
+  <script src="<?= media() ?>/vendor/simple-datatables/simple-datatables.js"></script>
   <script src="assets/vendor/apexcharts/apexcharts.min.js"></script>
   <script src="assets/vendor/chart.js/chart.umd.js"></script>
   <script src="assets/vendor/echarts/echarts.min.js"></script>
@@ -34,6 +35,7 @@
 
   <!-- Template Main JS File -->
   <script src="<?= media() ?>/js/main.js"></script>
+  <?php getScriptSession() ?>
   <script src="<?= media() ?>/js/app.js"></script>
   <?php if(array_key_exists('script',$data)): ?>
     <script src="<?= media() ?>/js/<?= $data['script'] ?>.js"></script>

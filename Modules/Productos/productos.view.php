@@ -1,4 +1,7 @@
-<?php header_admin($data); ?>
+<?php 
+header_admin($data); 
+getModal('productosModal', $data);
+?>
   <main id="main" class="main">
   
   <div class="pagetitle">
@@ -9,36 +12,18 @@
 
       <div class="card-body">
       <div class="card-title">
-        <button class="btn btn-primary">Nuevo Producto</button>
+        <button id="btnCrearProducto" class="btn btn-primary">Nuevo Producto</button>
 
-        <table class="table table-hover" id="tableProductos">
+        <table class="table">
           <thead>
             <tr>
               <th>Codigo</th>
               <th>Nombre</th>
-              <th>Color</th>
-              <th>Talla</th>
+              <th>Precio</th>
+              <th>Accion</th>
             </tr>
           </thead>
-          <tbody>
-            <tr>
-              <td>123</td>
-              <td>Franja</td>
-              <td>Axul</td>
-              <td>XL</td>
-            </tr>
-            <tr>
-              <td>123</td>
-              <td>Franja</td>
-              <td>Axul</td>
-              <td>XL</td>
-            </tr>
-            <tr>
-              <td>123</td>
-              <td>Franja</td>
-              <td>Axul</td>
-              <td>XL</td>
-            </tr>
+          <tbody id="tablaProductos">
           </tbody>
         </table>
       </div>

@@ -15,8 +15,6 @@ if (typeof scriptSession === 'undefined' || scriptSession === null) {
   permits = scriptSession.permisosMod
 }
 
-console.log(permits)
-
 document.addEventListener('click', (e)=>{
 
   let target = e.target.closest('button')

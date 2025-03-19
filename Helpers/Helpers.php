@@ -115,10 +115,12 @@ function getPermisos($idmodulo){
 
     $_SESSION['permisos'] = $permisos;
     $_SESSION['permisosMod'] = $permisosMod;
+}
+
+function getScriptSession(){
     $scriptSession = json_encode($_SESSION, JSON_UNESCAPED_UNICODE);
     ?>
         <script>
-            //console.log(`<?= $scriptSession ?>`)
             const scriptSession = <?= $scriptSession ?>
         </script>
     <?php

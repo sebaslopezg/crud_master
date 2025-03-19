@@ -4,13 +4,17 @@ class Usuarios extends Controllers{
     public function __construct(){
         parent::__construct();
     }
+
     public function usuarios(){
 
         cm_page(array(
             'class' => $this,
-            'login' => [
+            'login' => array(
                 'module' => 'usuarios',
-                'relocate' => 'login',
+                'relocate' => 'home',
+            ),
+            'permitRead' => [
+                'relocate' => 'home',
             ],
             'page_title' => 'Usuarios',
             'page_id' => 'usuarios',

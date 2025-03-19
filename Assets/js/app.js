@@ -2,11 +2,20 @@ let submitParams = []
 let deleteParams = {}
 let updateParams = {}
 let buttonParams = null
+let buttonPermitParams = []
 let modalParams = []
 let updating = {
   status: false,
   id: null
 }
+let permits
+if (typeof scriptSession === 'undefined' || scriptSession === null) {
+  permits = null
+}else{
+  permits = scriptSession.permisosMod
+}
+
+console.log(permits)
 
 document.addEventListener('click', (e)=>{
 
@@ -181,6 +190,7 @@ document.addEventListener('submit', (e) => {
           }).then((result) =>{
             'modal' in submitSet ? $('#'+submitSet.modal).modal('hide') : ''
             'tableFunction' in submitSet ? submitSet.tableFunction() : ''
+            console.log(data)
           })
         }else{
           Swal.fire({
@@ -299,15 +309,21 @@ function setTableFromUri(params, paramId){
 
       if('crud' in params && 'id' in params.crud){
         html += `<td>`
-        if ('delete' in params.crud){
-          html += `<button class="btn btn-danger" data-action="delete" data-id="${rowId}"> <i class="bi bi-${'icon' in params.crud.delete ? params.crud.delete.icon : 'trash' }"></i>  ${ 'text' in params.crud.delete ? params.crud.delete.text : 'Delete'}</button>`
+        if (permits !== null && permits.d > 0) {
+          if ('delete' in params.crud){
+            html += `<button class="btn btn-danger" data-action="delete" data-id="${rowId}"> <i class="bi bi-${'icon' in params.crud.delete ? params.crud.delete.icon : 'trash' }"></i>  ${ 'text' in params.crud.delete ? params.crud.delete.text : 'Delete'}</button>`
+          }
         }
 
-              
-        if ('update' in params.crud) {
-          html += ' '
-          html += `<button class="btn btn-primary" data-action="update" data-id="${rowId}"> <i class="bi bi-${'icon' in params.crud.update ? params.crud.update.icon : 'trash' }"></i>  ${ 'text' in params.crud.update ? params.crud.update.text : 'Update'}</button>` 
+        console.log(permits.d)
+
+        if (permits !== null && permits.u > 0) {          
+          if ('update' in params.crud) {
+            html += ' '
+            html += `<button class="btn btn-primary" data-action="update" data-id="${rowId}"> <i class="bi bi-${'icon' in params.crud.update ? params.crud.update.icon : 'trash' }"></i>  ${ 'text' in params.crud.update ? params.crud.update.text : 'Update'}</button>` 
+          }
         }
+              
 
         if ('buttons' in params.crud) {
 
@@ -330,7 +346,35 @@ function setTableFromUri(params, paramId){
   .catch(()=>{
       ///Exception occured do something
   })
-}   
+}
+
+function setButtonPermit(params){
+  buttonPermitParams.push(params)
+  checkButtonPermits()
+}
+
+function checkButtonPermits(){
+  if (permits !== null) {
+    buttonPermitParams.forEach(button => {
+      if ('permitType' in button) {
+
+        let permitTypeLetter
+
+        button.permitType == 'create' ? permitTypeLetter = 'w' : ''
+        button.permitType == 'read' ? permitTypeLetter = 'r' : ''
+        button.permitType == 'update' ? permitTypeLetter = 'u' : ''
+        button.permitType == 'delete' ? permitTypeLetter = 'd' : ''
+
+        if (permits[permitTypeLetter] == 0) {          
+          let id = button.id
+          buttonElement = document.querySelector(`#${id}`)
+          buttonElement.style.display = 'none'
+        }
+
+      }
+    })
+  }
+}
 
 function deleteFromUri(id, src){
   fetch(base_url + src + '/' + id)

@@ -18,7 +18,5 @@ getModal('registrosModal', $data);
     </tbody>
   </table>
 
-  <?php dep($_SESSION) ?>
-
   </main><!-- End #main -->
   <?php footer_admin($data); ?>

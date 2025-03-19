@@ -4,7 +4,7 @@ class Registros extends Controllers{
     public function __construct(){
         parent::__construct();
     }
-
+    
     public function registros(){
 
         cm_page(array(
@@ -91,9 +91,11 @@ class Registros extends Controllers{
             'return' => array(
                 'true' => array(
                     'msg' => 'Registro eliminado',
+                    'showData' => 'false',
                 ),
                 'false' => array(
                     'msg' => 'No se pudo eliminar el registro',
+                    'showData' => 'true',
                 )
             )
         ));

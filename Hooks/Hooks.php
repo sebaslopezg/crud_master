@@ -90,7 +90,7 @@ function cm_model($array){
     
                     if ($responseType == 'boolean') {
                         if ($model) {
-                            $arrData = array('status' => true, 'msg' => $array['return']['true']['msg'], 'data' => $array['model']);
+                            $arrData = array('status' => true, 'msg' => $array['return']['true']['msg'], 'data' => $model);
                         }else{
                             $arrData = array('status' => false, 'msg' => $array['return']['false']['msg']);
                         }
@@ -98,7 +98,7 @@ function cm_model($array){
     
                     if ($responseType == 'array') {
                         if (array_key_exists('status',$model)) {
-                            if ($array['model']['status']) {
+                            if ($model['status']) {
                                 if (array_key_exists('showData', $array['return']['true'])) {
                                     if ($array['return']['true']['showData'] == 'true') {
                                         $arrData = $model;
@@ -250,7 +250,6 @@ function cm_set($array){
     }else{
         $arrData = array('status' => false, 'msg' => 'undefined');
     }
-    //$arrData = array('status' => false, 'msg' => $arrPermit['permit']);
     return $arrData;
 } 
 
@@ -258,22 +257,15 @@ function cm_set($array){
 //Seccion models
 
 function cm_select($array){
-/*     $permit = true;
-    $arrPermit = setPermit($array);
-    $permit = $arrPermit['permit']; */
 
-     if (true) {
-        if (array_key_exists('all',$array) && array_key_exists('sql',$array)) {
-            $mysql = new Mysql();
-            if ($array['all'] == 'true') {
-                $request = $mysql->select_all($array['sql']);
-            }else{
-                $request = $mysql->select($array['sql']);
-            }
+    if (array_key_exists('all',$array) && array_key_exists('sql',$array)) {
+        $mysql = new Mysql();
+        if ($array['all'] == 'true') {
+            $request = $mysql->select_all($array['sql']);
+        }else{
+            $request = $mysql->select($array['sql']);
         }
-    }else{
-        $request = '';
-    } 
+    }
 
     return $request;
 }
@@ -281,17 +273,11 @@ function cm_select($array){
 //Actualizar registro
 function cm_update($array){
 
-/*     $arrPermit = setPermit($array);
-    $permit = $arrPermit['permit']; */
-    $permit = true;
+    $request;
 
-    if ($permit) {
-        if (array_key_exists('sql',$array) && array_key_exists('arrData',$array)) {
-            $mysql = new Mysql();
-            $request = $mysql->update($array['sql'], $array['arrData']);
-        }
-    }else{
-        $request = '';
+    if (array_key_exists('sql',$array) && array_key_exists('arrData',$array)) {
+        $mysql = new Mysql();
+        $request = $mysql->update($array['sql'], $array['arrData']);
     }
 
     return $request;
@@ -299,17 +285,12 @@ function cm_update($array){
 
 //eliminar registro
 function cm_delete($array){
-    $arrPermit = setPermit($array);
-    $permit = $arrPermit['permit'];
-    $permit = true;
 
-    if ($permit) {
-        if (array_key_exists('sql',$array)) {
-            $mysql = new Mysql();
-            $request = $mysql->delete($array['sql']);
-        }
-    }else{
-        $request = '';
+    $request;
+
+    if (array_key_exists('sql',$array)) {
+        $mysql = new Mysql();
+        $request = $mysql->delete($array['sql']);
     }
     return $request;
 }

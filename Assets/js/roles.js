@@ -30,7 +30,7 @@ function actualizarTabla(){
         replaceData:[{
                column:'status',
                values:['1','2'],
-               newValues:['<span class="badge bg-success">Activo</span>','<span class="badge bg-danger">Inactivo</span>']
+               newValues:['<span class="badge bg-success">Activo</span>','<span class="badge bg-secondary">Inactivo</span>']
             }, 
         ],
         crud:{

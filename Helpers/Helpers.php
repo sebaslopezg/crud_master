@@ -25,20 +25,12 @@ function dep($data){
     return $format;
 }
 
-function depjs($data){
+function console_log($data){
 ?>
 <script>
     console.log(`<?php print_r($data); ?>`)
 </script>
 <?php
-}
-
-function getPermit(){
-    if (isset($_SESSION)) {
-        if (array_key_exists('permisosMod',$_SESSION)) {
-            # code...
-        }
-    }
 }
 
 function setPermit($array){
@@ -89,6 +81,7 @@ function setPermit($array){
 
     $arrResponse = array('permit' => $permit, 'permitType' => $permitType);
     $_SESSION['permit'] = $permit;
+
     return $arrResponse;
 }
 
@@ -122,6 +115,13 @@ function getPermisos($idmodulo){
 
     $_SESSION['permisos'] = $permisos;
     $_SESSION['permisosMod'] = $permisosMod;
+    $scriptSession = json_encode($_SESSION, JSON_UNESCAPED_UNICODE);
+    ?>
+        <script>
+            //console.log(`<?= $scriptSession ?>`)
+            const scriptSession = <?= $scriptSession ?>
+        </script>
+    <?php
 }
 
 function strClean($strCadena){

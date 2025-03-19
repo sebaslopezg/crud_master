@@ -8,6 +8,11 @@ setSubmit({
   tableFunction: actualizarTabla
 })
 
+setButtonPermit({
+  id:'btnCrearRegistro',
+  permitType:'create',
+})
+
 setModal({
   trigger: 'btnCrearRegistro',
   modal: 'crearRegistroModal',
@@ -27,6 +32,8 @@ function actualizarTabla(){
         src: '/registros/eliminarRegistro',
         text: '',
         icon:'trash',
+        setPermit:true,
+        tableFunction:actualizarTabla,
         dialog:{
           title: 'Eliminar registro',
           text: '¿Desea eliminar el registro?',
@@ -52,6 +59,7 @@ function actualizarTabla(){
         icon:'pencil',
         src: '/registros/actualizarRegistro',
         form: 'frmCrearRetistro',
+        setPermit:true,
         modal: {
           id:'crearRegistroModal',
           srcElement: '/registros/getRegistrosById',

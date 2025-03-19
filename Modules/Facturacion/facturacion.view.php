@@ -12,7 +12,6 @@
       </div>
 
         <p>Aqui se efectuará el sistema de facturacion</p>
-        <?php dep($_SESSION['permisosMod']) ?>
       </div>
   </div>
 

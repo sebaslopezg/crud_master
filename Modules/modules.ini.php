@@ -21,6 +21,12 @@ $GLOBALS['navbar'] = array(
     ),
     array(
         'permit' => true,
+        'title' => 'Clientes',
+        'icon' => 'person-check',
+        'url' => 'clientes',
+        'page_id' => 'clientes',
+    ),
+    array(
         'title' => 'Productos',
         'icon' => 'box-seam',
         'url' => 'productos',

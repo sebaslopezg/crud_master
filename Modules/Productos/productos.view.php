@@ -14,7 +14,7 @@ getModal('productosModal', $data);
       <div class="card-title">
         <button id="btnCrearProducto" class="btn btn-primary">Nuevo Producto</button>
 
-        <table class="table">
+        <table class="table table-hover">
           <thead>
             <tr>
               <th>Codigo</th>

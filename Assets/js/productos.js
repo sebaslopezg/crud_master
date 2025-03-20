@@ -3,10 +3,15 @@ actualizarTabla()
 setModal({
     trigger: 'btnCrearProducto',
     modal: 'SetProductoModal',
-    ids: ['titleModal','btnCrear'],
+    ids: ['productModalTitle','btnCrear'],
     values:['Crear Producto', 'Guardar'],
-    fields:['txtCodigo'],
+    fields:['txtCodigo','txtNombreProducto','txtDescripcion','txtPrecio','txtStatus'],
 })
+
+setButtonPermit({
+    id:'btnCrearProducto',
+    permitType:'create',
+  })
 
 setSubmit({
     form:'frmSetProducto',
@@ -19,11 +24,11 @@ function actualizarTabla(){
     setTableFromUri({
         src:'/productos/listarProductos',
         table:'tablaProductos',
-        columns:['id','codigo','nombre','precio'],
+        columns:['codigo','nombre','precio'],
         crud:{
             id:'id',
             delete:{
-                src:'/',
+                src:'/productos/eliminarProducto',
                 text:'',
                 icon:'trash',
                 tableFunction:actualizarTabla,
@@ -47,17 +52,21 @@ function actualizarTabla(){
                 },
             },
             update:{
-                src:'/',
+                src:'/productos/actualizarProducto',
                 text:'',
                 icon:'pencil',
                 form:'frmSetProducto',
                 modal:{
                     id:'SetProductoModal',
-                    srcElement:'',
+                    srcElement:'/productos/listarProductoId',
                     setValues:{
-                        ids:[],
-                        values:[],
-                    }
+                        ids:['txtCodigo','txtNombreProducto','txtDescripcion','txtPrecio','txtStatus'],
+                        values:['codigo','nombre','descripcion','precio','status'],
+                    },
+                    replace:{
+                        ids:['productModalTitle'],
+                        values:['Actualizar Producto'],
+                    },
                 },
             }
         },

@@ -91,6 +91,23 @@ function getModal(string $nameModal, $data){
 }
 
 //Revisar esta funcion
+
+function getUser(string $userDataKey = null){
+    $response = null;
+
+    if (isset($_SESSION)) {
+        if (array_key_exists('userData',$_SESSION)) {
+            if ($userDataKey !== null) {
+                $response = $_SESSION['userData'][$userDataKey];
+            }else{
+                $response = $_SESSION['userData'];
+            }
+        }
+    }
+
+    return $response;
+}
+
 function getPermisos($idmodulo){
     require_once("Modules/Permisos/permisos.model.php");
     $idRol = $_SESSION['userData']['rol_id'];

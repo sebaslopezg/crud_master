@@ -1,4 +1,7 @@
-<?php header_admin($data); ?>
+<?php 
+header_admin($data); 
+getModal('ClientesModal', $data);
+?>
   <main id="main" class="main">
 
   <div class="pagetitle">
@@ -15,8 +18,7 @@
     <thead>
       <tr>
         <th>Documento</th>
-        <th>Nombres</th>
-        <th>Apellidos</th>
+        <th>Nombre</th>
         <th>Accion</th>
       </tr>
     </thead>

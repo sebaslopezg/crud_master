@@ -14,4 +14,9 @@ class Almacenes extends Controllers{
             'script' => 'almacenes',
         ]);
     }
+
+    public function ventas($args){
+        $arrParams = explode(",",$args);
+        dep($arrParams);
+    }
 }

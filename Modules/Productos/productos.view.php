@@ -3,17 +3,13 @@ header_admin($data);
 getModal('productosModal', $data);
 ?>
   <main id="main" class="main">
-  
-  <div class="pagetitle">
-      <h1>Productos</h1>
-    </div>
 
     <div class="card">
 
       <div class="card-body">
-      <div class="card-title">
-        <button id="btnCrearProducto" class="btn btn-primary">Nuevo Producto</button>
 
+        <button id="btnCrearProducto" class="btn btn-primary mt-3">Nuevo Producto</button>
+        
         <table class="table table-hover">
           <thead>
             <tr>
@@ -26,7 +22,6 @@ getModal('productosModal', $data);
           <tbody id="tablaProductos">
           </tbody>
         </table>
-      </div>
   </div>
 
 

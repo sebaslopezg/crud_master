@@ -4,10 +4,6 @@ getModal('ClientesModal', $data);
 ?>
   <main id="main" class="main">
 
-  <div class="pagetitle">
-    <h1>Clientes</h1>
-  </div>
-
   <div class="card">
 
 <div class="card-body">

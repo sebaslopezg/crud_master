@@ -4,10 +4,6 @@ getModal('rolesModal', $data);
 ?>
   <main id="main" class="main">
 
-  <div class="pagetitle">
-      <h1>Roles</h1>
-    </div>
-
   <div class="card">
     <div class="card-body">
         <br>

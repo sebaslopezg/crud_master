@@ -31,8 +31,13 @@ function cm_page($array){
 
         array_key_exists('page_title',$array) ? $data['page_title'] = $array['page_title'] : "Pagina sin nombre";
         array_key_exists('page_id',$array) ? $data['page_id'] = $array['page_id'] : 0;
+
         if (array_key_exists('script',$array)) {
             $data['script'] = $array['script'];
+        }
+
+        if (array_key_exists('data',$array)) {
+            $data['data'] = $array['data'];
         }
         
         if (array_key_exists('view',$array) && array_key_exists('class',$array)) {

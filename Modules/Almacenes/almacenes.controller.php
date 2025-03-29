@@ -15,8 +15,25 @@ class Almacenes extends Controllers{
         ]);
     }
 
-    public function ventas($args){
-        $arrParams = explode(",",$args);
-        dep($arrParams);
+    public function create(){
+        cm_model([
+            'model' => 'create',
+            'return' => [
+                'true' => [
+                    'msg' => 'Almacen creado',
+                    'showData' => 'false'
+                ],
+                'false' => [
+                    'msg' => 'Error',
+                    'showData' => 'true'
+                ],
+            ],
+        ]);
+    }
+
+    public function view(){
+        cm_model([
+            'model' => 'view',
+        ]);
     }
 }

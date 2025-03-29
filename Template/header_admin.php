@@ -49,6 +49,18 @@
       <i class="bi bi-list toggle-sidebar-btn"></i>
     </div><!-- End Logo -->
 
+    <div class="search-bar">
+      <h4><strong><?php 
+      if (isset($data)) {
+        if (array_key_exists('page_title',$data)) {
+          echo $data['page_title'];
+        }
+      }
+      ?></strong></h4>
+    </div>
+
+    
+
     <nav class="header-nav ms-auto">
       <ul class="d-flex align-items-center">
 

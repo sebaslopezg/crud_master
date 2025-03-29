@@ -26,15 +26,20 @@ document.addEventListener('click', (e)=>{
         $('#'+modal.modal).modal('show')
         updating.status = false
         updating.id = null
-        modal.fields.forEach((field) => {
-          let campo = document.querySelector('#'+field)
-          campo.value = ""
-        })
+        if ('fields' in modal) {          
+          modal.fields.forEach((field) => {
+            let campo = document.querySelector('#'+field)
+            campo.value = ""
+          })
+        }
 
-        modal.ids.forEach((id, index) => {
-          let campo = document.querySelector('#'+id)
-          campo.innerText = modal.values[index]
-        })
+        if ('ids' in modal) {          
+          modal.ids.forEach((id, index) => {
+            let campo = document.querySelector('#'+id)
+            campo.innerText = modal.values[index]
+          })
+        }
+
 
         if ('setSelect' in modal) {
           const select = document.querySelector(`#${modal.setSelect.id}`)
@@ -343,6 +348,17 @@ function setTableFromUri(params, paramId){
       ///Exception occured do something
   })
 }
+
+/* function setListGroupByUri(params, paramId){
+  let source
+  paramId == null ? source = params.src : source = params.src + '/' + paramId
+  fetch(base_url + source)
+  .then((res) => res.json())
+  .then((data) =>{
+    let listId = document.getElementById(params.listId)
+  })
+  .catch(() =>{})
+} */
 
 function setButtonPermit(params){
   buttonPermitParams.push(params)

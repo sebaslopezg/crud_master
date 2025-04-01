@@ -63,6 +63,16 @@ function listarProductoId($id){
     return $respuesta;
 }
 
+function listarProductoCodigo($codigo){
+    $res = cm_select([
+        'all' => 'true',
+        'sql' => "SELECT id, codigo, nombre, descripcion, precio FROM productos WHERE codigo='$codigo' AND status = 1",
+    ]);
+
+    return $res;
+}
+
+
 function eliminarProducto($id){
     $respuesta = cm_update([
         'sql' => 'UPDATE productos SET status = 0 WHERE id = ?',

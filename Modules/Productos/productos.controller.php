@@ -80,6 +80,16 @@ class Productos extends Controllers{
         ]);
     }
 
+    public function listarProductoCodigo($codigo){
+        cm_model([
+            'permitRead' => [
+                'msg' => 'No tiene permiso para ver productos',
+            ],
+            'model' => 'listarProductoCodigo',
+            'args' => [$codigo],
+        ]);
+    }
+
     public function eliminarProducto($id){
         cm_model([
             'permitDelete' => [

@@ -21,17 +21,24 @@
   <script src="<?= media() ?>/vendor/tinymce/tinymce.min.js"></script>
   <script src="<?= media() ?>/vendor/sweetalert/sweetalert2.all.min.js"></script>
 
-  
+  <!-- dataTables-->
+  <script src="<?= media() ?>/vendor/datatables/jquery.dataTables.min.js"></script>
+  <script src="<?= media() ?>/vendor/datatables/dataTables.bootstrap4.min.js"></script>
 <!--
   <script src="<?= media() ?>/vendor/simple-datatables/simple-datatables.js"></script>
   <script src="assets/vendor/apexcharts/apexcharts.min.js"></script>
   <script src="assets/vendor/chart.js/chart.umd.js"></script>
   <script src="assets/vendor/echarts/echarts.min.js"></script>
+
   <script src="assets/vendor/quill/quill.js"></script> 
   
   <script src="/vendor/simple-datatables/simple-datatables.js"></script>
   
-  <script src="assets/vendor/php-email-form/validate.js"></script> -->
+  <script src="assets/vendor/php-email-form/validate.js"></script>
+  
+  
+  
+  -->
 
   <!-- Template Main JS File -->
   <script src="<?= media() ?>/js/main.js"></script>

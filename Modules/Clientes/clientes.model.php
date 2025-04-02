@@ -60,15 +60,25 @@ function actualizarCliente($id){
 
 function eliminarCliente($id){
     $res = cm_update([
-        'sql' => "UPDATE clientes SET status = ? WHERE id = '$id'",
+        'sql' => "UPDATE clientes SET status = 0 WHERE id = ?",
         'arrData' => [$id],
     ]);
+    return $res;
 }
 
 function listarClienteId($id){
     $respuesta = cm_select([
         'all' => 'true',
         'sql' => "SELECT * FROM clientes WHERE id='$id' AND status > 0",
+    ]);
+
+    return $respuesta;
+}
+
+function listarClienteDocumento($documento){
+    $respuesta = cm_select([
+        'all' => 'false',
+        'sql' => "SELECT id, documento, nombre FROM clientes WHERE documento='$documento' AND status > 0",
     ]);
 
     return $respuesta;

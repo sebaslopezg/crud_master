@@ -4,11 +4,19 @@ const totalBill = document.querySelector('#totalBill')
 const totalRecibido = document.querySelector('#totalRecibido')
 const totalAbono = document.querySelector('#totalAbono')
 const totalToPay = document.querySelector('#totalToPay')
+const displayClient = document.querySelector('#displayClient')
+const documentClientModal = document.querySelector('#cedulaClienteModal')
+
+let clientSelected = {
+    nombre:null,
+    documento:null,
+}
 
 let tablaProductos = null
 let productListHtml = ''
 let isEditingAbono = false
 let isEditingRecibido = false
+let createClientModalDocument = null
 
 document.addEventListener('click', ({target}) => {
     if (target.dataset.action == 'getproductByCode') {
@@ -18,6 +26,27 @@ document.addEventListener('click', ({target}) => {
         let code = target.dataset.code
         agregarItem(code)
     }
+    if (target.dataset.action == 'addClient') {
+        $('#clientesModal').modal('show')
+    }
+    if (target.dataset.action == 'searchClient') {
+        const clientDocument = document.querySelector('#cedulaClienteModal')
+        getClientByDocument(clientDocument.value)
+    }
+    if (target.dataset.action == 'addClientModal') {
+        printClientOnDisplay()
+    }
+})
+
+documentClientModal.addEventListener('change', ({target}) => {
+    createClientModalDocument = target.value
+})
+
+setSubmit({
+    form:'frmSetCliente',
+    uri:'/clientes/crearCliente',
+    modal:'SetClientesModal',
+    tableFunction:setCreatedClient
 })
 
 document.addEventListener('change', ({target}) =>{
@@ -90,7 +119,6 @@ function agregarProducto(product){
 
     let frag = document.createRange().createContextualFragment(html);
     displayProducts.appendChild(frag)
-    //displayProducts.innerHTML += html
 }
 
 function loadProductosModal(){
@@ -133,6 +161,60 @@ function buscarProducto(json){
         }
     });
     return respuesta
+}
+
+function getClientByDocument(clientDocument, onlyData = false){
+    fetch(base_url + '/clientes/listarClienteDocumento/' + clientDocument)
+        .then((res) => res.json())
+        .then((data) => {
+
+            if (!onlyData) {    
+                if (data) {
+                    clientSelected.nombre = data.nombre
+                    clientSelected.documento = data.documento
+        
+                    const displayClientModal = document.querySelector('#displayClientModal')
+                    html = `
+                        <div class="row mt-4">
+                            <div class="col-auto">
+                                <span class="badge bg-light text-dark">
+                                ${data.documento}</span>
+                                <h5><b>${data.nombre}</b></h5>
+                            </div>
+                        </div>
+                    `
+                    displayClientModal.innerHTML = html                
+                }else{
+                    $('#clientesModal').modal('hide')
+                    $('#SetClientesModal').modal('show')
+                    let documentField = document.querySelector('#txtDocumento')
+                    documentField.value = createClientModalDocument
+                }
+            }else{
+                clientSelected.nombre = data.nombre
+                clientSelected.documento = data.documento
+            }
+
+        
+        })
+}
+
+function setCreatedClient(){
+    let clientDocument = createClientModalDocument
+    getClientByDocument(clientDocument, true)
+    printClientOnDisplay()
+}
+
+function printClientOnDisplay(){
+    let html = ''
+    clientSelected.documento == null ? '' : html = `
+    
+        <div class="alert alert-primary alert-dismissible fade show" role="alert">
+          <span>${clientSelected.documento}</span> | <span><b>${clientSelected.nombre}</b></span>
+          <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>          
+    `
+    displayClient.innerHTML = html
 }
 
 function updateBill(){

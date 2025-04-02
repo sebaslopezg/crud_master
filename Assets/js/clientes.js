@@ -34,6 +34,17 @@ function updateTable(){
                     denyButtonText:'No',
                     icon:'warning',
                 },
+                response:{
+                    statusTrue:{
+                        title:'Eliminar',
+                        icon:'success',
+                    },
+                    statusFalse:{
+                        title:'Error',
+                        text: 'No se pudo eliminar el producto',
+                        icon:'error'
+                    }
+                },
             },
             update:{
                 src:'/clientes/actualizarCliente',

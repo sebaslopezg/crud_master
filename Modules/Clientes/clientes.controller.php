@@ -43,6 +43,13 @@ class Clientes extends Controllers{
         ]);
     }
 
+    public function listarClienteDocumento($documento){
+        cm_model([
+            'model' => 'listarClienteDocumento',
+            'args' => [$documento],
+        ]);
+    }
+
     public function actualizarCliente($id){
         cm_model([
             'model' => 'actualizarCliente',
@@ -71,6 +78,7 @@ class Clientes extends Controllers{
                 ],
                 'false' => [
                     'ShowData' => 'true',
+                    'msg' => 'No se pudo eliminar el cliente',
                 ],
             ],
         ]);

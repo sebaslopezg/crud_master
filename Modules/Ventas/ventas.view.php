@@ -62,6 +62,22 @@ getModal('ventasModal', $data);
 
                     <div class="col-6">
 
+                    <div class="row">
+                      <div class="col-4">
+                        <button type="button" class="btn btn-secondary mb-2" data-action="addClient">
+                          <i class="bi bi-person-fill"></i>
+                          Agregar Cliente
+                        </button>
+
+                      </div>
+
+
+                      <div class="col">
+                        <div id="displayClient"></div>                        
+                      </div>
+
+                    </div>
+
                       <div class="row mb-2">
                           <div class="col-sm-6">
                               <input type="text" id="codigo" placeholder="CODIGO" class="form-control" />

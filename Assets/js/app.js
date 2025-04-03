@@ -1,3 +1,5 @@
+//revisar llaves de acceso en objetos y evitar errores cuando no se definan
+
 let submitParams = []
 let deleteParams = {}
 let updateParams = {}
@@ -193,7 +195,6 @@ document.addEventListener('submit', (e) => {
           }).then((result) =>{
             'modal' in submitSet ? $('#'+submitSet.modal).modal('hide') : ''
             'tableFunction' in submitSet ? submitSet.tableFunction() : ''
-            console.log(data)
           })
         }else{
           Swal.fire({

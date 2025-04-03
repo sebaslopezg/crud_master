@@ -6,6 +6,7 @@ const totalAbono = document.querySelector('#totalAbono')
 const totalToPay = document.querySelector('#totalToPay')
 const displayClient = document.querySelector('#displayClient')
 const documentClientModal = document.querySelector('#cedulaClienteModal')
+const cedulaClienteModal = document.querySelector('#cedulaClienteModal')
 
 let clientSelected = {
     nombre:null,
@@ -40,6 +41,13 @@ document.addEventListener('click', ({target}) => {
 
 documentClientModal.addEventListener('change', ({target}) => {
     createClientModalDocument = target.value
+})
+
+cedulaClienteModal.addEventListener('keydown', (e) =>{
+    if (e.key == 'Enter') {
+        const clientDocument = document.querySelector('#cedulaClienteModal')
+        getClientByDocument(clientDocument.value)
+    }
 })
 
 setSubmit({
@@ -193,6 +201,7 @@ function getClientByDocument(clientDocument, onlyData = false){
             }else{
                 clientSelected.nombre = data.nombre
                 clientSelected.documento = data.documento
+                printClientOnDisplay()
             }
 
         
@@ -202,7 +211,6 @@ function getClientByDocument(clientDocument, onlyData = false){
 function setCreatedClient(){
     let clientDocument = createClientModalDocument
     getClientByDocument(clientDocument, true)
-    printClientOnDisplay()
 }
 
 function printClientOnDisplay(){

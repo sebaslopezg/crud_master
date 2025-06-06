@@ -63,4 +63,14 @@ class Mysql extends Conexion{
         $del = $result->execute();
         return $del;
     }
+
+    public function statement(string $sql){
+        $this->strSql = $sql;
+        try{
+            $this->conexion->exec($this->strSql);
+            return true;
+        }catch (\Throwable $th) {
+            return false;
+        }
+    }
 }

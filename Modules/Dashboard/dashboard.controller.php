@@ -6,15 +6,21 @@ class Dashboard extends Controllers{
     }
     public function dashboard(){
 
-        cm_page(array(
+        cm_setModule([
+            'id' => 'dashboard',
+            'name' => 'Dashboard',
+            'description' => 'El dashboard de la pagina'
+        ]);
+
+        cm_page([
             'class' => $this,
-             'login' => array(
+             'login' => [
                 'module' => 'dashboard',
                 'relocate' => 'login',
-            ), 
+             ], 
             'page_title' => 'Dashboard',
             'page_id' => 'dashboard',
             'view' => 'dashboard',
-        ));
+        ]);
     }
 }

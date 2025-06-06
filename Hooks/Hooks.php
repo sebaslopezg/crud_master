@@ -294,3 +294,10 @@ function cm_delete($array){
     }
     return $request;
 }
+
+//Setear modulos
+function cm_setModule($params){
+    if (array_key_exists('id',$params) && array_key_exists('name',$params)) {
+        $mysql = new Mysql();
+    }
+}

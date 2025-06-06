@@ -9,13 +9,13 @@ class Usuarios extends Controllers{
 
         cm_page(array(
             'class' => $this,
-            'login' => array(
+/*             'login' => array(
                 'module' => 'usuarios',
                 'relocate' => 'home',
             ),
             'permitRead' => [
                 'relocate' => 'home',
-            ],
+            ], */
             'page_title' => 'Usuarios',
             'page_id' => 'usuarios',
             'view' => 'usuarios',
@@ -25,9 +25,9 @@ class Usuarios extends Controllers{
 
     public function crearUsuario(){
         cm_model(array(
-            'permitCreate' => [
+/*             'permitCreate' => [
                 'msg' => 'No tiene permiso para crear usuarios',
-            ],
+            ], */
             'model' => 'insertUsuario',
             'return' => array(
                 'true' => array(

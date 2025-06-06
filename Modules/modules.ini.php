@@ -20,14 +20,12 @@ $GLOBALS['navbar'] = array(
         'page_id' => 'roles',
     ),
     array(
-        'permit' => true,
         'title' => 'Almacenes',
         'icon' => 'shop',
         'url' => 'almacenes',
         'page_id' => 'almacenes',
     ),
     array(
-        'permit' => true,
         'title' => 'Clientes',
         'icon' => 'person-check',
         'url' => 'clientes',

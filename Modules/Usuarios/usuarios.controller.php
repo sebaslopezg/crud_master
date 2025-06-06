@@ -9,13 +9,13 @@ class Usuarios extends Controllers{
 
         cm_page(array(
             'class' => $this,
-/*             'login' => array(
+             'login' => array(
                 'module' => 'usuarios',
                 'relocate' => 'home',
             ),
             'permitRead' => [
                 'relocate' => 'home',
-            ], */
+            ], 
             'page_title' => 'Usuarios',
             'page_id' => 'usuarios',
             'view' => 'usuarios',
@@ -44,18 +44,18 @@ class Usuarios extends Controllers{
 
     public function listarUsuarios(){
         cm_model(array(
-            'permitRead' => [
+/*             'permitRead' => [
                 'msg' => 'No tiene permisos para ver esto',
-            ],
+            ], */
             'model' => 'getUsuarios',
         ));
     }
 
     public function traerUsuario($id){
         cm_model(array(
-            'permitRead' => [
+/*             'permitRead' => [
                 'msg' => 'No tiene permisos para ver esto',
-            ],
+            ], */
             'model' => 'getUsuario',
             'args' => [$id],
         ));
@@ -63,9 +63,9 @@ class Usuarios extends Controllers{
 
     public function actualizarUsuario($id){
         cm_model(array(
-            'permitUpdate' => [
+/*             'permitUpdate' => [
                 'msg' => 'No tiene permisos para actualizar usuarios',
-            ],
+            ], */
             'model' => 'updateUsuario',
             'args' => [$id],
             'return' => array(
@@ -83,9 +83,9 @@ class Usuarios extends Controllers{
 
     public function eliminarUsuario($id){
         cm_model(array(
-            'permitDelete' => [
+/*             'permitDelete' => [
                 'msg' => 'No tiene permisos para eliminar usuarios',
-            ],
+            ], */
             'model' => 'deleteUsuario',
             'args' => [$id],
             'return' => array(

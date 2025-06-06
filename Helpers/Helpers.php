@@ -37,7 +37,7 @@ function setPermit($array){
     $permit = true;
     $setPermit = false;
     $permitType = null;
-    $crudType;
+    $crudType = null;
 
     if (isset($_SESSION)) {
         if (isset($_SESSION['permisosMod'])) {
@@ -129,7 +129,6 @@ function getPermisos($idmodulo){
             $permisosMod = '';
         }
     }
-
     $_SESSION['permisos'] = $permisos;
     $_SESSION['permisosMod'] = $permisosMod;
 }

@@ -6,8 +6,7 @@ function userLogin($post){
         $arrResponse = array('status' => false, 'msg' => 'Error de datos');
     }else{
         $usuario = strtolower(strClean($post['usuario']));
-        //$password = hash("SHA256", strClean($post['password']));
-        $password = strClean($post['password']);
+        $password = hash("SHA256", strClean($post['password']));
 
         $requestUser = cm_select(array(
             'all' => 'false',

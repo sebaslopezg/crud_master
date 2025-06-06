@@ -8,13 +8,13 @@ class Roles extends Controllers{
     public function roles(){
         cm_page(array(
             'class' => $this,
-/*             'login' => array(
+             'login' => array(
                 'module' => 'roles',
                 'relocate' => 'login',
             ),
             'permitRead' => array(
                 'relocate' => 'home',
-            ), */
+            ), 
             'page_title' => 'Roles de usuario',
             'page_id' => 'roles',
             'view' => 'roles',
@@ -24,9 +24,9 @@ class Roles extends Controllers{
 
     public function crearRol(){
         cm_model(array(
-            'permitCreate' => array(
+/*             'permitCreate' => array(
                 'msg' => 'No tiene permiso para crear roles',
-            ),
+            ), */
             'model' => 'insertRol',
             'return' => array(
                 'true' => array(
@@ -52,9 +52,9 @@ class Roles extends Controllers{
 
     public function listarRolId($id){
         cm_model(array(
-            'permitRead' => [
+/*             'permitRead' => [
                 'msg' => 'No tiene permiso para ver esto',
-            ],
+            ], */
             'model' => 'getRolId',
             'args' => [$id],
         ));
@@ -62,9 +62,9 @@ class Roles extends Controllers{
 
     public function actualizarRol($id){
         cm_model(array(
-            'permitUpdate' => [
+/*             'permitUpdate' => [
                 'msg' => 'No tiene permiso para actualizar los roles',
-            ],
+            ], */
             'model' => 'updateRol',
             'args' => [$id],
             'return' => array(
@@ -82,9 +82,9 @@ class Roles extends Controllers{
 
     public function eliminarRol($id){
         cm_model(array(
-            'permitRead' => [
+/*             'permitRead' => [
                 'msg' => 'No tiene permiso para eliminar roles',
-            ],
+            ], */
             'model' => 'deleteRol',
             'args' => [$id],
             'return' => array(

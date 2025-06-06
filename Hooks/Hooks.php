@@ -159,7 +159,7 @@ function cm_model($array){
             $arrData = array('status' => false, 'msg' => 'undefined model');
         }
     }else{
-        $permitMessage;
+        $permitMessage = null;
         $permitType == null ? $permitMessage = 'permission denied' : $permitMessage = $array[$permitType]['msg'];
         $arrData = array('status' => false, 'msg' => $permitMessage);
     }
@@ -180,7 +180,7 @@ function cm_set($array){
 
         foreach ($data as $key => $value) {
 
-            $fieldData;
+            $fieldData = null;
             
             if (array_key_exists('value',$value)) {
                 array_push($fields, $value['value']);
@@ -273,7 +273,7 @@ function cm_select($array){
 //Actualizar registro
 function cm_update($array){
 
-    $request;
+    $request = null;
 
     if (array_key_exists('sql',$array) && array_key_exists('arrData',$array)) {
         $mysql = new Mysql();
@@ -286,7 +286,7 @@ function cm_update($array){
 //eliminar registro
 function cm_delete($array){
 
-    $request;
+    $request = null;
 
     if (array_key_exists('sql',$array)) {
         $mysql = new Mysql();

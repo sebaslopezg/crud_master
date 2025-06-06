@@ -8,10 +8,10 @@ class Dashboard extends Controllers{
 
         cm_page(array(
             'class' => $this,
-            'login' => array(
+             'login' => array(
                 'module' => 'dashboard',
                 'relocate' => 'login',
-            ),
+            ), 
             'page_title' => 'Dashboard',
             'page_id' => 'dashboard',
             'view' => 'dashboard',

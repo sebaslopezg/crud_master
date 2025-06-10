@@ -1,5 +1,7 @@
 <?php
 
+//crear funcion de schema para creacion en BD
+
 function selectModules(){
     $response = cm_select(array(
         'all' => 'true',

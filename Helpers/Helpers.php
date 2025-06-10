@@ -133,10 +133,6 @@ function getPermisos($idmodulo){
     $_SESSION['permisosMod'] = $permisosMod;
 }
 
-function getModules(){
-
-}
-
 function getScriptSession(){
     $scriptSession = json_encode($_SESSION, JSON_UNESCAPED_UNICODE);
     ?>

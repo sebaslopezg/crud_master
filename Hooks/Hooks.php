@@ -301,3 +301,8 @@ function cm_setModule($params){
         $mysql = new Mysql();
     }
 }
+
+//schema function 
+function cm_schema_mysql($tableName,$params){
+    
+}

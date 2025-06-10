@@ -4,7 +4,7 @@ class Controllers{
     public function __construct(){
         $this->views = new Views();
         $this->loadModel();
-        session_start();
+        isset($_SESSION) ? '' : session_start();
     }
 
     public function loadModel(){
@@ -16,11 +16,7 @@ class Controllers{
         }
     }
 
-/*     public function initModule(){
-        $moduleInitPath = "Modules/modules.ini.php";
-
-        if(file_exists($moduleInitPath)){
-            require_once($moduleInitPath);
-        }
-    } */
+    public function schema(){
+        //aquí se dispara el schema
+    }
 }

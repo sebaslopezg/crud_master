@@ -8,6 +8,7 @@
 require_once("Config/Config.php");
 require_once("Helpers/Helpers.php");
 require_once("Hooks/Hooks.php");
+//require_once("Hooks/Autoload.php");
 
 $url = !empty($_GET['url']) ? $_GET['url'] : 'home/home';
 

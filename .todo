@@ -2,3 +2,6 @@
 
 -revisar porque cuando se restringen permisos igual tiene acceso el usuarioa
 Crear variables de entorno
+
+-Cambiar hooks a clases y luego implementar autoload
+-Hacier lo mismo con los helpers

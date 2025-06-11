@@ -9,26 +9,26 @@ class Permisos extends Controllers{
     //Resolver problema con el seteo de modulos, tanto para cuando se setean swiches en cualquier parte de la tabla
     //como también cuando no se setea nada y queda vacío.
     public function setPermisos($id){
-        cm_model(array(
+        cm_model([
             'model' => 'setPermisosModel',
             'args' => [$id],
-            'return' => array(
-                'true' => array(
+            'return' => [
+                'true' => [
                     'msg' => 'Permisos Asignados',
                     'ShowData' => 'false',
-                ),
-                'false' => array(
+                ],
+                'false' => [
                     'msg' => 'error al asignar permisos',
                     'ShowData' => 'true',
-                ),
-            ),
-        ));
+                ],
+            ],
+        ]);
     }
 
     public function getPermiso($id){
-        cm_model(array(
+        cm_model([
             'model' => 'selectPermisos',
             'args' => [$id],
-        ));
+        ]);
     }
 }

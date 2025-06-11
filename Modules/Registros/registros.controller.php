@@ -7,98 +7,98 @@ class Registros extends Controllers{
     
     public function registros(){
 
-        cm_page(array(
+        cm_page([
             'class' => $this,
-            'login' => array(
+            'login' => [
                 'module' => 'registros',
                 'relocate' => 'login',
-            ),
-            'permitRead' => array(
+            ],
+            'permitRead' => [
                 'relocate' => 'home',
-            ),
+            ],
             'page_title' => 'Los registros',
             'page_id' => 'registros',
             'view' => 'registros',
             'script' => 'registros',
-        ));
+        ]);
     }
 
     public function crearRegistro(){
-        cm_model(array(
-            'permitCreate' => array(
+        cm_model([
+            'permitCreate' => [
                 'msg' => 'No tiene permiso para actualizar registros',
-            ),
+            ],
             'model' => 'insertRegistro',
-            'return' => array(
-                'true' => array(
+            'return' => [
+                'true' => [
                     'msg' => 'Registro creado',
                     'showData' => 'false',
-                ),
-                'false' => array(
+                ],
+                'false' => [
                     'msg' => 'No se pudo crear el registro',
                     'showData' => 'true',
-                )
-            )
-        ));
+                ]
+            ]
+        ]);
     }
 
     public function actualizarRegistro($id){
-        cm_model(array(
-            'permitUpdate' => array(
+        cm_model([
+            'permitUpdate' => [
                 'msg' => 'No tiene permiso para actualizar registros',
-            ),
+            ],
             'model' => 'updateRegistro',
             'args' => [$id],
-            'return' => array(
-                'true' => array(
+            'return' => [
+                'true' => [
                     'msg' => 'Registro actualizado',
                     'showData' => 'true',
-                ),
-                'false' => array(
+                ],
+                'false' => [
                     'msg' => 'No se pudo actualizar el registro',
                     'showData' => 'true',
-                )
-            )
-        ));
+                ]
+            ]
+        ]);
     }
 
     public function getRegistros(){
-        cm_model(array(
-            'permitRead' => array(
+        cm_model([
+            'permitRead' => [
                 'msg' => 'No tiene permiso para ver registros',
-            ),
+            ],
             'model' => 'selectRegistros',
-        ));
+        ]);
     }
 
     public function getRegistrosById($id){
-        cm_model(array(
-            'permitRead' => array(
+        cm_model([
+            'permitRead' => [
                 'msg' => 'No tiene permiso para ver registros',
-            ),
+            ],
             'model' => 'selectRegistrosById',
             'args' => [$id],
-        ));
+        ]);
     }
 
     public function eliminarRegistro($id){
-        cm_model(array(
-            'permitDelete' => array(
+        cm_model([
+            'permitDelete' => [
                 'msg' => 'No tiene permiso para eliminar registros',
-            ),
+            ],
             'model' => 'deleteRegistro',
             'args' => [$id],
-            'return' => array(
-                'true' => array(
+            'return' => [
+                'true' => [
                     'msg' => 'Registro eliminado',
                     'showData' => 'false',
-                ),
-                'false' => array(
+                ],
+                'false' => [
                     'msg' => 'No se pudo eliminar el registro',
                     'showData' => 'true',
-                )
-            )
-        ));
+                ]
+            ]
+        ]);
     }
 }
 

@@ -1,49 +1,49 @@
 <?php
 
 function insertRol(){
-    $setRol = cm_set(array(
+    $setRol = cm_set([
         'type' => 'post',
         'mysql_type' => 'insert',
-        'data' => array(
-            'id' => array('required' => false, 'value' => uniqid('',true)),
-            'txtNombre' => array('required' => true),
-            'txtDescripcion' => array('required' => false),
-            'selStatus' => array('required'=> true),
-        ),
+        'data' => [
+            'id' => ['required' => false, 'value' => uniqid('',true)],
+            'txtNombre' => ['required' => true],
+            'txtDescripcion' => ['required' => false],
+            'selStatus' => ['required'=> true],
+        ],
         'sql' => "INSERT INTO roles (id, nombre, descripcion, status) VALUES(?,?,?,?)",
         'error_required_msg' => 'Algunos campos son obligatorios',
-    ));
+    ]);
     return $setRol;
 }
 
 function getRoles(){
-    $getRoles = cm_select(array(
+    $getRoles = cm_select([
         'all' => 'true',
         'sql' => "SELECT * FROM roles WHERE status > 0",
-    ));
+    ]);
     return $getRoles;
 }
 
 function getRolId($id){
-    $getRol = cm_select(array(
+    $getRol = cm_select([
         'all' => 'true',
         'sql' => "SELECT * FROM roles WHERE status > 0 AND id = '$id'",
-    ));
+    ]);
     return $getRol;
 }
 
 function updateRol($id){
-    $setRol = cm_set(array(
+    $setRol = cm_set([
         'type' => 'post',
         'mysql_type' => 'update',
-        'data' => array(
-            'txtNombre' => array('required' => true),
-            'txtDescripcion' => array('required' => false),
-            'selStatus' => array('required'=> true),
-        ),
+        'data' => [
+            'txtNombre' => ['required' => true],
+            'txtDescripcion' => ['required' => false],
+            'selStatus' => ['required'=> true],
+        ],
         'sql' => "UPDATE roles SET nombre = ?, descripcion = ?, status = ? WHERE id = '$id'",
         'error_required_msg' => 'Algunos campos son obligatorios',
-    ));
+    ]);
     return $setRol;
 }
 
@@ -59,10 +59,10 @@ function deleteRol($id){
     if($selectUsuario){
         $response = ['status' => false, 'msg' => 'No se puede eliminar el rol porque tiene usuarios asignados'];
     }else{
-        $deleteRol = cm_update(array(
+        $deleteRol = cm_update([
             'sql' => "UPDATE roles SET status = ? WHERE id = '$id'",
             'arrData' => array(0),
-        ));
+        ]);
         $response = $deleteRol;
     }
 

@@ -17,6 +17,6 @@ class Controllers{
     }
 
     public function schema(){
-        //aquí se dispara el schema
+        function_exists('schema') ? schema() : '';
     }
 }

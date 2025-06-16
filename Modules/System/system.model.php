@@ -7,7 +7,7 @@ function schema(){
             'name' => 'id',
             'type' => 'varchar',
             'length' => 30,
-            'index' => 'primary'
+            'index' => 'primary key'
         ],
         [
             'name' => 'nombre',

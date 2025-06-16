@@ -304,5 +304,20 @@ function cm_setModule($params){
 
 //schema function 
 function cm_schema_mysql($tableName,$params){
-    
+    $mysql = new Mysql();
+
+    $fields = '';
+    $last_key = array_key_last($params);
+
+    foreach ($params as $key => $value) {
+        //print_r ($value);
+        array_key_exists('name', $value) ? $fields .= $value['name'] : '';
+        array_key_exists('type', $value) ? $fields .= ' ' . $value['type'] : '';
+        array_key_exists('length', $value) ? $fields .= '(' . $value['length'] . ')' : '(' . 0 . ')' ;
+        array_key_exists('index', $value) ? $fields .= ' ' . $value['index'] : '' ;
+        $key == $last_key ? '' : $fields .= ', ';
+    }
+
+    $setStatement = "CREATE TABLE IF NOT EXISTS $tableName($fields)";
+    $statement = $mysql->statement($setStatement);
 }

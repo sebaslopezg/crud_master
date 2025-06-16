@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 07, 2025 at 08:57 PM
+-- Generation Time: Jun 17, 2025 at 01:00 AM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -39,9 +39,14 @@ CREATE TABLE `modulos` (
 --
 
 INSERT INTO `modulos` (`id`, `nombre`, `descripcion`, `status`) VALUES
+('almacenes', 'Almacenes', 'Almacenes del sistema', 1),
+('clientes', 'Clientes', '', 1),
 ('permisos', 'Permisos', '', 1),
+('productos', 'Productos', '', 1),
+('registros', 'Registros', '', 1),
 ('roles', 'Roles', '', 1),
-('usuarios', 'usuarios', '', 1);
+('usuarios', 'usuarios', '', 1),
+('ventas', 'Ventas', '', 1);
 
 -- --------------------------------------------------------
 
@@ -64,12 +69,17 @@ CREATE TABLE `permisos` (
 --
 
 INSERT INTO `permisos` (`id`, `rol_id`, `modulo_id`, `r`, `w`, `u`, `d`) VALUES
-('68434f37d1c76', '67c93aa50bc6c0.23522713', 'permisos', 1, 1, 1, 1),
-('68434f37d5343', '67c93aa50bc6c0.23522713', 'roles', 1, 1, 1, 1),
-('68434f37d7200', '67c93aa50bc6c0.23522713', 'usuarios', 1, 1, 1, 1),
 ('684351423667d', '67c93a4fa0a661.10017893', 'permisos', 1, 0, 0, 0),
 ('6843514237ffe', '67c93a4fa0a661.10017893', 'roles', 1, 0, 0, 0),
-('68435142395d5', '67c93a4fa0a661.10017893', 'usuarios', 1, 0, 0, 0);
+('68435142395d5', '67c93a4fa0a661.10017893', 'usuarios', 1, 0, 0, 0),
+('68509f9baf273', '67c93aa50bc6c0.23522713', 'almacenes', 1, 1, 1, 1),
+('68509f9bb62a8', '67c93aa50bc6c0.23522713', 'clientes', 1, 1, 1, 1),
+('68509f9bb9f2f', '67c93aa50bc6c0.23522713', 'permisos', 1, 1, 1, 1),
+('68509f9bbe0f8', '67c93aa50bc6c0.23522713', 'productos', 1, 1, 1, 1),
+('68509f9bc55e8', '67c93aa50bc6c0.23522713', 'registros', 1, 1, 1, 1),
+('68509f9bc6d0e', '67c93aa50bc6c0.23522713', 'roles', 1, 1, 1, 1),
+('68509f9bcd07c', '67c93aa50bc6c0.23522713', 'usuarios', 1, 1, 1, 1),
+('68509f9bd49d9', '67c93aa50bc6c0.23522713', 'ventas', 1, 1, 1, 1);
 
 -- --------------------------------------------------------
 
@@ -146,6 +156,30 @@ INSERT INTO `roles` (`id`, `nombre`, `descripcion`, `status`) VALUES
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `sys_modulos`
+--
+
+CREATE TABLE `sys_modulos` (
+  `id` varchar(30) NOT NULL,
+  `nombre` varchar(60) DEFAULT NULL,
+  `descripcion` varchar(50) DEFAULT NULL,
+  `status` int(1) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `test`
+--
+
+CREATE TABLE `test` (
+  `id` varchar(30) DEFAULT NULL,
+  `data` varchar(20) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `usuarios`
 --
 
@@ -211,6 +245,12 @@ ALTER TABLE `registros`
 -- Indexes for table `roles`
 --
 ALTER TABLE `roles`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `sys_modulos`
+--
+ALTER TABLE `sys_modulos`
   ADD PRIMARY KEY (`id`);
 
 --

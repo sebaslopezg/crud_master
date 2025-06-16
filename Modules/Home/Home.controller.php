@@ -6,11 +6,11 @@ class Home extends Controllers{
     }
     public function home(){
 
-        cm_page(array(
+        cm_page([
             'class' => $this,
             'page_title' => 'Mi home',
             'page_id' => 'home',
             'view' => 'home',
-        ));
+        ]);
     }
 }

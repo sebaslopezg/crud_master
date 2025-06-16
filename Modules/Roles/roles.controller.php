@@ -6,97 +6,97 @@ class Roles extends Controllers{
     }
 
     public function roles(){
-        cm_page(array(
+        cm_page([
             'class' => $this,
-             'login' => array(
+             'login' => [
                 'module' => 'roles',
                 'relocate' => 'login',
-            ),
-            'permitRead' => array(
+             ],
+            'permitRead' => [
                 'relocate' => 'home',
-            ), 
+            ], 
             'page_title' => 'Roles de usuario',
             'page_id' => 'roles',
             'view' => 'roles',
             'script' => 'roles',
-        ));
+        ]);
     }
 
     public function crearRol(){
-        cm_model(array(
-/*             'permitCreate' => array(
+        cm_model([
+                'permitCreate' => [
                 'msg' => 'No tiene permiso para crear roles',
-            ), */
+            ],
             'model' => 'insertRol',
-            'return' => array(
-                'true' => array(
+            'return' => [
+                'true' => [
                     'msg' => 'Rol creado exitosamente',
                     'showData' => 'true',
-                ),
-                'false' => array(
+                ],
+                'false' => [
                     'msg' => 'No se pudo crear el rol',
                     'showData' => 'true',
-                ),
-            ),
-        ));
+                ],
+            ],
+        ]);
     }
 
     public function listarRoles(){
-        cm_model(array(
-/*             'permitRead' => [
+        cm_model([
+                'permitRead' => [
                 'msg' => 'No tiene permiso para ver esto',
-            ], */
+            ],
             'model' => 'getRoles',
-        ));
+        ]);
     }
 
     public function listarRolId($id){
-        cm_model(array(
-/*             'permitRead' => [
+        cm_model([
+                'permitRead' => [
                 'msg' => 'No tiene permiso para ver esto',
-            ], */
+            ],
             'model' => 'getRolId',
             'args' => [$id],
-        ));
+        ]);
     }
 
     public function actualizarRol($id){
-        cm_model(array(
-/*             'permitUpdate' => [
+        cm_model([
+                'permitUpdate' => [
                 'msg' => 'No tiene permiso para actualizar los roles',
-            ], */
+            ],
             'model' => 'updateRol',
             'args' => [$id],
-            'return' => array(
-                'true' => array(
+            'return' => [
+                'true' => [
                     'msg' => 'Rol actualizado exitosamente',
                     'showData' => 'true',
-                ),
-                'false' => array(
+                ],
+                'false' => [
                     'msg' => 'No se pudo actualizar el rol',
                     'showData' => 'true',
-                ),
-            ),
-        ));
+                ],
+            ],
+        ]);
     }
 
     public function eliminarRol($id){
-        cm_model(array(
-/*             'permitRead' => [
+        cm_model([
+                'permitRead' => [
                 'msg' => 'No tiene permiso para eliminar roles',
-            ], */
+            ],
             'model' => 'deleteRol',
             'args' => [$id],
-            'return' => array(
-                'true' => array(
+            'return' => [
+                'true' => [
                     'msg' => 'Rol eliminado exitosamente',
                     'showData' => 'true',
-                ),
-                'false' => array(
+                ],
+                'false' => [
                     'msg' => 'No se pudo eliminar el rol',
                     'showData' => 'true',
-                ),
-            ),
-        ));
+                ],
+            ],
+        ]);
     }
 }

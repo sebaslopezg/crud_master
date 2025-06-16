@@ -5,12 +5,12 @@ class Errors extends Controllers{
         parent::__construct();
     }
     public function notFound(){
-        cm_page(array(
+        cm_page([
             'class' => $this,
             'page_title' => 'Error',
             'page_id' => 'error',
             'view' => 'errors',
-        ));
+        ]);
     }
 }
 

@@ -8,16 +8,16 @@ function userLogin($post){
         $usuario = strtolower(strClean($post['usuario']));
         $password = hash("SHA256", strClean($post['password']));
 
-        $requestUser = cm_select(array(
+        $requestUser = cm_select([
             'all' => 'false',
             'sql' => "SELECT id, status FROM usuarios WHERE
             email = '$usuario' AND
             password = '$password' AND
             status != 0",
-        ));
+        ]);
     
         if (empty($requestUser)) {
-            $arrResponse = array('status' => false, 'msg' => 'El usuario o la contraseña es incorrecta');
+            $arrResponse = ['status' => false, 'msg' => 'El usuario o la contraseña es incorrecta'];
         }else{
             $arrData = $requestUser;
             if ($arrData['status'] == 1) {
@@ -26,7 +26,7 @@ function userLogin($post){
     
                 $idUser = $_SESSION['idUser'];
     
-                $arrData = cm_select(array(
+                $arrData = cm_select([
                     'all' => 'false',
                     'sql' => "SELECT 
                     u.id, 
@@ -39,13 +39,13 @@ function userLogin($post){
                     u.status 
                     FROM usuarios u 
                     WHERE u.id = '$idUser'",
-                ));
+                ]);
     
                 $_SESSION['userData'] = $arrData;
     
-                $arrResponse = array('status' => true, 'msg' => 'Sesion iniciada');
+                $arrResponse = ['status' => true, 'msg' => 'Sesion iniciada'];
             }else{
-                $arrResponse = array('status' => false, 'msg' => 'Usuario inactivo');
+                $arrResponse = ['status' => false, 'msg' => 'Usuario inactivo'];
             }
         }
     } 

@@ -7,12 +7,12 @@ class Usuarios extends Controllers{
 
     public function usuarios(){
 
-        cm_page(array(
+        cm_page([
             'class' => $this,
-             'login' => array(
+             'login' => [
                 'module' => 'usuarios',
                 'relocate' => 'home',
-            ),
+             ],
             'permitRead' => [
                 'relocate' => 'home',
             ], 
@@ -20,33 +20,33 @@ class Usuarios extends Controllers{
             'page_id' => 'usuarios',
             'view' => 'usuarios',
             'script' => 'usuarios',
-        ));
+        ]);
     }
 
     public function crearUsuario(){
-        cm_model(array(
-/*             'permitCreate' => [
+        cm_model([
+                'permitCreate' => [
                 'msg' => 'No tiene permiso para crear usuarios',
-            ], */
+            ],
             'model' => 'insertUsuario',
-            'return' => array(
-                'true' => array(
+            'return' => [
+                'true' => [
                     'msg' => 'Usuario creado',
                     'showData' => 'true',
-                ),
-                'false' => array(
+                ],
+                'false' => [
                     'msg' => 'No se pudo crear el usuario',
                     'showData' => 'true',
-                )
-            )
-        ));
+                ]
+            ]
+        ]);
     }
 
     public function listarUsuarios(){
         cm_model(array(
-/*             'permitRead' => [
+            'permitRead' => [
                 'msg' => 'No tiene permisos para ver esto',
-            ], */
+            ],
             'model' => 'getUsuarios',
         ));
     }

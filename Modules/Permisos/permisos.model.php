@@ -1,9 +1,9 @@
 <?php
 
 function setPermisosModel($id){
-    $deletePermisos = cm_delete(array(
+    $deletePermisos = cm_delete([
         'sql' => "DELETE FROM permisos WHERE rol_id = '$id'",
-    ));
+    ]);
 
     $modulos = $_POST['modulos'];
     $idRol = $_POST['rolId'];
@@ -14,21 +14,21 @@ function setPermisosModel($id){
         $w = isset($value['w']) ? 1 : 0;
         $u = isset($value['u']) ? 1 : 0;
         $d = isset($value['d']) ? 1 : 0;
-        $requestInsert = cm_set(array(
+        $requestInsert = cm_set([
             'type' => 'post',
             'mysql_type' => 'insert',
-            'data' => array(
-                'id' => array('required' => false, 'value' => uniqid()),
-                'rol_id' => array('required' => false, 'value' => $idRol),
-                'modulo_id' => array('required' => false, 'value' => $idModulo),
-                'r' => array('required' => false, 'value' => $r),
-                'w' => array('required' => false, 'value' => $w),
-                'u' => array('required' => false, 'value' => $u),
-                'd' => array('required' => false, 'value' => $d),
-            ),
+            'data' => [
+                'id' => ['required' => false, 'value' => uniqid()],
+                'rol_id' => ['required' => false, 'value' => $idRol],
+                'modulo_id' => ['required' => false, 'value' => $idModulo],
+                'r' => ['required' => false, 'value' => $r],
+                'w' => ['required' => false, 'value' => $w],
+                'u' => ['required' => false, 'value' => $u],
+                'd' => ['required' => false, 'value' => $d],
+            ],
             'sql' => "INSERT INTO permisos (id, rol_id, modulo_id, r, w, u, d) VALUES(?,?,?,?,?,?,?)",
             'error_required_msg' => 'No es posible asignar los permisos',
-        ));
+        ]);
     } 
     return $requestInsert;
 }
@@ -36,17 +36,17 @@ function setPermisosModel($id){
 //TODO:: Corregir error en selectPermisoso
 function selectPermisos($id){
     $response;
-    $arrPermisosRol = cm_select(array(
+    $arrPermisosRol = cm_select([
         'all' => 'true',
         'sql' => "SELECT * FROM permisos WHERE rol_id = '$id'"
-    ));
+    ]);
 
-    $arrModulos = cm_select(array(
+    $arrModulos = cm_select([
         'all' => 'true',
         'sql' => "SELECT * FROM modulos"
-    ));
+    ]);
 
-    $arrPermisos = array('r' => 0, 'w' => 0, 'u' => 0, 'd' => 0);
+    $arrPermisos = ['r' => 0, 'w' => 0, 'u' => 0, 'd' => 0];
 
      if (empty($arrPermisosRol)) {
 
@@ -57,7 +57,7 @@ function selectPermisos($id){
         }
     }else{
          for ($i=0; $i < count($arrModulos); $i++) { 
-            $arrPermisos = array('r' => 0, 'w' => 0, 'u' => 0, 'd' => 0);
+            $arrPermisos = ['r' => 0, 'w' => 0, 'u' => 0, 'd' => 0];
             
             foreach ($arrPermisosRol as $key => $value) {
                 if ($arrModulos[$i]['id'] == $value['modulo_id']) {
@@ -83,7 +83,7 @@ function selectPermisos($id){
 
 function permisosModulo($idRol){
 
-    $request = cm_select(array(
+    $request = cm_select([
         'all' => 'true',
         'sql' => "SELECT p.rol_id,
                 p.modulo_id,
@@ -96,7 +96,7 @@ function permisosModulo($idRol){
                 INNER JOIN modulos m
                 ON p.modulo_id = m.id
                 WHERE p.rol_id = '$idRol'"
-    ));
+    ]);
 
      $arrPermisos = array();
 

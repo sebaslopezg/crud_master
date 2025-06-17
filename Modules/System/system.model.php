@@ -2,7 +2,20 @@
 
 //crear funcion de schema para creacion en BD
 function schema(){
-    cm_schema_mysql('sys_modulos',[
+    cm_schema_mysql('sys_log',[
+        [
+            'name' => 'log_key',
+            'type' => 'varchar',
+            'length' => 60,
+            'index' => 'primary key'
+        ],
+        [
+            'name' => 'log_value',
+            'type' => 'longtext',
+        ],
+    ]);
+
+    cm_schema_mysql('sys_modules',[
         [
             'name' => 'id',
             'type' => 'varchar',
@@ -25,6 +38,29 @@ function schema(){
             'length' => 1
         ],
     ]);
+
+    $query = cm_select([
+        'all' => 'true',
+        'sql' => "SELECT COUNT(*) AS COUNT FROM sys_modules"
+    ]); 
+
+    $isEmpty = $query[0]['COUNT'];
+    
+    if (!$isEmpty) {
+        cm_set([
+            'type' => 'post',
+            'mysql_type' => 'insert',
+            'data' => [
+                'id' => ['required' => false, 'value' => 'usuarios'],
+                'nombre' => ['required' => false, 'value' => 'Usuarios'],
+                'descripcion' => ['required' => false, 'value' => 'Users'],
+                'status' => ['required' => false, 'value' => 1],
+            ],
+            'sql' => "INSERT INTO sys_modules(id, nombre, descripcion, status) VALUES (?, ?, ?, ?)",
+            'error_required_msg' => '',
+        ]);
+    }
+
 }
 
 function selectModules(){

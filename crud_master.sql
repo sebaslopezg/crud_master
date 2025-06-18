@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 07, 2025 at 08:57 PM
+-- Generation Time: Jun 18, 2025 at 06:44 AM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -24,6 +24,77 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `almacenes`
+--
+
+CREATE TABLE `almacenes` (
+  `id` varchar(30) NOT NULL,
+  `modify_date` date NOT NULL,
+  `modify_by` varchar(60) NOT NULL,
+  `status` int(1) NOT NULL,
+  `nombre` varchar(60) NOT NULL,
+  `descripcion` text NOT NULL,
+  `config` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NOT NULL CHECK (json_valid(`config`))
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `almacenes`
+--
+
+INSERT INTO `almacenes` (`id`, `modify_date`, `modify_by`, `status`, `nombre`, `descripcion`, `config`) VALUES
+('6850e15575c53', '2025-06-16', '1', 1, 'test', 'asdlk', '{\"title\":\"asdasd\",\"secondTitle\":\"\",\"documentType\":\"\",\"storeName\":\"\",\"storeNit\":\"\",\"storeAddress\":\"\",\"storePhone\":\"\",\"storeEmail\":\"\",\"reportSuffix\":\"\",\"reportFooter1\":\"\",\"reportFooter2\":\"\"}'),
+('6850e1722f10a', '2025-06-16', '1', 2, 'almacencito', 'para vende', '');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `clientes`
+--
+
+CREATE TABLE `clientes` (
+  `id` varchar(30) NOT NULL,
+  `timestamp` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
+  `fecha_modificacion` date NOT NULL,
+  `creado_por` varchar(30) NOT NULL,
+  `modificado_por` varchar(30) NOT NULL,
+  `documento` varchar(30) NOT NULL,
+  `direccion` varchar(60) NOT NULL,
+  `nombre` varchar(60) NOT NULL,
+  `email` varchar(60) NOT NULL,
+  `telefono` varchar(60) NOT NULL,
+  `status` int(1) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `clientes`
+--
+
+INSERT INTO `clientes` (`id`, `timestamp`, `fecha_modificacion`, `creado_por`, `modificado_por`, `documento`, `direccion`, `nombre`, `email`, `telefono`, `status`) VALUES
+('6850eedb814b61.32045595', '2025-06-17 04:28:11', '2025-06-16', '1', '1', '1321', 'avenida 23 con 33', 'secilio marchesin', 'cecills2d1@gmail.com', '321324', 1),
+('6851bce5e75c78.27014715', '2025-06-17 19:07:17', '2025-06-17', '1', '1', '98787', 'dasds', 'Sebastian', 'sebassasalag96@gmail.com', '23435435534', 1),
+('6851c38c9f7f09.34170740', '2025-06-17 19:35:40', '2025-06-17', '1', '1', '123', 'werwe', 'Raul', 'sebaslg96@gmail.com', '3106019959', 1);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `config`
+--
+
+CREATE TABLE `config` (
+  `config_key` varchar(100) NOT NULL,
+  `config_value` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `config`
+--
+
+INSERT INTO `config` (`config_key`, `config_value`) VALUES
+('configBillReport', '{\"title\":\"Recibo de Ventas\",\"secondTitle\":\"Venta\",\"documentType\":\"Recibo de venta\",\"storeName\":\"Fajas Mimi\",\"storeNit\":\"26286642\",\"storeAddress\":\"CL 12 # 7 - 49\",\"storePhone\":\"3104270002\",\"storeEmail\":\"ventasfajasmimi@gmail.com\",\"reportSuffix\":\"RECIBO\",\"reportFooter1\":\"Para cualquier cambio o reclamo es indispensable presentar esta factura. Plazo para cambios o garant&iacute;as &uacute;nicamente hasta 30 d&iacute;as despu&eacute;s de la compra. Prendas en promoci&oacute;n no tienen cambio. No se hace devoluci&oacute;n de dinero. Las prendas deben conservar su ticket original, para que se pueda realizar alg&uacute;n cambio. Gracias por su compra\",\"reportFooter2\":\"Software Design and Development By 7d Studio 00000080124406-0\"}');
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `modulos`
 --
 
@@ -39,9 +110,14 @@ CREATE TABLE `modulos` (
 --
 
 INSERT INTO `modulos` (`id`, `nombre`, `descripcion`, `status`) VALUES
+('almacenes', 'Almacenes', 'Almacenes del sistema', 1),
+('clientes', 'Clientes', '', 1),
 ('permisos', 'Permisos', '', 1),
+('productos', 'Productos', '', 1),
+('registros', 'Registros', '', 1),
 ('roles', 'Roles', '', 1),
-('usuarios', 'usuarios', '', 1);
+('usuarios', 'usuarios', '', 1),
+('ventas', 'Ventas', '', 1);
 
 -- --------------------------------------------------------
 
@@ -64,12 +140,41 @@ CREATE TABLE `permisos` (
 --
 
 INSERT INTO `permisos` (`id`, `rol_id`, `modulo_id`, `r`, `w`, `u`, `d`) VALUES
-('68434f37d1c76', '67c93aa50bc6c0.23522713', 'permisos', 1, 1, 1, 1),
-('68434f37d5343', '67c93aa50bc6c0.23522713', 'roles', 1, 1, 1, 1),
-('68434f37d7200', '67c93aa50bc6c0.23522713', 'usuarios', 1, 1, 1, 1),
 ('684351423667d', '67c93a4fa0a661.10017893', 'permisos', 1, 0, 0, 0),
 ('6843514237ffe', '67c93a4fa0a661.10017893', 'roles', 1, 0, 0, 0),
-('68435142395d5', '67c93a4fa0a661.10017893', 'usuarios', 1, 0, 0, 0);
+('68435142395d5', '67c93a4fa0a661.10017893', 'usuarios', 1, 0, 0, 0),
+('6850a47571b66', '67c93aa50bc6c0.23522713', 'almacenes', 1, 1, 1, 1),
+('6850a47578cb8', '67c93aa50bc6c0.23522713', 'clientes', 1, 1, 1, 1),
+('6850a47580870', '67c93aa50bc6c0.23522713', 'permisos', 1, 1, 1, 1),
+('6850a47588107', '67c93aa50bc6c0.23522713', 'productos', 1, 1, 1, 1),
+('6850a4758f82b', '67c93aa50bc6c0.23522713', 'registros', 1, 1, 1, 1),
+('6850a47597447', '67c93aa50bc6c0.23522713', 'roles', 1, 1, 1, 1),
+('6850a4759ea5e', '67c93aa50bc6c0.23522713', 'usuarios', 1, 1, 1, 1),
+('6850a475a6256', '67c93aa50bc6c0.23522713', 'ventas', 1, 1, 1, 1);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `productos`
+--
+
+CREATE TABLE `productos` (
+  `id` varchar(30) NOT NULL,
+  `timestamp` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
+  `modificado` datetime NOT NULL,
+  `codigo` varchar(30) NOT NULL,
+  `nombre` varchar(60) NOT NULL,
+  `precio` double NOT NULL,
+  `descripcion` text NOT NULL,
+  `status` int(1) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `productos`
+--
+
+INSERT INTO `productos` (`id`, `timestamp`, `modificado`, `codigo`, `nombre`, `precio`, `descripcion`, `status`) VALUES
+('6850f0d07bda43.09319168', '2025-06-17 04:36:32', '2025-06-16 23:36:32', '123-789-4441', 'productoso', 10000, 'descripcion descripciosa', 1);
 
 -- --------------------------------------------------------
 
@@ -107,12 +212,13 @@ INSERT INTO `registros` (`id`, `nombre`, `apellido`, `status`) VALUES
 ('67c3f3503d8278.53517604', 'Anderson', 'Cabrera', 1),
 ('67c3f360597771.07177069', 'esto es otra cosa', 'no c xD', 0),
 ('67c4c2c901fa02.23000943', 'Alejandro', 'Buitrago', 1),
-('67c4c4b08392b9.83664373', 'Andres', 'Rincon', 1),
+('67c4c4b08392b9.83664373', 'Andres', 'Rincon', 0),
 ('67c511e17327b5.46473334', 'otro registro', 'mas', 0),
 ('67c54131dc19b7.13443484', 'nuevo registro', 'apartir de nose', 0),
 ('67c6187ad97e47.78160409', 'Paton', 'Bauza', 0),
 ('67c618c5674430.36537717', 'sdsdsd', 'sooooosaaaaa', 0),
 ('67c626bc87b3c7.03867470', 'Sergio ', 'cazuelaz', 0),
+('6850a42caa9871.53414582', 'ddddddddddddddddd', 'aaaaaaa', 0),
 ('a6sd54s6d54', 'sebasttopol', 'hola', 0),
 ('a6sd54s6d54sdd', 'dfgdf', 'dfg', 0),
 ('as56d4a6sd54', 'sosobra', 'asdd', 0),
@@ -141,7 +247,39 @@ INSERT INTO `roles` (`id`, `nombre`, `descripcion`, `status`) VALUES
 ('67c9dd73f13eb7.54260594', 'eliminable', 'aldkjasdjkl', 0),
 ('67c9dda559ded9.51385382', 'asdasdas', 'asdasdasd', 0),
 ('67c9dda9133534.90117198', 'ddsdssd', 'sdsdsdsd', 0),
-('67ca1c4d811b23.74278146', 'Agente de ventas', 'Rol de vendedor', 2);
+('67ca1c4d811b23.74278146', 'Agente de ventas', 'Rol de vendedor', 2),
+('68520d698dd0c6.61519857', 'vendedorsitos', 'asdlkj', 1);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `sys_log`
+--
+
+CREATE TABLE `sys_log` (
+  `log_key` varchar(60) NOT NULL,
+  `log_value` longtext DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `sys_modules`
+--
+
+CREATE TABLE `sys_modules` (
+  `id` varchar(30) NOT NULL,
+  `nombre` varchar(60) DEFAULT NULL,
+  `descripcion` varchar(50) DEFAULT NULL,
+  `status` int(1) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `sys_modules`
+--
+
+INSERT INTO `sys_modules` (`id`, `nombre`, `descripcion`, `status`) VALUES
+('usuarios', 'Usuarios', 'Users', 1);
 
 -- --------------------------------------------------------
 
@@ -188,6 +326,24 @@ INSERT INTO `usuarios` (`id`, `rol_id`, `documento`, `tipo_documento`, `nombres`
 --
 
 --
+-- Indexes for table `almacenes`
+--
+ALTER TABLE `almacenes`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `clientes`
+--
+ALTER TABLE `clientes`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `config`
+--
+ALTER TABLE `config`
+  ADD PRIMARY KEY (`config_key`);
+
+--
 -- Indexes for table `modulos`
 --
 ALTER TABLE `modulos`
@@ -211,6 +367,18 @@ ALTER TABLE `registros`
 -- Indexes for table `roles`
 --
 ALTER TABLE `roles`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `sys_log`
+--
+ALTER TABLE `sys_log`
+  ADD PRIMARY KEY (`log_key`);
+
+--
+-- Indexes for table `sys_modules`
+--
+ALTER TABLE `sys_modules`
   ADD PRIMARY KEY (`id`);
 
 --

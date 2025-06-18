@@ -36,4 +36,36 @@ class Almacenes extends Controllers{
             'model' => 'view',
         ]);
     }
+
+    public function setconfig(){
+        cm_model([
+            'model' => 'setConfig',
+            'return' => [
+                'true' => [
+                    'msg' => 'Se ha guardado la configuración',
+                    'showData' => 'false'
+                ],
+                'false' => [
+                    'msg' => 'Error al intentar guardar la configuración',
+                    'showData' => 'true'
+                ],
+            ],
+        ]);
+    }
+
+    public function getconfig(){
+        cm_model([
+            'model' => 'getconfig',
+            'return' => [
+                'true' => [
+                    'msg' => 'Se ha guardado la configuración',
+                    'showData' => 'false'
+                ],
+                'false' => [
+                    'msg' => 'Error al intentar guardar la configuración',
+                    'showData' => 'true'
+                ],
+            ],
+        ]);
+    }
 }

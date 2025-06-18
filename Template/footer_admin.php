@@ -4,7 +4,7 @@
     <!--<strong>ECOSOFT</strong> 2025-->
     </div>
     <div class="credits">
-      <p>Framework Crud Master</p>
+      <p>ADSO 2025</p>
     </div>
   </footer><!-- End Footer -->
 

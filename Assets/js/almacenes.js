@@ -1,6 +1,7 @@
 const almacenesList = document.querySelector('#almacenesList')
 
 getAlmacenes()
+getForm()
 
 setModal({
     trigger: 'btnNew',
@@ -14,13 +15,54 @@ setSubmit({
     tableFunction:getAlmacenes
 })
 
+setSubmit({
+    form:'configBillReport',
+    uri:'/almacenes/setconfig',
+    tableFunction:getForm
+})
+
+function getForm(){
+    setForms([{
+        form:'configBillReport',
+        uri:'/almacenes/getconfig',
+        dataKey:'config_value',
+        setValues:{
+        ids:[
+            'title',
+            'secondTitle',
+            'documentType',
+            'storeName',
+            'storeNit',
+            'storeAddress',
+            'storeEmail',
+            'reportSuffix',
+            'reportFooter1',
+            'reportFooter2',
+            'storePhone',
+            ],
+        values:[
+            'title',
+            'secondTitle',
+            'documentType',
+            'storeName',
+            'storeNit',
+            'storeAddress',
+            'storeEmail',
+            'reportSuffix',
+            'reportFooter1',
+            'reportFooter2',
+            'storePhone',
+            ]
+        },
+    }])
+}
+
 function getAlmacenes(){
     fetch(base_url + '/almacenes/view')
     .then((res) => res.json())
     .then((data) =>{
         let html = ''
         data.forEach(almacen => {        
-            console.log(almacen)
             html = ''
 
             let elementStatus = {

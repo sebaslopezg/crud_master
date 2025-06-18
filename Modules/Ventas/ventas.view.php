@@ -284,6 +284,8 @@ getModal('ventasModal', $data);
 
       </div>
     </div>
-
   </main><!-- End #main -->
+  <script> 
+    const almacenData = "<?= $data['data']['id'] ?>" 
+  </script>
   <?php footer_admin($data); ?>

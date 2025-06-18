@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 17, 2025 at 06:39 AM
+-- Generation Time: Jun 18, 2025 at 06:44 AM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -33,16 +33,17 @@ CREATE TABLE `almacenes` (
   `modify_by` varchar(60) NOT NULL,
   `status` int(1) NOT NULL,
   `nombre` varchar(60) NOT NULL,
-  `descripcion` text NOT NULL
+  `descripcion` text NOT NULL,
+  `config` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NOT NULL CHECK (json_valid(`config`))
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `almacenes`
 --
 
-INSERT INTO `almacenes` (`id`, `modify_date`, `modify_by`, `status`, `nombre`, `descripcion`) VALUES
-('6850e15575c53', '2025-06-16', '1', 1, 'test', 'asdlk'),
-('6850e1722f10a', '2025-06-16', '1', 2, 'almacencito', 'para vende');
+INSERT INTO `almacenes` (`id`, `modify_date`, `modify_by`, `status`, `nombre`, `descripcion`, `config`) VALUES
+('6850e15575c53', '2025-06-16', '1', 1, 'test', 'asdlk', '{\"title\":\"asdasd\",\"secondTitle\":\"\",\"documentType\":\"\",\"storeName\":\"\",\"storeNit\":\"\",\"storeAddress\":\"\",\"storePhone\":\"\",\"storeEmail\":\"\",\"reportSuffix\":\"\",\"reportFooter1\":\"\",\"reportFooter2\":\"\"}'),
+('6850e1722f10a', '2025-06-16', '1', 2, 'almacencito', 'para vende', '');
 
 -- --------------------------------------------------------
 
@@ -69,7 +70,27 @@ CREATE TABLE `clientes` (
 --
 
 INSERT INTO `clientes` (`id`, `timestamp`, `fecha_modificacion`, `creado_por`, `modificado_por`, `documento`, `direccion`, `nombre`, `email`, `telefono`, `status`) VALUES
-('6850eedb814b61.32045595', '2025-06-17 04:28:11', '2025-06-16', '1', '1', '1321', 'avenida 23 con 33', 'secilio marchesin', 'cecills2d1@gmail.com', '321324', 1);
+('6850eedb814b61.32045595', '2025-06-17 04:28:11', '2025-06-16', '1', '1', '1321', 'avenida 23 con 33', 'secilio marchesin', 'cecills2d1@gmail.com', '321324', 1),
+('6851bce5e75c78.27014715', '2025-06-17 19:07:17', '2025-06-17', '1', '1', '98787', 'dasds', 'Sebastian', 'sebassasalag96@gmail.com', '23435435534', 1),
+('6851c38c9f7f09.34170740', '2025-06-17 19:35:40', '2025-06-17', '1', '1', '123', 'werwe', 'Raul', 'sebaslg96@gmail.com', '3106019959', 1);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `config`
+--
+
+CREATE TABLE `config` (
+  `config_key` varchar(100) NOT NULL,
+  `config_value` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `config`
+--
+
+INSERT INTO `config` (`config_key`, `config_value`) VALUES
+('configBillReport', '{\"title\":\"Recibo de Ventas\",\"secondTitle\":\"Venta\",\"documentType\":\"Recibo de venta\",\"storeName\":\"Fajas Mimi\",\"storeNit\":\"26286642\",\"storeAddress\":\"CL 12 # 7 - 49\",\"storePhone\":\"3104270002\",\"storeEmail\":\"ventasfajasmimi@gmail.com\",\"reportSuffix\":\"RECIBO\",\"reportFooter1\":\"Para cualquier cambio o reclamo es indispensable presentar esta factura. Plazo para cambios o garant&iacute;as &uacute;nicamente hasta 30 d&iacute;as despu&eacute;s de la compra. Prendas en promoci&oacute;n no tienen cambio. No se hace devoluci&oacute;n de dinero. Las prendas deben conservar su ticket original, para que se pueda realizar alg&uacute;n cambio. Gracias por su compra\",\"reportFooter2\":\"Software Design and Development By 7d Studio 00000080124406-0\"}');
 
 -- --------------------------------------------------------
 
@@ -226,7 +247,8 @@ INSERT INTO `roles` (`id`, `nombre`, `descripcion`, `status`) VALUES
 ('67c9dd73f13eb7.54260594', 'eliminable', 'aldkjasdjkl', 0),
 ('67c9dda559ded9.51385382', 'asdasdas', 'asdasdasd', 0),
 ('67c9dda9133534.90117198', 'ddsdssd', 'sdsdsdsd', 0),
-('67ca1c4d811b23.74278146', 'Agente de ventas', 'Rol de vendedor', 2);
+('67ca1c4d811b23.74278146', 'Agente de ventas', 'Rol de vendedor', 2),
+('68520d698dd0c6.61519857', 'vendedorsitos', 'asdlkj', 1);
 
 -- --------------------------------------------------------
 
@@ -314,6 +336,12 @@ ALTER TABLE `almacenes`
 --
 ALTER TABLE `clientes`
   ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `config`
+--
+ALTER TABLE `config`
+  ADD PRIMARY KEY (`config_key`);
 
 --
 -- Indexes for table `modulos`

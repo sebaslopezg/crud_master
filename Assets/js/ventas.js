@@ -244,3 +244,49 @@ function updateBill(){
     isEditingAbono ? '' : totalAbono.value = total
     isEditingRecibido ? '' : totalRecibido.value = total
 }
+
+///////
+
+getForm()
+
+setSubmit({
+    form:'configBillReport',
+    uri: `/ventas/setconfig/${almacenData}`,
+    tableFunction:getForm
+})
+
+function getForm(){
+    setForms([{
+        form:'configBillReport',
+        uri: `/ventas/getconfig/${almacenData}`,
+        dataKey:'config',
+        setValues:{
+        ids:[
+            'title',
+            'secondTitle',
+            'documentType',
+            'storeName',
+            'storeNit',
+            'storeAddress',
+            'storeEmail',
+            'reportSuffix',
+            'reportFooter1',
+            'reportFooter2',
+            'storePhone',
+            ],
+        values:[
+            'title',
+            'secondTitle',
+            'documentType',
+            'storeName',
+            'storeNit',
+            'storeAddress',
+            'storeEmail',
+            'reportSuffix',
+            'reportFooter1',
+            'reportFooter2',
+            'storePhone',
+            ]
+        },
+    }])
+}

@@ -22,38 +22,39 @@ setSubmit({
 })
 
 function getForm(){
-setForms([{
-    form:'configBillReport',
-    uri:'/almacenes/getconfig',
-    setValues:{
-      ids:[
-        'title',
-        'secondTitle',
-        'documentType',
-        'storeName',
-        'storeNit',
-        'storeAddress',
-        'storeEmail',
-        'reportSuffix',
-        'reportFooter1',
-        'reportFooter2',
-        'storePhone',
-        ],
-      values:[
-        'title',
-        'secondTitle',
-        'documentType',
-        'storeName',
-        'storeNit',
-        'storeAddress',
-        'storeEmail',
-        'reportSuffix',
-        'reportFooter1',
-        'reportFooter2',
-        'storePhone',
-        ]
-    },
-}])
+    setForms([{
+        form:'configBillReport',
+        uri:'/almacenes/getconfig',
+        dataKey:'config_value',
+        setValues:{
+        ids:[
+            'title',
+            'secondTitle',
+            'documentType',
+            'storeName',
+            'storeNit',
+            'storeAddress',
+            'storeEmail',
+            'reportSuffix',
+            'reportFooter1',
+            'reportFooter2',
+            'storePhone',
+            ],
+        values:[
+            'title',
+            'secondTitle',
+            'documentType',
+            'storeName',
+            'storeNit',
+            'storeAddress',
+            'storeEmail',
+            'reportSuffix',
+            'reportFooter1',
+            'reportFooter2',
+            'storePhone',
+            ]
+        },
+    }])
 }
 
 function getAlmacenes(){

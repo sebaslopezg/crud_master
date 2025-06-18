@@ -19,7 +19,6 @@ if (typeof scriptSession === 'undefined' || scriptSession === null) {
 }
 
 const setForms = (params) =>{
-  console.log(params)
   params.forEach((form) =>{
     if ('setValues' in form) { 
       if ('ids' in form.setValues && 'values' in form.setValues) {
@@ -30,9 +29,14 @@ const setForms = (params) =>{
         .then((res) => res.json())
         .then((rawData) =>{
           ids.forEach((id, index) => {
-            let data = JSON.parse(rawData[0].config_value)
-            let campo = document.querySelector('#'+id)
-            campo.value = data[values[index]]
+            if(rawData[0]){
+              let data
+              'dataKey' in form ? data = JSON.parse(rawData[0][form.dataKey]) : 
+              data = JSON.parse(rawData[0])
+              
+              let campo = document.querySelector('#'+id)
+              campo.value = data[values[index]]
+            }
           })
         })
       }
@@ -199,6 +203,8 @@ document.addEventListener('submit', (e) => {
       if ('hiddenInput' in submitSet) {
         let routeId = document.querySelector('#'+submitSet.hiddenInput)
         route = submitSet.uri + '/' + routeId.value
+      }else if('uriId' in submitSet){
+        route = submitSet.uri + '/' + uriId.value
       }else{
         route = submitSet.uri
       }

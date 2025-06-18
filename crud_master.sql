@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 18, 2025 at 06:44 AM
+-- Generation Time: Jun 18, 2025 at 07:21 AM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -34,7 +34,7 @@ CREATE TABLE `almacenes` (
   `status` int(1) NOT NULL,
   `nombre` varchar(60) NOT NULL,
   `descripcion` text NOT NULL,
-  `config` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NOT NULL CHECK (json_valid(`config`))
+  `config` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_bin DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
@@ -42,8 +42,7 @@ CREATE TABLE `almacenes` (
 --
 
 INSERT INTO `almacenes` (`id`, `modify_date`, `modify_by`, `status`, `nombre`, `descripcion`, `config`) VALUES
-('6850e15575c53', '2025-06-16', '1', 1, 'test', 'asdlk', '{\"title\":\"asdasd\",\"secondTitle\":\"\",\"documentType\":\"\",\"storeName\":\"\",\"storeNit\":\"\",\"storeAddress\":\"\",\"storePhone\":\"\",\"storeEmail\":\"\",\"reportSuffix\":\"\",\"reportFooter1\":\"\",\"reportFooter2\":\"\"}'),
-('6850e1722f10a', '2025-06-16', '1', 2, 'almacencito', 'para vende', '');
+('685249663b196', '2025-06-18', '1', 1, 'Almacen la Quinta', 'Ubicado en la calle 4', '{\"title\":\"Recibo de Ventas\",\"secondTitle\":\"Venta\",\"documentType\":\"Recibo de venta\",\"storeName\":\"Fajas Mimi\",\"storeNit\":\"26286642\",\"storeAddress\":\"CL 12 # 7 - 49\",\"storePhone\":\"3104270002\",\"storeEmail\":\"ventasfajasmimi@gmail.com\",\"reportSuffix\":\"RECIBO\",\"reportFooter1\":\"Para cualquier cambio o reclamo es indispensable presentar esta factura. Plazo para cambios o garant&iacute;as &uacute;nicamente hasta 30 d&iacute;as despu&eacute;s de la compra. Prendas en promoci&oacute;n no tienen cambio. No se hace devoluci&oacute;n de dinero. Las prendas deben conservar su ticket original, para que se pueda realizar alg&uacute;n cambio. Gracias por su compra\",\"reportFooter2\":\"Software Design and Development By 7d Studio 00000080124406-0\"}');
 
 -- --------------------------------------------------------
 
@@ -174,7 +173,8 @@ CREATE TABLE `productos` (
 --
 
 INSERT INTO `productos` (`id`, `timestamp`, `modificado`, `codigo`, `nombre`, `precio`, `descripcion`, `status`) VALUES
-('6850f0d07bda43.09319168', '2025-06-17 04:36:32', '2025-06-16 23:36:32', '123-789-4441', 'productoso', 10000, 'descripcion descripciosa', 1);
+('6850f0d07bda43.09319168', '2025-06-18 05:07:44', '2025-06-16 23:36:32', '123-789-4441', 'productoso', 10000, 'descripcion descripciosa', 0),
+('68524bdc27d331.70162514', '2025-06-18 05:17:16', '2025-06-18 00:17:16', '234', 'sdffds', 234, 'dfsdf', 1);
 
 -- --------------------------------------------------------
 

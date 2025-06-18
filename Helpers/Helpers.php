@@ -13,9 +13,19 @@ function header_admin($data = ""){
     require_once ($view_header);
 }
 
+function header_landing(){
+    $view_landingHeader = "Template/Landing/header_landing.php";
+    require_once ($view_landingHeader);
+}
+
 function footer_admin($data = ""){
     $view_footer = "Template/footer_admin.php";
     require_once ($view_footer);
+}
+
+function footer_landing(){
+    $view_landingFooter = "Template/Landing/footer_landing.php";
+    require_once ($view_landingFooter);
 }
 
 function dep($data){

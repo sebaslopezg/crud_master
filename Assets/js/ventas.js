@@ -242,5 +242,5 @@ function updateBill(){
     totalToPay.value = total
 
     isEditingAbono ? '' : totalAbono.value = total
-    isEditingRecibido? '' : totalRecibido.value = total
+    isEditingRecibido ? '' : totalRecibido.value = total
 }

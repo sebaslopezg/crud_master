@@ -27,3 +27,54 @@ function view(){
 
     return $response;
 }
+
+function setConfig(){
+
+    $payload = arrClean($_POST);
+
+
+    $data = json_encode($payload,JSON_UNESCAPED_UNICODE);
+
+    $query = cm_select([
+        'all' => 'true',
+        'sql' => "SELECT * FROM config WHERE config_key = 'configBillReport'",
+    ]);
+
+    $response;
+
+    if (empty($query)) {
+        $response = cm_set([
+            'type' => 'post',
+            'mysql_type' => 'insert',
+            'data' => [
+                'config_key' => ['required' => false, 'value' => 'configBillReport'],
+                'config_value' => ['required' => false, 'value' => $data],
+            ],
+            'sql' => "INSERT INTO config(config_key,config_value) VALUES(?,?)",
+            'error_exist_msg' => 'No se pudo guardar el campo "key" o "value" de la configuración',
+        ]);
+    }else{
+        $response = cm_set([
+            'type' => 'post',
+            'mysql_type' => 'update',
+            'data' => [
+                'config_value' => ['required' => false, 'value' => $data],
+            ],
+            'sql' => "UPDATE config SET config_value = ? WHERE config_key = 'configBillReport'",
+            'error_exist_msg' => 'No se pudo actualizar la configuración, error al procesar los campos',
+        ]);
+    }
+
+
+
+    return $response; 
+}
+
+function getconfig(){
+    $query = cm_select([
+        'all' => 'true',
+        'sql' => "SELECT * FROM config WHERE config_key = 'configBillReport'",
+    ]);
+
+    return $query;
+}

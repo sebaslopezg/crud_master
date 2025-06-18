@@ -176,6 +176,16 @@ function strClean($strCadena){
     return $string;
 }
 
+function arrClean($array){
+    $arrResponse = array();
+    foreach ($array as $key => $value) {
+        //array_push($arrResponse,strClean($value));
+        $arrResponse[$key] = strClean($value);
+    }
+
+    return $arrResponse;
+}
+
 function check_post($value){
     $validState = true;
     if (!isset($_POST[$value]) || empty(strClean($_POST[$value]))) {

@@ -69,7 +69,6 @@ document.addEventListener('click', (e)=>{
           })
         }
 
-
         if ('setSelect' in modal) {
           const select = document.querySelector(`#${modal.setSelect.id}`)
           select.innerHTML = ''
@@ -86,7 +85,7 @@ document.addEventListener('click', (e)=>{
       }
     })
 
-    if (buttonParams) {
+    if (buttonParams){
       buttonParams.forEach(button =>{
         if (target.dataset.action == button.btnName) {
           if ('modal' in button) {
@@ -182,7 +181,6 @@ document.addEventListener('click', (e)=>{
       }
     }
   }
-
 })
 
 document.addEventListener('submit', (e) => {

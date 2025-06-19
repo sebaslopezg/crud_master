@@ -1,16 +1,25 @@
 const displayProducts = document.getElementById('displayProducts')
 const codigo = document.querySelector('#codigo')
 const totalBill = document.querySelector('#totalBill')
+const totalBase = document.querySelector('#totalBase')
+const totalImpuesto = document.querySelector('#totalImpuesto')
 const totalRecibido = document.querySelector('#totalRecibido')
+const descuento = document.querySelector('#descuento')
+const metodoPago = document.querySelector('#metodoPago')
+const comentarios = document.querySelector('#comentarios')
 const totalAbono = document.querySelector('#totalAbono')
 const totalToPay = document.querySelector('#totalToPay')
 const displayClient = document.querySelector('#displayClient')
 const documentClientModal = document.querySelector('#cedulaClienteModal')
 const cedulaClienteModal = document.querySelector('#cedulaClienteModal')
+const btnSetPayment = document.querySelector('#btnSetPayment')
+
+let setBillForm = document.querySelector('#setBillForm')
 
 let clientSelected = {
     nombre:null,
     documento:null,
+    telefono: null, 
 }
 
 let tablaProductos = null
@@ -124,7 +133,6 @@ function agregarProducto(product){
             </div>
         </div>
     `
-
     let frag = document.createRange().createContextualFragment(html);
     displayProducts.appendChild(frag)
 }
@@ -180,6 +188,7 @@ function getClientByDocument(clientDocument, onlyData = false){
                 if (data) {
                     clientSelected.nombre = data.nombre
                     clientSelected.documento = data.documento
+                    clientSelected.telefono = data.telefono
         
                     const displayClientModal = document.querySelector('#displayClientModal')
                     html = `
@@ -201,6 +210,7 @@ function getClientByDocument(clientDocument, onlyData = false){
             }else{
                 clientSelected.nombre = data.nombre
                 clientSelected.documento = data.documento
+                clientSelected.telefono = data.telefono
                 printClientOnDisplay()
             }
 
@@ -245,15 +255,66 @@ function updateBill(){
     isEditingRecibido ? '' : totalRecibido.value = total
 }
 
+//// FACTURA
+
+function billItemSetter(){
+    productos = document.querySelectorAll('.product')
+    console.log(productos)
+}
+
+function billFormSetter(){
+
+    //const formData = new FormData(setBillForm)
+    const formData = new FormData()
+    formData.append('subtotal', totalBill.value)
+    formData.append('totalBase', totalBase.value)
+    formData.append('impuesto', totalImpuesto.value)
+    formData.append('total', totalToPay.value)
+    formData.append('descuento', descuento.value)
+    formData.append('abono', totalAbono.value)
+    formData.append('recibido', totalRecibido.value)
+    formData.append('metodoPago', metodoPago.value)
+    formData.append('comentarios', comentarios.value)
+    formData.append('cliente', clientSelected.nombre)
+    formData.append('identidad_cliente', clientSelected.documento)
+    formData.append('telefono_cliente', clientSelected.telefono)
+
+    fetch(`${base_url}/ventas/setbill/${almacenData}`,{
+        method: 'POST',
+        body: formData
+    })
+    .then((response) => response.json())
+    .then((data) => {
+      if (data.status) {
+        Swal.fire({
+          title: "Registro",
+          text: data.msg,
+          icon: "success"
+        });
+        billItemSetter()
+      }else{
+        Swal.fire({
+          title: "Error",
+          text: data.msg,
+          icon: "error"
+        });
+      }
+    })
+}
+
+btnSetPayment.addEventListener('click', (e) => {
+    billFormSetter()
+})
+
+
 ///////
 
 getForm()
 
-setSubmit({
-    form:'configBillReport',
-    uri: `/ventas/setconfig/${almacenData}`,
-    tableFunction:getForm
-})
+//setSubmit({
+//    form:'setBillForm',
+//    uri: `/ventas/setbill/${almacenData}`,
+//})
 
 function getForm(){
     setForms([{

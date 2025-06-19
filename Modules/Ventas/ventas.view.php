@@ -57,139 +57,123 @@ getModal('ventasModal', $data);
             <div class="tab-pane fade active show" id="content-ventas" role="tabpanel">
               <!-- Contenido de VENTAS -->
               <div class="container mt-4">
-
                 <div class="row g-3">
-
                     <div class="col-6">
-
                     <div class="row">
                       <div class="col-4">
                         <button type="button" class="btn btn-secondary mb-2" data-action="addClient">
                           <i class="bi bi-person-fill"></i>
                           Agregar Cliente
                         </button>
-
                       </div>
-
-
                       <div class="col">
                         <div id="displayClient"></div>                        
                       </div>
-
                     </div>
+                      <div class="row mb-2">
+                        <div class="col-sm-6">
+                          <input type="text" id="codigo" placeholder="CODIGO" class="form-control" />
+                        </div>
+                        <div class="col-sm-6">
+                          <button class="btn btn-primary" data-action="getproductByCode">Buscar</button>
+                        </div>
+                      </div>
+                      <div class="col-11">
+                        <div id="displayProducts"></div>
+                      </div>
+                    </div>
+                    <div class="col-6">
+                      <div class="row mb-2">
+                        <label class="col-sm-4 col-form-label"><b>Sub total</b></label>
+                        <div class="col-sm-8">
+                          <div class="input-group">
+                            <span class="input-group-text">$</span>
+                            <input type="text" id="totalBill" class="form-control" value="0" disabled="">
+                          </div>
+                        </div>
+                      </div>
+                      <div class="row mb-2">
+                        <label class="col-sm-4 col-form-label">Total Base</label>
+                        <div class="col-sm-8">
+                            <div class="input-group">
+                              <span class="input-group-text">$</span>
+                              <input type="text" id="totalBase" class="form-control" value="0" disabled="">
+                            </div>
+                        </div>
+                      </div>
+                      <div class="row mb-2">
+                        <label class="col-sm-4 col-form-label">Total Impuesto</label>
+                        <div class="col-sm-8">
+                          <div class="input-group">
+                            <span class="input-group-text">$</span>
+                            <input type="text" id="totalImpuesto" class="form-control" value="0" disabled="">
+                          </div>
+                        </div>
+                      </div>
+                      <div class="row mb-2">
+                        <label class="col-sm-4 col-form-label"><b>Total A Pagar</b></label>
+                        <div class="col-sm-8">
+                          <div class="input-group">
+                            <span class="input-group-text">$</span>
+                            <input type="text" class="form-control" id="totalToPay" value="0" disabled="">
+                          </div>
+                        </div>
+                      </div>
+                      <hr class="bg-danger border-2 border-top border-secondary" />
+                      <div class="row mb-2">
+                        <label class="col-sm-4 col-form-label">Descuento</label>
+                        <div class="col-sm-8">
+                            <div class="input-group">
+                              <span class="input-group-text">%</span>
+                              <input type="text" id="descuento" class="form-control" value="0" onkeypress="return controlTag(event)">
+                            </div>
+                        </div>
+                      </div>
 
                       <div class="row mb-2">
-                          <div class="col-sm-6">
-                              <input type="text" id="codigo" placeholder="CODIGO" class="form-control" />
+                        <label class="col-sm-4 col-form-label">Abono</label>
+                        <div class="col-sm-8">
+                            <div class="input-group">
+                              <span class="input-group-text">$</span>
+                              <input id="totalAbono" type="text" class="form-control" value="" onkeypress="return controlTag(event)">
+                            </div>
+                        </div>
+                      </div>
+                      <div class="row mb-2">
+                        <label class="col-sm-4 col-form-label">Total Recibido</label>
+                        <div class="col-sm-8">
+                          <div class="input-group">
+                            <span class="input-group-text">$</span>
+                            <input id="totalRecibido" type="text" class="form-control" value="" onkeypress="return controlTag(event)">
                           </div>
-                          <div class="col-sm-6">
-                              <button class="btn btn-primary" data-action="getproductByCode">Buscar</button>
-                          </div>
+                        </div>
+                      </div>
+                      <div class="row mb-2">
+                        <label class="col-sm-4 col-form-label">Metodo de pago</label>
+                        <div class="col-sm-8">
+                          <select id="metodoPago" class="form-control">
+                            <option value="0">----</option>
+                            <option value="efectivo">Efectivo</option>
+                            <option value="Transferencia">Transferencia</option>
+                            <option value="Tarjeta Credito">Tarjeta Credito</option>
+                            <option value="Tarjeta Debito">Tarjeta Debito</option>
+                          </select>
+                        </div>
                       </div>
 
-                      <div class="col-11">
-                          <div id="displayProducts"></div>
+                      <div class="row mb-2">
+                        <label class="col-sm-4 col-form-label">Comentarios</label>
+                        <div class="col-sm-8">
+                          <textarea id="comentarios" class="form-control"  rows="2"></textarea>
+                        </div>
                       </div>
-                        
-                    </div>
-
-                    <div class="col-6">
-
-                        <div class="row mb-2">
-                            <label class="col-sm-4 col-form-label"><b>Total</b></label>
-                            <div class="col-sm-8">
-                                <div class="input-group">
-                                    <span class="input-group-text">$</span>
-                                    <input type="text" id="totalBill" class="form-control" value="0" disabled="">
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="row mb-2">
-                            <label class="col-sm-4 col-form-label">Total Base</label>
-                            <div class="col-sm-8">
-                                <div class="input-group">
-                                    <span class="input-group-text">$</span>
-                                    <input type="text" class="form-control" value="0" disabled="">
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="row mb-2">
-                            <label class="col-sm-4 col-form-label">Total Impuesto</label>
-                            <div class="col-sm-8">
-                                <div class="input-group">
-                                    <span class="input-group-text">$</span>
-                                    <input type="text" class="form-control" value="0" disabled="">
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="row mb-2">
-                            <label class="col-sm-4 col-form-label"><b>Total A Pagar</b></label>
-                            <div class="col-sm-8">
-                                <div class="input-group">
-                                    <span class="input-group-text">$</span>
-                                    <input type="text" class="form-control" id="totalToPay" value="0" disabled="">
-                                </div>
-                            </div>
-                        </div>
-
-                        <hr class="bg-danger border-2 border-top border-secondary" />
-
-                        <div class="row mb-2">
-                            <label class="col-sm-4 col-form-label">Descuento</label>
-                            <div class="col-sm-8">
-                                <div class="input-group">
-                                    <span class="input-group-text">%</span>
-                                    <input type="text" class="form-control" value="0" onkeypress="return controlTag(event)">
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="row mb-2">
-                            <label class="col-sm-4 col-form-label">Abono</label>
-                            <div class="col-sm-8">
-                                <div class="input-group">
-                                    <span class="input-group-text">$</span>
-                                    <input id="totalAbono" type="text" class="form-control" value="" onkeypress="return controlTag(event)">
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="row mb-2">
-                            <label class="col-sm-4 col-form-label">Total Recibido</label>
-                            <div class="col-sm-8">
-                                <div class="input-group">
-                                    <span class="input-group-text">$</span>
-                                    <input id="totalRecibido" type="text" class="form-control" value="" onkeypress="return controlTag(event)">
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="row mb-2">
-                            <label class="col-sm-4 col-form-label">Metodo de pago</label>
-                            <div class="col-sm-8">
-                                <select class="form-control">
-                                    <option value="0">----</option>
-                                </select>
-                            </div>
-                        </div>
-
-                        <div class="row mb-2">
-                            <label class="col-sm-4 col-form-label">Comentarios</label>
-                            <div class="col-sm-8">
-                                <textarea class="form-control"  rows="2"></textarea>
-                            </div>
-                        </div>
-
-                        <div class="row mb-2">
-                            <button class="col-sm-12 btn btn-primary">Pagar</button>
-                        </div>
-                        
+                      <div class="row mb-2">
+                        <form id="setBillForm" action="post">
+                          <button id="btnSetPayment" class="col-sm-12 btn btn-primary">Pagar</button>
+                        </form>
+                      </div>
                     </div>
                 </div>
-
               </div>
             </div>
 

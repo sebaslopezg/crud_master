@@ -78,7 +78,7 @@ function listarClienteId($id){
 function listarClienteDocumento($documento){
     $respuesta = cm_select([
         'all' => 'false',
-        'sql' => "SELECT id, documento, nombre FROM clientes WHERE documento='$documento' AND status > 0",
+        'sql' => "SELECT id, documento, nombre, telefono FROM clientes WHERE documento='$documento' AND status > 0",
     ]);
 
     return $respuesta;

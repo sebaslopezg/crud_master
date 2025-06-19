@@ -1,6 +1,16 @@
 <?php
 
 function create(){
+
+    $query = cm_select([
+        'all' => 'true',
+        'sql' => "SELECT config_value FROM config WHERE config_key = 'configBillReport'",
+    ]);
+
+    $storeConfig = $query[0]['config_value'];
+
+    empty($storeConfig) ?  $configValue = '' : $configValue = $storeConfig;
+
     $response = cm_set([
         'type' => 'post',
         'mysql_type' => 'insert',
@@ -11,8 +21,9 @@ function create(){
             'selStatus' => ['required' => true, 'required_values' => [1,2]],
             'txtNombre' => ['required' => true],
             'txtDescripcion' => ['required' => true],
+            'config' => ['required' => false, 'value' => $configValue],
         ],
-        'sql' => "INSERT INTO almacenes(id, modify_date, modify_by, status, nombre, descripcion) VALUES(?,?,?,?,?,?)",
+        'sql' => "INSERT INTO almacenes(id, modify_date, modify_by, status, nombre, descripcion, config) VALUES(?,?,?,?,?,?,?)",
         'error_exist_msg' => 'Algunos campos son obligatorios',
     ]);
 

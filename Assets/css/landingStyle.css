@@ -8,8 +8,9 @@ body {
   font-family: "Outfit", sans-serif;
   font-optical-sizing: auto;
   font-style: normal;
-  color: white;
-  background-color: black;
+  background-image: url("../img/bg1.jpg");
+  background-attachment: fixed;
+  background-size: cover;
 }
 body .parallax-wrapper {
   height: 100vh;
@@ -23,6 +24,7 @@ body .parallax-wrapper .intro-screen {
   display: flex;
   justify-content: center;
   align-items: center;
+  color: white;
 }
 body .parallax-wrapper .outro-screen {
   height: 100vh;
@@ -30,6 +32,49 @@ body .parallax-wrapper .outro-screen {
   display: flex;
   justify-content: center;
   align-items: center;
+  color: white;
+}
+body .parallax-wrapper .parallax-group-small {
+  position: relative;
+  height: 70vh;
+  transform-style: preserve-3d;
+}
+body .parallax-wrapper .parallax-group-small .parallax-layer {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+body .parallax-wrapper .parallax-group {
+  position: relative;
+  height: 100vh;
+  transform-style: preserve-3d;
+}
+body .parallax-wrapper .parallax-group .parallax-layer {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+body .parallax-wrapper #intro {
+  z-index: 0;
+}
+body .parallax-wrapper #group-1 {
+  z-index: -1;
+}
+body .parallax-wrapper #group-2 {
+  z-index: 0;
+  background-color: black;
+  color: white;
+}
+
+.title-color {
+  background: #3ba5eb;
+  background: linear-gradient(135deg, rgb(59, 165, 235) 0%, rgb(196, 35, 183) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
 }
 
 .big-title {
@@ -40,40 +85,163 @@ section {
   display: grid;
   place-items: center;
   align-content: center;
-  min-height: 100vh;
-}
-
-.bg-image {
-  background-image: url("../img/bg1.jpg");
 }
 
 .card-bg {
   background-repeat: no-repeat;
-  background: rgba(0, 0, 0, 0.29);
+  background: rgba(0, 0, 0, 0.63);
   border-radius: 16px;
   box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
-  backdrop-filter: blur(6.4px);
-  -webkit-backdrop-filter: blur(6.4px);
-  border: 1px solid rgba(0, 0, 0, 0.25);
+  backdrop-filter: blur(8.2px);
+  -webkit-backdrop-filter: blur(8.2px);
+  border: 1px solid rgba(0, 0, 0, 0.3);
   color: white;
   width: 20rem;
   height: 15rem;
 }
 
-.hidden {
+.icon-circle i {
+  font-size: 60px;
+  background: #2DB8B5;
+  background: linear-gradient(135deg, rgb(45, 184, 181) 0%, rgb(59, 165, 235) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.card-parent {
+  width: 30rem;
+  height: 20rem;
+}
+
+.card-child {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  border-radius: 10px;
+}
+
+.card-child::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-image: url("../img/store.png");
+  background-position: center;
+  background-size: cover;
+  transition: transform 0.5s ease;
+  z-index: -1; /* behind content */
+}
+
+.card-parent:hover .card-child::before,
+.card-parent:focus .card-child::before {
+  transform: scale(1.1);
+}
+
+.card-child::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 152, 253, 0.308);
   opacity: 0;
-  filter: blur(5px);
-  transition: all 1s;
+  transition: opacity 0.5s ease;
+  z-index: 0;
 }
 
-.show {
+.card-parent:hover .card-child::after,
+.card-parent:focus .card-child::after {
   opacity: 1;
-  filter: blur(0);
 }
 
-@media (prefers-reduced-motion) {
-  .hidden {
-    transition: none;
-  }
+.div-width {
+  width: 30rem;
+  padding-left: 2%;
 }
+
+/**** ANIMATION SECTION ****/
+.animated-text {
+  opacity: 0;
+  transform: translateY(-30px);
+  transition: opacity 0.6s ease, transform 0.6s ease;
+}
+
+.animated-text.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.animated-icon {
+  opacity: 0;
+  transform: translateX(-50px);
+  /* Use ease-out for smoother entrance */
+  transition: opacity 0.6s cubic-bezier(0.4, 0, 0.2, 1), transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.animated-icon.visible {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+.animated-icon.disappear {
+  opacity: 0;
+  /* Slightly longer and slower easing for exit */
+  transition: opacity 0.8s cubic-bezier(0.4, 0, 1, 1), transform 0.8s cubic-bezier(0.4, 0, 1, 1);
+  transform: translateX(50px);
+}
+
+.card {
+  opacity: 0;
+  transform: translateY(30px) scale(0.95);
+  transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+}
+
+.card.visible {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+}
+
+/* Base state (before scroll) */
+.animate-slide-left,
+.animate-slide-right {
+  opacity: 0;
+  transition: all 0.8s ease-out;
+}
+
+.animate-slide-left {
+  transform: translateX(-80px);
+}
+
+.animate-slide-right {
+  transform: translateX(80px);
+}
+
+/* Final state (after scroll in) */
+.animate-slide-left.visible,
+.animate-slide-right.visible {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+/* .hidden{
+    opacity: 0;
+    filter: blur(5px);
+    transition: all 1s;
+}
+
+.show{
+    opacity: 1;
+    filter: blur(0);
+}
+
+@media(prefers-reduced-motion){
+    .hidden{
+        transition: none;
+    }
+}
+ */
 /****  BACKGROUND ANIMATION  ****//*# sourceMappingURL=landingStyle.css.map */

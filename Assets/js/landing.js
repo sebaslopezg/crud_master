@@ -67,4 +67,36 @@ const slideObserver = new IntersectionObserver((entries, observer) => {
 });
 
 slideElements.forEach(el => slideObserver.observe(el));
+
+const navLinks = document.querySelectorAll('.nav-link');
+const pageSections = document.querySelectorAll('section[id]');
+
+const sectionObserver = new IntersectionObserver(entries => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      const id = entry.target.id;
+
+      navLinks.forEach(link => {
+        link.classList.remove('active');
+        if (link.getAttribute('href') === `#${id}`) {
+          link.classList.add('active');
+        }
+      });
+    }
+  });
+}, {
+  threshold: 0.5
+});
+
+pageSections.forEach(section => sectionObserver.observe(section));
+
+document.querySelectorAll('.nav-link').forEach(link => {
+  link.addEventListener('click', function (e) {
+    const target = document.querySelector(this.getAttribute('href'));
+    if (target) {
+      e.preventDefault();
+      target.scrollIntoView({ behavior: 'smooth' });
+    }
+  });
+});
 })

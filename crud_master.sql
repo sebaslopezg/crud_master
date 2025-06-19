@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 18, 2025 at 07:21 AM
+-- Generation Time: Jun 20, 2025 at 01:43 AM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -42,7 +42,8 @@ CREATE TABLE `almacenes` (
 --
 
 INSERT INTO `almacenes` (`id`, `modify_date`, `modify_by`, `status`, `nombre`, `descripcion`, `config`) VALUES
-('685249663b196', '2025-06-18', '1', 1, 'Almacen la Quinta', 'Ubicado en la calle 4', '{\"title\":\"Recibo de Ventas\",\"secondTitle\":\"Venta\",\"documentType\":\"Recibo de venta\",\"storeName\":\"Fajas Mimi\",\"storeNit\":\"26286642\",\"storeAddress\":\"CL 12 # 7 - 49\",\"storePhone\":\"3104270002\",\"storeEmail\":\"ventasfajasmimi@gmail.com\",\"reportSuffix\":\"RECIBO\",\"reportFooter1\":\"Para cualquier cambio o reclamo es indispensable presentar esta factura. Plazo para cambios o garant&iacute;as &uacute;nicamente hasta 30 d&iacute;as despu&eacute;s de la compra. Prendas en promoci&oacute;n no tienen cambio. No se hace devoluci&oacute;n de dinero. Las prendas deben conservar su ticket original, para que se pueda realizar alg&uacute;n cambio. Gracias por su compra\",\"reportFooter2\":\"Software Design and Development By 7d Studio 00000080124406-0\"}');
+('685249663b196', '2025-06-18', '1', 1, 'Almacen la Quinta', 'Ubicado en la calle 4', '{\"title\":\"Facturita\",\"secondTitle\":\"Venta\\/Recibo\",\"documentType\":\"Resporete\",\"storeName\":\"La Quinua\",\"storeNit\":\"54654546\",\"storeAddress\":\"enrique segoviano\",\"storePhone\":\"3215666\",\"storeEmail\":\"se@dsd.co\",\"reportSuffix\":\"LQN\",\"reportFooter1\":\"jjijiji\",\"reportFooter2\":\"sdijdf\"}'),
+('68532855eb589', '2025-06-18', '1', 1, 'Visperas del Mar', 'Ubicado en Bolivia', '{\"title\":\"Recibo de Ventas\",\"secondTitle\":\"Venta\",\"documentType\":\"Recibo de venta\",\"storeName\":\"Fajas Mimi\",\"storeNit\":\"26286642\",\"storeAddress\":\"CL 12 # 7 - 49\",\"storePhone\":\"000000000\",\"storeEmail\":\"ventasfajasmimi@gmail.com\",\"reportSuffix\":\"RECIBO\",\"reportFooter1\":\"Para cualquier cambio o reclamo es indispensable presentar esta factura. Plazo para cambios o garant&iacute;as &uacute;nicamente hasta 30 d&iacute;as despu&eacute;s de la compra. Prendas en promoci&oacute;n no tienen cambio. No se hace devoluci&oacute;n de dinero. Las prendas deben conservar su ticket original, para que se pueda realizar alg&uacute;n cambio. Gracias por su compra\",\"reportFooter2\":\"Software Design and Development By 7d Studio 00000080124406-0\"}');
 
 -- --------------------------------------------------------
 
@@ -94,6 +95,71 @@ INSERT INTO `config` (`config_key`, `config_value`) VALUES
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `factura_detalle`
+--
+
+CREATE TABLE `factura_detalle` (
+  `id` varchar(30) NOT NULL,
+  `factura_maestro_id` varchar(30) NOT NULL,
+  `producto_id` varchar(30) NOT NULL,
+  `producto_codigo` varchar(150) NOT NULL,
+  `cantidad` int(20) NOT NULL,
+  `total` double NOT NULL,
+  `status` int(1) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `factura_maestro`
+--
+
+CREATE TABLE `factura_maestro` (
+  `id` varchar(30) NOT NULL,
+  `timestamp` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
+  `modify_date` timestamp NOT NULL DEFAULT current_timestamp(),
+  `modify_by` varchar(30) NOT NULL,
+  `status` int(1) NOT NULL,
+  `imagen` varchar(200) DEFAULT NULL,
+  `titulo` varchar(160) NOT NULL,
+  `subtitulo` varchar(160) NOT NULL,
+  `nombre_reporte` varchar(160) NOT NULL,
+  `nombre_almacen` varchar(160) NOT NULL,
+  `nit` varchar(60) NOT NULL,
+  `direccion` varchar(60) NOT NULL,
+  `telefono` varchar(60) NOT NULL,
+  `email` varchar(60) NOT NULL,
+  `pagina_web` varchar(150) NOT NULL,
+  `prefijo_consecutivo` varchar(10) NOT NULL,
+  `numero_consecutivo` double NOT NULL,
+  `autor` varchar(30) NOT NULL,
+  `cliente` varchar(30) NOT NULL,
+  `identidad_cliente` varchar(60) NOT NULL,
+  `telefono_cliente` varchar(60) NOT NULL,
+  `tipo_pago` varchar(60) NOT NULL,
+  `descuento` double NOT NULL,
+  `subtotal` double NOT NULL,
+  `iva` double NOT NULL,
+  `abono` double NOT NULL,
+  `total` double NOT NULL,
+  `comentario` text NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `factura_maestro`
+--
+
+INSERT INTO `factura_maestro` (`id`, `timestamp`, `modify_date`, `modify_by`, `status`, `imagen`, `titulo`, `subtitulo`, `nombre_reporte`, `nombre_almacen`, `nit`, `direccion`, `telefono`, `email`, `pagina_web`, `prefijo_consecutivo`, `numero_consecutivo`, `autor`, `cliente`, `identidad_cliente`, `telefono_cliente`, `tipo_pago`, `descuento`, `subtotal`, `iva`, `abono`, `total`, `comentario`) VALUES
+('68547aea5c9c45.33899393', '2025-06-19 21:02:34', '2025-06-19 21:02:34', '1', 1, '', 'Facturita', 'Venta/Recibo', 'Resporete', 'La Quinua', '54654546', 'enrique segoviano', '3215666', 'se@dsd.co', 'http://localhost/crud_master', 'LQN', 34, 'Root root', 'Raul', '123', '3106019959', 'Transferencia', 0, 25000, 0, 25000, 25000, 'asdsa'),
+('68547b83073073.73961584', '2025-06-19 21:05:07', '2025-06-19 21:05:07', '1', 1, '', 'Facturita', 'Venta/Recibo', 'Resporete', 'La Quinua', '54654546', 'enrique segoviano', '3215666', 'se@dsd.co', 'http://localhost/crud_master', 'LQN', 35, 'Root root', 'Raul', '123', '3106019959', 'Transferencia', 0, 25000, 0, 25000, 25000, 'asdsa'),
+('6854816caec5a2.57076631', '2025-06-19 21:30:20', '2025-06-19 21:30:20', '1', 1, '', 'Facturita', 'Venta/Recibo', 'Resporete', 'La Quinua', '54654546', 'enrique segoviano', '3215666', 'se@dsd.co', 'http://localhost/crud_master', 'LQN', 36, 'Root root', 'Raul', '123', '3106019959', 'Transferencia', 0, 25000, 0, 25000, 25000, ''),
+('685481a7193263.53986532', '2025-06-19 21:31:19', '2025-06-19 21:31:19', '1', 1, '', 'Facturita', 'Venta/Recibo', 'Resporete', 'La Quinua', '54654546', 'enrique segoviano', '3215666', 'se@dsd.co', 'http://localhost/crud_master', 'LQN', 37, 'Root root', 'Raul', '123', '3106019959', 'Transferencia', 0, 25000, 0, 25000, 25000, ''),
+('685497897eadd6.70540858', '2025-06-19 23:04:41', '2025-06-19 23:04:41', '1', 1, '', 'Facturita', 'Venta/Recibo', 'Resporete', 'La Quinua', '54654546', 'enrique segoviano', '3215666', 'se@dsd.co', 'http://localhost/crud_master', 'LQN', 38, 'Root root', 'Raul', '123', '3106019959', 'efectivo', 0, 50468, 0, 50468, 50468, ''),
+('685497ef013039.55710188', '2025-06-19 23:06:23', '2025-06-19 23:06:23', '1', 1, '', 'Facturita', 'Venta/Recibo', 'Resporete', 'La Quinua', '54654546', 'enrique segoviano', '3215666', 'se@dsd.co', 'http://localhost/crud_master', 'LQN', 39, 'Root root', 'Raul', '123', '3106019959', 'efectivo', 0, 50702, 0, 50702, 50702, 'hola :3');
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `modulos`
 --
 
@@ -111,6 +177,7 @@ CREATE TABLE `modulos` (
 INSERT INTO `modulos` (`id`, `nombre`, `descripcion`, `status`) VALUES
 ('almacenes', 'Almacenes', 'Almacenes del sistema', 1),
 ('clientes', 'Clientes', '', 1),
+('dashboard', 'Dashboard', 'Dashboard del sitio', 1),
 ('permisos', 'Permisos', '', 1),
 ('productos', 'Productos', '', 1),
 ('registros', 'Registros', '', 1),
@@ -142,14 +209,15 @@ INSERT INTO `permisos` (`id`, `rol_id`, `modulo_id`, `r`, `w`, `u`, `d`) VALUES
 ('684351423667d', '67c93a4fa0a661.10017893', 'permisos', 1, 0, 0, 0),
 ('6843514237ffe', '67c93a4fa0a661.10017893', 'roles', 1, 0, 0, 0),
 ('68435142395d5', '67c93a4fa0a661.10017893', 'usuarios', 1, 0, 0, 0),
-('6850a47571b66', '67c93aa50bc6c0.23522713', 'almacenes', 1, 1, 1, 1),
-('6850a47578cb8', '67c93aa50bc6c0.23522713', 'clientes', 1, 1, 1, 1),
-('6850a47580870', '67c93aa50bc6c0.23522713', 'permisos', 1, 1, 1, 1),
-('6850a47588107', '67c93aa50bc6c0.23522713', 'productos', 1, 1, 1, 1),
-('6850a4758f82b', '67c93aa50bc6c0.23522713', 'registros', 1, 1, 1, 1),
-('6850a47597447', '67c93aa50bc6c0.23522713', 'roles', 1, 1, 1, 1),
-('6850a4759ea5e', '67c93aa50bc6c0.23522713', 'usuarios', 1, 1, 1, 1),
-('6850a475a6256', '67c93aa50bc6c0.23522713', 'ventas', 1, 1, 1, 1);
+('68546579a1717', '67c93aa50bc6c0.23522713', 'almacenes', 1, 1, 1, 1),
+('68546579a33b5', '67c93aa50bc6c0.23522713', 'clientes', 1, 1, 1, 1),
+('68546579a7a66', '67c93aa50bc6c0.23522713', 'dashboard', 1, 1, 1, 1),
+('68546579ab363', '67c93aa50bc6c0.23522713', 'permisos', 1, 1, 1, 1),
+('68546579aee89', '67c93aa50bc6c0.23522713', 'productos', 1, 1, 1, 1),
+('68546579b2ce0', '67c93aa50bc6c0.23522713', 'registros', 1, 1, 1, 1),
+('68546579bab9e', '67c93aa50bc6c0.23522713', 'roles', 1, 1, 1, 1),
+('68546579c2364', '67c93aa50bc6c0.23522713', 'usuarios', 1, 1, 1, 1),
+('68546579c5fc9', '67c93aa50bc6c0.23522713', 'ventas', 1, 1, 1, 1);
 
 -- --------------------------------------------------------
 
@@ -174,7 +242,8 @@ CREATE TABLE `productos` (
 
 INSERT INTO `productos` (`id`, `timestamp`, `modificado`, `codigo`, `nombre`, `precio`, `descripcion`, `status`) VALUES
 ('6850f0d07bda43.09319168', '2025-06-18 05:07:44', '2025-06-16 23:36:32', '123-789-4441', 'productoso', 10000, 'descripcion descripciosa', 0),
-('68524bdc27d331.70162514', '2025-06-18 05:17:16', '2025-06-18 00:17:16', '234', 'sdffds', 234, 'dfsdf', 1);
+('68524bdc27d331.70162514', '2025-06-18 05:17:16', '2025-06-18 00:17:16', '234', 'sdffds', 234, 'dfsdf', 1),
+('685461b5caa1b1.54437396', '2025-06-19 19:15:01', '2025-06-19 14:15:01', '10-45-100', 'pataconsitos', 25000, 'los pata cones', 1);
 
 -- --------------------------------------------------------
 
@@ -344,6 +413,21 @@ ALTER TABLE `config`
   ADD PRIMARY KEY (`config_key`);
 
 --
+-- Indexes for table `factura_detalle`
+--
+ALTER TABLE `factura_detalle`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `factura_maestro_id` (`factura_maestro_id`);
+
+--
+-- Indexes for table `factura_maestro`
+--
+ALTER TABLE `factura_maestro`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `numero_consecutivo_2` (`numero_consecutivo`),
+  ADD KEY `numero_consecutivo` (`numero_consecutivo`);
+
+--
 -- Indexes for table `modulos`
 --
 ALTER TABLE `modulos`
@@ -389,8 +473,24 @@ ALTER TABLE `usuarios`
   ADD KEY `rol_id` (`rol_id`);
 
 --
+-- AUTO_INCREMENT for dumped tables
+--
+
+--
+-- AUTO_INCREMENT for table `factura_maestro`
+--
+ALTER TABLE `factura_maestro`
+  MODIFY `numero_consecutivo` double NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=40;
+
+--
 -- Constraints for dumped tables
 --
+
+--
+-- Constraints for table `factura_detalle`
+--
+ALTER TABLE `factura_detalle`
+  ADD CONSTRAINT `factura_detalle_ibfk_1` FOREIGN KEY (`factura_maestro_id`) REFERENCES `factura_maestro` (`id`);
 
 --
 -- Constraints for table `permisos`

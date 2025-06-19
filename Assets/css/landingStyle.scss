@@ -11,6 +11,10 @@
     align-items: center;
 }
 
+html, body {
+  scroll-behavior: smooth;
+}
+
 body{
     font-family: "Outfit", sans-serif;
     font-optical-sizing: auto;
@@ -22,7 +26,6 @@ body{
     .parallax-wrapper{
         height: 100vh;
         overflow-x: hidden;
-        overflow-y: auto;
         perspective: 300px;
 
         .intro-screen{
@@ -45,9 +48,12 @@ body{
             transform-style: preserve-3d;
 
             .parallax-layer{
-                position: absolute;
-                inset: 0;
-                @include align-center;
+                  position: absolute;
+                  inset: 0;
+                  display: flex;
+                  justify-content: center;
+                  align-items: center;
+                  background-color: rgba(0, 0, 0, 0.1);
             }
         }
 
@@ -65,11 +71,15 @@ body{
         #intro{
             z-index: 0;
         }
-
-        #group-1{
-            z-index: -1;
+        .group-1{
+          z-index: 0;
+          color: white;
+          background-color: rgba(0, 0, 0, 0.145);
+          box-shadow: 0 4px 30px rgba(0, 0, 0, 0.2);
+          backdrop-filter: blur(1px); 
+          -webkit-backdrop-filter: blur(12px); 
         }
-        #group-2{
+        .group-2{
             z-index: 0;
             background-color: black;
             color: white;
@@ -92,19 +102,29 @@ section{
     display: grid;
     place-items: center;
     align-content: center;
+    scroll-margin-top: 80px;
 } 
 
 .card-bg{
-background-repeat: no-repeat;
-background: rgba(0, 0, 0, 0.63);
-border-radius: 16px;
-box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
-backdrop-filter: blur(8.2px);
--webkit-backdrop-filter: blur(8.2px);
-border: 1px solid rgba(0, 0, 0, 0.3);
-color: white;
-width: 20rem;
-height: 15rem;
+  background: rgba(0, 0, 0, 0.35); 
+  border-radius: 16px;
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.2);
+  backdrop-filter: blur(12px); 
+  -webkit-backdrop-filter: blur(12px); 
+  border: 1px solid rgba(255, 255, 255, 0.15); 
+  color: white;
+  width: 20rem;
+  height: 15rem;
+  position: relative; 
+  z-index: 1;
+}
+
+.card-animate{
+  transition: transform 0.1s ease;
+}
+
+.card-animate:hover{
+  transform: scale(1.05);
 }
 
 .icon-circle i {
@@ -132,11 +152,10 @@ height: 15rem;
   content: "";
   position: absolute;
   top: 0; left: 0; right: 0; bottom: 0;
-  background-image: url('../img/store.png');
   background-position: center;
   background-size: cover;
   transition: transform 0.5s ease;
-  z-index: -1; /* behind content */
+  z-index: -1; 
 }
 
 .card-parent:hover .card-child::before,
@@ -159,12 +178,60 @@ height: 15rem;
   opacity: 1;
 }
 
+.bg-shop::before{
+  background-image: url('../img/store.png');
+}
+
+.bg-users::before{
+  background-image: url('../img/users.jpg');
+}
+
+.bg-sales::before{
+  background-image: url('../img/sale.jpeg');
+}
+
 .div-width{
     width: 30rem;
     padding-left: 2%;
 }
 
-/**** ANIMATION SECTION ****/
+.nav-bg{
+  background-color: rgba(0, 0, 0);
+}
+
+/* Smooth underline on hover */
+.navbar-nav .nav-link {
+  position: relative;
+  color: #fff; /* Or your desired text color */
+  transition: color 0.3s ease;
+}
+
+.navbar-nav .nav-link::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  height: 2px;
+  width: 0%;
+  background-color: #00d1ff; /* Accent color */
+  transition: width 0.3s ease;
+}
+
+.navbar-nav .nav-link:hover::after,
+.navbar-nav .nav-link.active::after {
+  width: 100%;
+}
+
+.navbar-nav .nav-link:hover {
+  color: #00d1ff; /* Optional: color change on hover */
+}
+
+.navbar-nav .nav-link.active {
+  color: #00d1ff;
+  font-weight: 600;
+}
+
+/* *** *** *** *** *** *** *** *** ANIMATION SECTION *** *** *** *** *** *** *** *** */
 
 .animated-text {
   opacity: 0;
@@ -230,22 +297,3 @@ height: 15rem;
   opacity: 1;
   transform: translateX(0);
 }
-
-/* .hidden{
-    opacity: 0;
-    filter: blur(5px);
-    transition: all 1s;
-}
-
-.show{
-    opacity: 1;
-    filter: blur(0);
-}
-
-@media(prefers-reduced-motion){
-    .hidden{
-        transition: none;
-    }
-}
- */
-/****  BACKGROUND ANIMATION  ****/

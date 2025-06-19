@@ -9,16 +9,14 @@ function setBill($id){
 
     $config = $config[0]['config'];
 
-
-
     if (!empty($config)) {
 
+        $response = ['status' => false, 'msg' => 'Error desconocido'];
         $config = json_decode($config,true);
 
         foreach ($config as $field) {
             if (empty($field) && $field !== 0) {
-                return false;
-                die();
+                $response = ['status' => false, 'msg' => 'Faltan algunos datos de configuración de la factura'];
             }
         }
 
@@ -46,12 +44,12 @@ function setBill($id){
                 'identidad_cliente' => ['required' => true],
                 'telefono_cliente' => ['required' => true],
                 'metodoPago' => ['required' => true],
-                'descuento' => ['required' => true],
-                'totalBase' => ['required' => false],
+                'descuento' => ['required' => false],
+                'subtotal' => ['required' => false],
                 'impuesto' => ['required' => false],
                 'abono' => ['required' => true],
                 'total' => ['required' => true],
-                'comentarios' => ['required' => true],
+                'comentarios' => ['required' => false],
             ],
             'sql' => "INSERT INTO factura_maestro(
                     id, 
@@ -74,21 +72,49 @@ function setBill($id){
                     telefono_cliente,
                     tipo_pago,
                     descuento,
-                    totalBase,
-                    impuesto,
+                    subtotal,
+                    iva,
                     abono,
                     total,
-                    comentarios
+                    comentario
                 ) VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)",
             'error_required_msg' => 'No se pudo generar la factura, faltan algunos campos por llenar',
         ]);
 
-        return $master;
-
+        $response = $master;
     }else{
-        $config = null;
-        return false;
+        $response = ['status' => false, 'msg' => 'Configuración de factura incompleta'];
     }
+    return $response;
+}
+
+function setBillItems($idStore){
+
+    $response = cm_set([
+        'type' => 'post',
+        'mysql_type' => 'insert',
+        'data' => [
+            'id' => ['required' => false, 'value' => uniqid('',true)],
+            'factura_maestro_id' => ['required' => true],
+            'producto_id' => ['required' => true],
+            'producto_codigo' => ['required' => true],
+            'cantidad' => ['required' => true],
+            'total' => ['required' => true],
+            'status' => ['required' => false, 'value' => 1],
+        ],
+        'sql' => "INSERT INTO factura_detalle(
+            id, 
+            factura_maestro_id, 
+            producto_id, 
+            producto_codigo,
+            cantidad,
+            total,
+            status
+            ) VALUES(?,?,?,?,?,?,?)
+        ",
+    ]);
+
+    return $response;
 }
 
 function setConfig($id){
@@ -104,7 +130,7 @@ function setConfig($id){
             'config' => ['required' => false, 'value' => $data],
         ],
         'sql' => "UPDATE almacenes SET config = ? WHERE id = '$id'",
-        'error_exist_msg' => 'No se pudo actualizar la configuración, error al procesar los campos',
+        'error_required_msg' => 'No se pudo actualizar la configuración, error al procesar los campos',
     ]);
 
     return $response; 

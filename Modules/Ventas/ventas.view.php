@@ -83,52 +83,6 @@ getModal('ventasModal', $data);
                       </div>
                     </div>
                     <div class="col-6">
-                      <div class="row mb-2">
-                        <label class="col-sm-4 col-form-label"><b>Sub total</b></label>
-                        <div class="col-sm-8">
-                          <div class="input-group">
-                            <span class="input-group-text">$</span>
-                            <input type="text" id="totalBill" class="form-control" value="0" disabled="">
-                          </div>
-                        </div>
-                      </div>
-                      <div class="row mb-2">
-                        <label class="col-sm-4 col-form-label">Total Base</label>
-                        <div class="col-sm-8">
-                            <div class="input-group">
-                              <span class="input-group-text">$</span>
-                              <input type="text" id="totalBase" class="form-control" value="0" disabled="">
-                            </div>
-                        </div>
-                      </div>
-                      <div class="row mb-2">
-                        <label class="col-sm-4 col-form-label">Total Impuesto</label>
-                        <div class="col-sm-8">
-                          <div class="input-group">
-                            <span class="input-group-text">$</span>
-                            <input type="text" id="totalImpuesto" class="form-control" value="0" disabled="">
-                          </div>
-                        </div>
-                      </div>
-                      <div class="row mb-2">
-                        <label class="col-sm-4 col-form-label"><b>Total A Pagar</b></label>
-                        <div class="col-sm-8">
-                          <div class="input-group">
-                            <span class="input-group-text">$</span>
-                            <input type="text" class="form-control" id="totalToPay" value="0" disabled="">
-                          </div>
-                        </div>
-                      </div>
-                      <hr class="bg-danger border-2 border-top border-secondary" />
-                      <div class="row mb-2">
-                        <label class="col-sm-4 col-form-label">Descuento</label>
-                        <div class="col-sm-8">
-                            <div class="input-group">
-                              <span class="input-group-text">%</span>
-                              <input type="text" id="descuento" class="form-control" value="0" onkeypress="return controlTag(event)">
-                            </div>
-                        </div>
-                      </div>
 
                       <div class="row mb-2">
                         <label class="col-sm-4 col-form-label">Abono</label>
@@ -149,6 +103,16 @@ getModal('ventasModal', $data);
                         </div>
                       </div>
                       <div class="row mb-2">
+                        <label class="col-sm-4 col-form-label">Descuento</label>
+                        <div class="col-sm-8">
+                            <div class="input-group">
+                              <span class="input-group-text">%</span>
+                              <input type="text" id="descuento" class="form-control" value="0" onkeypress="return controlTag(event)">
+                            </div>
+                        </div>
+                      </div>
+
+                      <div class="row mb-2">
                         <label class="col-sm-4 col-form-label">Metodo de pago</label>
                         <div class="col-sm-8">
                           <select id="metodoPago" class="form-control">
@@ -167,6 +131,74 @@ getModal('ventasModal', $data);
                           <textarea id="comentarios" class="form-control"  rows="2"></textarea>
                         </div>
                       </div>
+                      
+                      <hr class="bg-danger border-2 border-top border-secondary" />
+
+                      <div class="row mb-2">
+                        <label class="col-sm-4 col-form-label"><b>Total A Pagar</b></label>
+                        <div class="col-sm-8">
+                          <div class="input-group">
+                            <span class="input-group-text">$</span>
+                            <input type="text" class="form-control" id="totalToPay" value="0" disabled="">
+                          </div>
+                        </div>
+                      </div>
+
+                      <div class="accordion accordion-flush" id="accordionFlushExample">
+                        <div class="accordion-item">
+                          <h2 class="accordion-header" id="flush-headingOne">
+                            <button 
+                              class="accordion-button collapsed" 
+                              type="button" data-bs-toggle="collapse" 
+                              data-bs-target="#flush-collapseOne" 
+                              aria-expanded="false" 
+                              aria-controls="flush-collapseOne"
+                              >
+                              Detalles del total
+                            </button>
+                          </h2>
+                          <div 
+                            id="flush-collapseOne" 
+                            class="accordion-collapse collapse" 
+                            aria-labelledby="flush-headingOne" 
+                            data-bs-parent="#accordionFlushExample" 
+                            style=""
+                            >
+                            <div class="accordion-body">
+
+                            <div class="row mb-2">
+                              <label class="col-sm-4 col-form-label"><b>Sub total</b></label>
+                              <div class="col-sm-8">
+                                <div class="input-group">
+                                  <span class="input-group-text">$</span>
+                                  <input type="text" id="subTotal" class="form-control" value="0" disabled="">
+                                </div>
+                              </div>
+                            </div>
+                            <div class="row mb-2">
+                              <label class="col-sm-4 col-form-label">Valor descontado</label>
+                              <div class="col-sm-8">
+                                  <div class="input-group">
+                                    <span class="input-group-text">$</span>
+                                    <input type="text" id="totalDescuento" class="form-control" value="0" disabled="">
+                                  </div>
+                              </div>
+                            </div>
+                            <div class="row mb-2">
+                              <label class="col-sm-4 col-form-label">Total Impuesto</label>
+                              <div class="col-sm-8">
+                                <div class="input-group">
+                                  <span class="input-group-text">$</span>
+                                  <input type="text" id="totalImpuesto" class="form-control" value="0" disabled="">
+                                </div>
+                              </div>
+                            </div>
+
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+
                       <div class="row mb-2">
                         <form id="setBillForm" action="post">
                           <button id="btnSetPayment" class="col-sm-12 btn btn-primary">Pagar</button>

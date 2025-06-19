@@ -77,6 +77,7 @@ function cm_model($array){
     $arrPermit = setPermit($array);
     $permit = $arrPermit['permit'];
     $permitType = $arrPermit['permitType'];
+    $arrData = array('status' => false, 'msg' => 'undefined model output');
 
     if ($permit) {
         if (array_key_exists('model',$array)){
@@ -87,7 +88,6 @@ function cm_model($array){
                 $model = call_user_func($array['model']);
             }
 
-    
             if(array_key_exists('return', $array)){
                 if (array_key_exists('true', $array['return'])) {
                     $responseType = gettype($model);
@@ -146,6 +146,14 @@ function cm_model($array){
                                 }else{
                                     $arrData = array('status' => true, 'msg' => $array['return']['true']['msg']);
                                 }
+                            }else{
+                                //FIX: parche, retirar mas adelante
+                                if (array_key_exists('showData', $array['return']['true'])) {
+                                    $array['return']['true']['showData'] == 'true' ? $data = $model : $data = '';
+                                    $arrData = array('status' => true, 'msg' => $array['return']['true']['msg'], 'data' => $data);
+                                }else{
+                                    $arrData = array('status' => true, 'msg' => $array['return']['true']['msg']);
+                                }  
                             }
                         }catch(Exception $e){
                             $arrData = $model;

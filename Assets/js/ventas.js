@@ -1,10 +1,10 @@
 const displayProducts = document.getElementById('displayProducts')
 const codigo = document.querySelector('#codigo')
-const totalBill = document.querySelector('#totalBill')
-const totalBase = document.querySelector('#totalBase')
+const subTotal = document.querySelector('#subTotal')
 const totalImpuesto = document.querySelector('#totalImpuesto')
 const totalRecibido = document.querySelector('#totalRecibido')
 const descuento = document.querySelector('#descuento')
+const totalDescuento = document.querySelector('#totalDescuento')
 const metodoPago = document.querySelector('#metodoPago')
 const comentarios = document.querySelector('#comentarios')
 const totalAbono = document.querySelector('#totalAbono')
@@ -22,8 +22,9 @@ let clientSelected = {
     telefono: null, 
 }
 
+let productosList = []
+
 let tablaProductos = null
-let productListHtml = ''
 let isEditingAbono = false
 let isEditingRecibido = false
 let createClientModalDocument = null
@@ -108,14 +109,12 @@ function agregarItem(value){
 }
 
 function agregarProducto(product){
-//append child and create elements
-    let rowProduct = document.createElement('div')
-
+    productosList.push(product) 
     let html = 
     `
-        <div class="row product" id="${product.id}">
+        <div class="row">
             <div class="alert border-secondary alert-dismissible fade show" role="alert">
-                <div class="row">
+                <div class="row product" id="${product.id}">
                     <div class="col-5">
                         <small class="text-primary">${product.nombre}</small>
                         <h5><b>${product.codigo}</b></h5>
@@ -242,14 +241,16 @@ function updateBill(){
     let price
     let total = 0
     productos.forEach((el) =>{
-        input = el.children[0].children[0].children[0].children[2].children[1]
+        input = el.children[0].children[2].children[1]
         stock = input.value
         price = input.getAttribute('data-item-price')
         total += stock * price
     })
 
-    totalBill.value = total
-    totalToPay.value = total
+    descuento.value > 0 ? totalDescuento.value = (total / 100) * descuento.value : ''
+
+    subTotal.value = total
+    totalToPay.value = parseInt(total) - parseInt(totalDescuento.value)
 
     isEditingAbono ? '' : totalAbono.value = total
     isEditingRecibido ? '' : totalRecibido.value = total
@@ -258,19 +259,29 @@ function updateBill(){
 //// FACTURA
 
 function billItemSetter(){
-    productos = document.querySelectorAll('.product')
-    console.log(productos)
+
+    productosList.forEach((producto) =>{
+        const formDataItems = new FormData()
+        formDataItems.append('factura_maestro_id')
+        formDataItems.append('producto_id')
+        formDataItems.append('producto_codigo')
+        formDataItems.append('cantidad')
+        formDataItems.append('total')
+        fetch(`${base_url}/ventas/setbillitems/${almacenData}`,{
+            method: 'POST',
+            body: formDataItems
+        })
+        .then()
+    })
 }
 
 function billFormSetter(){
 
-    //const formData = new FormData(setBillForm)
     const formData = new FormData()
-    formData.append('subtotal', totalBill.value)
-    formData.append('totalBase', totalBase.value)
+    formData.append('subtotal', subTotal.value)
     formData.append('impuesto', totalImpuesto.value)
     formData.append('total', totalToPay.value)
-    formData.append('descuento', descuento.value)
+    formData.append('descuento', totalDescuento.value) 
     formData.append('abono', totalAbono.value)
     formData.append('recibido', totalRecibido.value)
     formData.append('metodoPago', metodoPago.value)
@@ -278,6 +289,7 @@ function billFormSetter(){
     formData.append('cliente', clientSelected.nombre)
     formData.append('identidad_cliente', clientSelected.documento)
     formData.append('telefono_cliente', clientSelected.telefono)
+    formData.append('items', JSON.stringify(productosList))
 
     fetch(`${base_url}/ventas/setbill/${almacenData}`,{
         method: 'POST',
@@ -291,7 +303,6 @@ function billFormSetter(){
           text: data.msg,
           icon: "success"
         });
-        billItemSetter()
       }else{
         Swal.fire({
           title: "Error",
@@ -311,10 +322,10 @@ btnSetPayment.addEventListener('click', (e) => {
 
 getForm()
 
-//setSubmit({
-//    form:'setBillForm',
-//    uri: `/ventas/setbill/${almacenData}`,
-//})
+setSubmit({
+    form:'configBillReport',
+    uri:`/ventas/setconfig/${almacenData}`,
+})
 
 function getForm(){
     setForms([{

@@ -43,15 +43,12 @@
 </nav>
 <!--END NAVBAR-->
 
-
-
-
 <!--SECOND SECTION-->
 <div class='parallax-group group-1' id="group-1">
   <div class='parallax-layer mid-layer'>
         <div class="container text-center d-grid gap-3">
           <div class="row mx-auto">
-            <div class="col-md">
+            <div class="col-md card-animate">
             <div class="card card-bg text-center mb-3 mx-auto">
             <div class="card-body text-center">
               <h1><i class="bi bi-shop"></i></h1>
@@ -59,7 +56,7 @@
             </div>
           </div>
         </div>
-        <div class="col-md">
+        <div class="col-md card-animate">
           <div class="card card-bg text-center mb-3 mx-auto">
             <div class="card-body text-center">
               <h1><i class="bi bi-person-circle"></i></h1>
@@ -67,7 +64,7 @@
             </div>
           </div>
         </div>
-        <div class="col-md">
+        <div class="col-md card-animate">
           <div class="card card-bg text-center mb-3 mx-auto">
             <div class="card-body text-center mx-auto">
               <h1><i class="bi bi-box2-heart"></i></h1>
@@ -77,7 +74,7 @@
         </div>
       </div>
       <div class="row mx-auto">
-        <div class="col-md">
+        <div class="col-md card-animate">
           <div class="card card-bg text-center mb-3 mx-auto">
             <div class="card-body text-center">
               <h1><i class="bi bi-receipt"></i></h1>
@@ -85,7 +82,7 @@
             </div>
           </div>
         </div>
-        <div class="col-md">
+        <div class="col-md card-animate">
           <div class="card card-bg text-center mb-3 mx-auto">
             <div class="card-body text-center">
               <h1><i class="bi bi-tags"></i></h1>
@@ -93,7 +90,7 @@
             </div>
           </div>
         </div>
-          <div class="col-md">
+          <div class="col-md card-animate">
             <div class="card card-bg text-center mb-3 mx-auto">
               <div class="card-body text-center">
                 <h1><i class="bi bi-pencil"></i></h1>

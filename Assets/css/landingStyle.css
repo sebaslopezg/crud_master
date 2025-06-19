@@ -111,6 +111,14 @@ section {
   z-index: 1;
 }
 
+.card-animate {
+  transition: transform 0.1s ease;
+}
+
+.card-animate:hover {
+  transform: scale(1.05);
+}
+
 .icon-circle i {
   font-size: 60px;
   background: #2DB8B5;

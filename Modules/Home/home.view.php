@@ -6,33 +6,22 @@
 <div class='parallax-wrapper'>
 
   <!--INTRO SECTION-->
-  <div class='parallax-section intro-screen' id='intro'>
-    <section class='hidden'>
-      <h1 class='big-title'>CRUD Master</h1>   
-      <div class="container text-center d-grid gap-3">
-        <div class="row mx-auto">
-          <div class='col-md'>
-              <h1><i class="bi bi-shop"></i></h1>
-          </div>
-          <div class='col-md'>
-              <h1><i class="bi bi-person-circle"></i></h1>
-          </div>
-          <div class='col-md'>
-              <h1><i class="bi bi-box2-heart"></i></h1>
-          </div>
-                    <div class='col-md'>
-              <h1><i class="bi bi-receipt"></i></h1>
-          </div>
-          <div class='col-md'>
-              <h1><i class="bi bi-tags"></i></h1>
-          </div>
-          <div class='col-md'>
-              <h1><i class="bi bi-pencil"></i></h1>
-          </div>
-        </div>
-      </div>
-    </section>
-  </div>
+<div class='parallax-section intro-screen' id='intro'>
+  <section class='hidden'>
+    <h1 class='big-title animated-text'>CRUD Master</h1>   
+    <div class="container text-center d-grid gap-3">
+      <div class="row mx-auto">
+  <div class="col-md"><h1 class="animated-icon"><i class="bi bi-shop"></i></h1></div>
+  <div class="col-md"><h1 class="animated-icon"><i class="bi bi-person-circle"></i></h1></div>
+  <div class="col-md"><h1 class="animated-icon"><i class="bi bi-box2-heart"></i></h1></div>
+  <div class="col-md"><h1 class="animated-icon"><i class="bi bi-receipt"></i></h1></div>
+  <div class="col-md"><h1 class="animated-icon"><i class="bi bi-tags"></i></h1></div>
+  <div class="col-md"><h1 class="animated-icon"><i class="bi bi-pencil"></i></h1></div>
+</div>
+    </div>
+  </section>
+</div>
+
 
 <!--SECOND SECTION-->
 <div class='parallax-group' id='group-1'>
@@ -103,7 +92,7 @@
   <div class='parallax-layer base-layer'>
     <section>
       <div class="container">
-        <div class="d-flex align-items-center">
+        <div class="d-flex align-items-center animate-slide-left">
           <div class='card-parent'>
             <div class='card-child'></div>
           </div>  
@@ -129,7 +118,7 @@
   <div class='parallax-layer base-layer'>
     <section>
       <div class="container">
-        <div class="d-flex align-items-center">
+        <div class="d-flex align-items-center animate-slide-right">
             <div class='div-width'>
               <div class="d-flex align-items-center">
                 <div class="icon-circle me-3">
@@ -155,7 +144,7 @@
   <div class='parallax-layer base-layer'>
     <section>
       <div class="container">
-        <div class="d-flex align-items-center">
+        <div class="d-flex align-items-center animate-slide-left">
           <div class='card-parent'>
             <div class='card-child'></div>
           </div>  

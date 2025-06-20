@@ -15,7 +15,7 @@ class Productos extends Controllers{
             'permitRead' => [
                 'relocate' => 'home',
             ],
-            'page_title' => 'Mis inventarios xD',
+            'page_title' => 'Productos',
             'page_id' => 'productos',
             'view' => 'productos',
             'script' => 'productos',

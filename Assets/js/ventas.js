@@ -1,4 +1,8 @@
-import {SetdataTable, showBillDetails} from './ventas/facturas.js'
+import {
+    setdataTable, 
+    showBillDetails,
+    reloadTableFacturas
+} from './ventas/facturas.js'
 const displayProducts = document.getElementById('displayProducts')
 const codigo = document.querySelector('#codigo')
 const subTotal = document.querySelector('#subTotal')
@@ -269,23 +273,6 @@ function updateBill(){
 
 //// FACTURA
 
-/* function billItemSetter(){
-
-    productosList.forEach((producto) =>{
-        const formDataItems = new FormData()
-        formDataItems.append('factura_maestro_id')
-        formDataItems.append('producto_id')
-        formDataItems.append('producto_codigo')
-        formDataItems.append('cantidad')
-        formDataItems.append('total')
-        fetch(`${base_url}/ventas/setbillitems/${almacenData}`,{
-            method: 'POST',
-            body: formDataItems
-        })
-        .then()
-    })
-} */
-
 function billFormSetter(){
 
     const formData = new FormData()
@@ -297,9 +284,10 @@ function billFormSetter(){
     formData.append('recibido', totalRecibido.value)
     formData.append('metodoPago', metodoPago.value)
     formData.append('comentarios', comentarios.value)
-    formData.append('cliente', clientSelected.nombre)
-    formData.append('identidad_cliente', clientSelected.documento)
-    formData.append('telefono_cliente', clientSelected.telefono)
+
+    clientSelected.nombre ? formData.append('cliente', clientSelected.nombre) : ''
+    clientSelected.documento ? formData.append('identidad_cliente', clientSelected.documento) : ''
+    clientSelected.telefono ? formData.append('telefono_cliente', clientSelected.telefono) : ''
 
 
     let productos = document.querySelectorAll('.product')
@@ -332,7 +320,7 @@ function billFormSetter(){
           icon: "success"
         });
         clearSellData()
-        SetdataTable()
+        reloadTableFacturas()
       }else{
         Swal.fire({
           title: "Error",
@@ -362,7 +350,7 @@ function clearSellData(){
 }
 /// FACTURAS ////
 
-SetdataTable()
+setdataTable()
 
 /// CONFIG ////
 

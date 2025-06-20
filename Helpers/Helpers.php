@@ -217,7 +217,7 @@ function check_file(array $fileName){
 function save_image($fileName){
     $imagen = $_FILES[$fileName];
     $response = "";
-    $directorio = 'Assets/img/uploded/';
+    $directorio = 'Assets/img/upload/';
     if (!is_dir($directorio)) {
         mkdir($directorio, 0777, true);
     }

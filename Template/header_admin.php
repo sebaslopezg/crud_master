@@ -69,14 +69,14 @@
             <i class="bi bi-search"></i>
           </a>
         </li><!-- End Search Icon-->
-
+<!--
         <li class="nav-item dropdown">
 
           <a class="nav-link nav-icon" href="#" data-bs-toggle="dropdown">
             <i class="bi bi-bell"></i>
             <span class="badge bg-primary badge-number">4</span>
-          </a><!-- End Notification Icon -->
-
+          </a> --> <!-- End Notification Icon -->
+<!--
           <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow notifications">
             <li class="dropdown-header">
               You have 4 new notifications
@@ -141,17 +141,17 @@
               <a href="#">Show all notifications</a>
             </li>
 
-          </ul><!-- End Notification Dropdown Items -->
+          </ul> --><!-- End Notification Dropdown Items -->
 
-        </li><!-- End Notification Nav -->
-
+  <!--      </li> --> <!-- End Notification Nav -->
+<!--
         <li class="nav-item dropdown">
 
           <a class="nav-link nav-icon" href="#" data-bs-toggle="dropdown">
             <i class="bi bi-chat-left-text"></i>
             <span class="badge bg-success badge-number">3</span>
-          </a><!-- End Messages Icon -->
-
+          </a> --><!-- End Messages Icon -->
+<!--
           <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow messages">
             <li class="dropdown-header">
               You have 3 new messages
@@ -207,7 +207,7 @@
               <a href="#">Show all messages</a>
             </li>
 
-          </ul><!-- End Messages Dropdown Items -->
+          </ul>  --> <!-- End Messages Dropdown Items -->
 
         </li><!-- End Messages Nav -->
 
@@ -227,20 +227,13 @@
             </li>
 
             <li>
-              <a class="dropdown-item d-flex align-items-center" href="users-profile.html">
+              <a class="dropdown-item d-flex align-items-center" href="<?= base_url() ?>/perfil">
                 <i class="bi bi-person"></i>
                 <span>Mi cuenta</span>
               </a>
             </li>
             <li>
               <hr class="dropdown-divider">
-            </li>
-
-            <li>
-              <a class="dropdown-item d-flex align-items-center" href="users-profile.html">
-                <i class="bi bi-gear"></i>
-                <span>Ajustes</span>
-              </a>
             </li>
             <li>
               <hr class="dropdown-divider">

@@ -1,5 +1,6 @@
-const SetdataTable = () =>{
-    let table = $('#myTable').dataTable({
+let tablaFacturas
+const setdataTable = () =>{
+    tablaFacturas = $('#myTable').dataTable({
         "language": {
             "url": `${base_url}/Assets/vendor/datatables/dataTables_es.json`
         },
@@ -22,6 +23,10 @@ const SetdataTable = () =>{
         "order":[[0, "asc"]]
     })
 
+}
+
+const reloadTableFacturas = () => {
+    table.ajax.reload()
 }
 
 const showBillDetails = (id) =>{
@@ -66,6 +71,7 @@ const showBillDetails = (id) =>{
 }
 
 export{
-    SetdataTable,
+    setdataTable,
     showBillDetails,
+    reloadTableFacturas,
 }

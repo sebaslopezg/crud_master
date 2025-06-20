@@ -332,6 +332,7 @@ function billFormSetter(){
           icon: "success"
         });
         clearSellData()
+        SetdataTable()
       }else{
         Swal.fire({
           title: "Error",
@@ -356,8 +357,8 @@ function clearSellData(){
     comentarios.value = ''
     totalToPay.value = '0'
     subTotal.value = '0'
-    totalDescuento = '0'
-    totalImpuesto = '0'
+    totalDescuento.value = '0'
+    totalImpuesto.value = '0'
 }
 /// FACTURAS ////
 

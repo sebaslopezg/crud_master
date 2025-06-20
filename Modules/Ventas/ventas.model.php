@@ -20,11 +20,13 @@ function setBill($id){
             }
         }
 
+        $facturaId = uniqid('',true);
+
         $master = cm_set([
             'type' => 'post',
             'mysql_type' => 'insert',
             'data' => [
-                'id' => ['required' => false, 'value' => uniqid('',true)],
+                'id' => ['required' => false, 'value' => $facturaId],
                 'modify_by' => ['required' => false, 'value' => getUser('id')],
                 'status' => ['required' => false, 'value' => 1],
                 'imagen' => ['required' => false, 'value' => ''],
@@ -82,6 +84,39 @@ function setBill($id){
         ]);
 
         $response = $master;
+
+        if (isset($_POST['items'])) {
+            $items = $_POST['items'];
+            $items = json_decode($items,true);
+
+            foreach ($items as $item) {
+                $responseItem = cm_set([
+                    'type' => 'post',
+                    'mysql_type' => 'insert',
+                    'data' => [
+                        'id' => ['required' => false, 'value' => uniqid('',true)],
+                        'factura_maestro_id' => ['required' => false, 'value' => $facturaId],
+                        'producto_id' => ['required' => false, 'value' => $item['id']],
+                        'producto_codigo' => ['required' => false, 'value' => $item['code']],
+                        'producto_nombre' => ['required' => false, 'value' => $item['itemName']],
+                        'cantidad' => ['required' => false, 'value' => $item['stock']],
+                        'total' => ['required' => false, 'value' => $item['total']],
+                        'status' => ['required' => false, 'value' => 1],
+                    ],
+                    'sql' => "INSERT INTO factura_detalle(
+                        id,
+                        factura_maestro_id,
+                        producto_id,
+                        producto_codigo,
+                        producto_nombre,
+                        cantidad,
+                        total,
+                        status
+                    ) VALUES(?,?,?,?,?,?,?,?)",
+                ]);
+            }
+        }
+
     }else{
         $response = ['status' => false, 'msg' => 'Configuración de factura incompleta'];
     }

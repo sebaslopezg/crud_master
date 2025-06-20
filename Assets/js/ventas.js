@@ -22,8 +22,6 @@ let clientSelected = {
     telefono: null, 
 }
 
-let productosList = []
-
 let tablaProductos = null
 let isEditingAbono = false
 let isEditingRecibido = false
@@ -109,7 +107,6 @@ function agregarItem(value){
 }
 
 function agregarProducto(product){
-    productosList.push(product) 
     let html = 
     `
         <div class="row">
@@ -120,7 +117,16 @@ function agregarProducto(product){
                         <h5><b>${product.codigo}</b></h5>
                         <div class="input-group">
                             <span class="input-group-text">Cantidad</span>
-                            <input type="text" class="form-control" data-item-price="${product.precio}" value="1" onkeypress="{return controlTag(event)}">
+                            <input 
+                                type="text" 
+                                class="form-control" 
+                                data-item-price="${product.precio}" 
+                                data-item-id="${product.id}" 
+                                data-item-code="${product.codigo}" 
+                                data-item-name="${product.nombre}" 
+                                value="1" 
+                                onkeypress="{return controlTag(event)}"
+                                >
                         </div>
                     </div>
                     <div class="col-4">
@@ -289,6 +295,23 @@ function billFormSetter(){
     formData.append('cliente', clientSelected.nombre)
     formData.append('identidad_cliente', clientSelected.documento)
     formData.append('telefono_cliente', clientSelected.telefono)
+
+
+    productos = document.querySelectorAll('.product')
+    let productosList = []
+    let input
+    productos.forEach((el) =>{
+        input = el.children[0].children[2].children[1]
+        productosList.push({
+            stock: input.value,
+            price: input.getAttribute('data-item-price'),
+            id: input.getAttribute('data-item-id'),
+            code: input.getAttribute('data-item-code'),
+            itemName: input.getAttribute('data-item-name'),
+            total: parseInt(input.value) * parseFloat(input.getAttribute('data-item-price'))
+        })
+    })
+
     formData.append('items', JSON.stringify(productosList))
 
     fetch(`${base_url}/ventas/setbill/${almacenData}`,{
@@ -303,6 +326,7 @@ function billFormSetter(){
           text: data.msg,
           icon: "success"
         });
+        clearSellData()
       }else{
         Swal.fire({
           title: "Error",
@@ -317,6 +341,19 @@ btnSetPayment.addEventListener('click', (e) => {
     billFormSetter()
 })
 
+function clearSellData(){
+    displayProducts.innerHTML = ''
+    displayClient.innerHTML = ''
+    totalAbono.value = '0'
+    totalRecibido.value = '0'
+    totalDescuento.value = '0'
+    metodoPago.value = 0
+    comentarios.value = ''
+    totalToPay.value = '0'
+    subTotal.value = '0'
+    totalDescuento = '0'
+    totalImpuesto = '0'
+}
 
 ///////
 

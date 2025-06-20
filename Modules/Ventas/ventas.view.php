@@ -270,18 +270,16 @@ getModal('ventasModal', $data);
               </div>
               <form method="post" class="row g-3" id="configBillReport">
 
-                <div class="col-md-4">
-                  <label for="title" class="form-label">Título</label>
-                  <input type="text" class="form-control" id="title" name="title">
-                </div>
-                <div class="col-md-4">
-                  <label for="secondTitle" class="form-label">Subtítulo</label>
-                  <input type="text" class="form-control" id="secondTitle" name="secondTitle">
-                </div>
-                <div class="col-md-4">
-                  <label for="documentType" class="form-label">Tipo de Reporte (ej Factura de venta)</label>
-                  <input type="text" class="form-control" id="documentType" name="documentType">
-                </div>
+          <div class="accordion" id="datosTienda">
+            <div class="accordion-item">
+              <h2 class="accordion-header">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTienda" aria-expanded="false" aria-controls="collapseTienda">
+                  Datos del almacén
+                </button>
+              </h2>
+              <div id="collapseTienda" class="accordion-collapse collapse" data-bs-parent="#datosTienda">
+                <div class="accordion-body">
+                  <div class="row g-3">
                 <div class="col-md-6">
                   <label for="storeName" class="form-label">Nombre del Almacén</label>
                   <input type="text" class="form-control" id="storeName" name="storeName">
@@ -302,7 +300,34 @@ getModal('ventasModal', $data);
                   <label for="storeEmail" class="form-label">Correo electrónico del Almacén</label>
                   <input type="text" class="form-control" id="storeEmail" name="storeEmail">
                 </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
 
+          <div class="accordion" id="datosFactura">
+            <div class="accordion-item">
+              <h2 class="accordion-header">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFactura" aria-expanded="false" aria-controls="collapseFactura">
+                  Datos de la factura
+                </button>
+              </h2>
+              <div id="collapseFactura" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
+                <div class="accordion-body">
+                  <div class="row g-3">
+                <div class="col-md-4">
+                  <label for="title" class="form-label">Título</label>
+                  <input type="text" class="form-control" id="title" name="title">
+                </div>
+                <div class="col-md-4">
+                  <label for="secondTitle" class="form-label">Subtítulo</label>
+                  <input type="text" class="form-control" id="secondTitle" name="secondTitle">
+                </div>
+                <div class="col-md-4">
+                  <label for="documentType" class="form-label">Tipo de Reporte (ej Factura de venta)</label>
+                  <input type="text" class="form-control" id="documentType" name="documentType">
+                </div>
                 <div class="col-12">
                   <label for="reportSuffix" class="form-label">Subfijo del reporte</label>
                   <input type="text" class="form-control" id="reportSuffix" name="reportSuffix">
@@ -315,7 +340,28 @@ getModal('ventasModal', $data);
                   <label for="reportFooter2" class="form-label">Pie del reporte línea 2</label>
                   <input type="text" class="form-control" id="reportFooter2" name="reportFooter2">
                 </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
 
+          <div class="accordion accordion-danger" id="zonaPeligro">
+            <div class="accordion-item">
+              <h2 class="accordion-header">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapsePeligro" aria-expanded="false" aria-controls="collapsePeligro">
+                  Zona de peligro
+                </button>
+              </h2>
+              <div id="collapsePeligro" class="accordion-collapse collapse" data-bs-parent="#zonaPeligro">
+                <div class="accordion-body">
+                  <div class="">
+                    <button type="" class="btn btn-danger">Eliminar almacén</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
                 <div class="">
                   <button type="submit" class="btn btn-primary">Guardar</button>
                 </div>

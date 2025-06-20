@@ -29,6 +29,7 @@ function setBill($id){
                 'id' => ['required' => false, 'value' => $facturaId],
                 'modify_by' => ['required' => false, 'value' => getUser('id')],
                 'status' => ['required' => false, 'value' => 1],
+                'almacen_id' => ['required' => false, 'value' => $id],
                 'imagen' => ['required' => false, 'value' => ''],
                 'titulo' => ['required' => false, 'value' => $config['title']],
                 'subtitulo' => ['required' => false, 'value' => $config['secondTitle']],
@@ -57,6 +58,7 @@ function setBill($id){
                     id, 
                     modify_by, 
                     status, 
+                    almacen_id,
                     imagen, 
                     titulo, 
                     subtitulo,
@@ -79,7 +81,7 @@ function setBill($id){
                     abono,
                     total,
                     comentario
-                ) VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)",
+                ) VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)",
             'error_required_msg' => 'No se pudo generar la factura, faltan algunos campos por llenar',
         ]);
 
@@ -123,7 +125,7 @@ function setBill($id){
     return $response;
 }
 
-function setBillItems($idStore){
+/* function setBillItems($idStore){
 
     $response = cm_set([
         'type' => 'post',
@@ -149,6 +151,14 @@ function setBillItems($idStore){
         ",
     ]);
 
+    return $response;
+} */
+
+function getbills($idStore){
+    $response = cm_select([
+        'all' => 'true',
+        'sql' => "SELECT * FROM factura_maestro WHERE almacen_id = '$idStore'",
+    ]);
     return $response;
 }
 

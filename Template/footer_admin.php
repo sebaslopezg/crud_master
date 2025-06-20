@@ -45,7 +45,7 @@
   <?php getScriptSession() ?>
   <script src="<?= media() ?>/js/app.js"></script>
   <?php if(array_key_exists('script',$data)): ?>
-    <script src="<?= media() ?>/js/<?= $data['script'] ?>.js"></script>
+    <script type="module" src="<?= media() ?>/js/<?= $data['script'] ?>.js"></script>
   <?php endif; ?>
 
 </body>

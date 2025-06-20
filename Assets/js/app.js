@@ -176,8 +176,7 @@ document.addEventListener('click', (e)=>{
             })
           }
 
-        })
-        
+        }) 
       }
     }
   }
@@ -375,6 +374,10 @@ function setTableFromUri(params, paramId){
   .catch(()=>{
       ///Exception occured do something
   })
+}
+
+function setDataTable(params, paramId){
+
 }
 
 /* function setListGroupByUri(params, paramId){

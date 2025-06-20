@@ -233,7 +233,33 @@ getModal('ventasModal', $data);
             <div class="tab-pane fade" id="content-facturas" role="tabpanel">
               <!-- Contenido FACTURAS -->
               <div class="mt-4">
-                <span class="text-secondary">El módulo <b>Facturas</b> está en proceso de implementación...</span>
+
+
+
+
+
+
+                <table class="table table-hover" width="100%" cellspacing="0" id="myTable">
+                    <thead>
+                        <tr>
+                        <th>Tipo</th>
+                        <th>Vendedor(a)</th>
+                        <th>Cliente</th>
+                        <th>Documento del cliente</th>
+                        <th>Total</th>
+                        <th>Comentario</th>
+                        <th>Detalle</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    </tbody>
+                </table>
+
+
+
+
+
+
               </div>
             </div>
 

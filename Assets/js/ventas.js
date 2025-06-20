@@ -1,3 +1,4 @@
+import {SetdataTable, showBillDetails} from './ventas/facturas.js'
 const displayProducts = document.getElementById('displayProducts')
 const codigo = document.querySelector('#codigo')
 const subTotal = document.querySelector('#subTotal')
@@ -14,7 +15,7 @@ const documentClientModal = document.querySelector('#cedulaClienteModal')
 const cedulaClienteModal = document.querySelector('#cedulaClienteModal')
 const btnSetPayment = document.querySelector('#btnSetPayment')
 
-let setBillForm = document.querySelector('#setBillForm')
+/* let setBillForm = document.querySelector('#setBillForm') */
 
 let clientSelected = {
     nombre:null,
@@ -34,6 +35,10 @@ document.addEventListener('click', ({target}) => {
     if (target.dataset.action == 'getproduct') {
         let code = target.dataset.code
         agregarItem(code)
+    }
+    if (target.dataset.action == 'getBill') {
+        const id = target.dataset.id
+        showBillDetails(id)
     }
     if (target.dataset.action == 'addClient') {
         $('#clientesModal').modal('show')
@@ -196,7 +201,7 @@ function getClientByDocument(clientDocument, onlyData = false){
                     clientSelected.telefono = data.telefono
         
                     const displayClientModal = document.querySelector('#displayClientModal')
-                    html = `
+                    let html = `
                         <div class="row mt-4">
                             <div class="col-auto">
                                 <span class="badge bg-light text-dark">
@@ -241,7 +246,7 @@ function printClientOnDisplay(){
 }
 
 function updateBill(){
-    productos = document.querySelectorAll('.product')
+    let productos = document.querySelectorAll('.product')
     let input
     let stock
     let price
@@ -264,7 +269,7 @@ function updateBill(){
 
 //// FACTURA
 
-function billItemSetter(){
+/* function billItemSetter(){
 
     productosList.forEach((producto) =>{
         const formDataItems = new FormData()
@@ -279,7 +284,7 @@ function billItemSetter(){
         })
         .then()
     })
-}
+} */
 
 function billFormSetter(){
 
@@ -297,7 +302,7 @@ function billFormSetter(){
     formData.append('telefono_cliente', clientSelected.telefono)
 
 
-    productos = document.querySelectorAll('.product')
+    let productos = document.querySelectorAll('.product')
     let productosList = []
     let input
     productos.forEach((el) =>{
@@ -354,8 +359,11 @@ function clearSellData(){
     totalDescuento = '0'
     totalImpuesto = '0'
 }
+/// FACTURAS ////
 
-///////
+SetdataTable()
+
+/// CONFIG ////
 
 getForm()
 

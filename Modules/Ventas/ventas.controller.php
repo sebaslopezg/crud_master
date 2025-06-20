@@ -49,7 +49,7 @@ class Ventas extends Controllers{
         ]);
     }
 
-    public function setbillitems($idStore){
+/*     public function setbillitems($idStore){
         cm_model([
             'model' => 'setBillItems',
             'args' => [$idStore],
@@ -63,6 +63,13 @@ class Ventas extends Controllers{
                     'showData' => 'true'
                 ]
             ]
+        ]);
+    } */
+
+    public function getbills($idStore){
+        cm_model([
+            'model' => 'getbills',
+            'args' => [$idStore],
         ]);
     }
 

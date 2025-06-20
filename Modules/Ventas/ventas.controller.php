@@ -31,9 +31,9 @@ class Ventas extends Controllers{
 
     public function setbill($id){
         cm_model([
-/*             'permitCreate' => [
+            'permitCreate' => [
                 'msg' => 'No tiene permiso para creat facturas',
-            ], */
+            ],
             'model' => 'setBill',
             'args' => [$id],
             'return' => [
@@ -49,23 +49,6 @@ class Ventas extends Controllers{
         ]);
     }
 
-/*     public function setbillitems($idStore){
-        cm_model([
-            'model' => 'setBillItems',
-            'args' => [$idStore],
-            'return' => [
-                'true' => [
-                    'msg' => 'Se ha guardado el item de la factura de manera exitosa',
-                    'showData' => 'false'
-                ],
-                'false' => [
-                    'msg' => 'Error al intentar generar el item',
-                    'showData' => 'true'
-                ]
-            ]
-        ]);
-    } */
-
     public function getbills($idStore){
         cm_model([
             'model' => 'getbills',
@@ -79,10 +62,10 @@ class Ventas extends Controllers{
             $idStore = $arrParams[0];
             $idBill = $arrParams[1];
 
-        cm_model([
-            'model' => 'getbill',
-            'args' => [$idStore, $idBill],
-        ]);
+            cm_model([
+                'model' => 'getbill',
+                'args' => [$idStore, $idBill],
+            ]);
         }
 
     }
@@ -93,12 +76,11 @@ class Ventas extends Controllers{
             $idStore = $arrParams[0];
             $idBill = $arrParams[1];
 
-        cm_model([
-            'model' => 'getbilldetail',
-            'args' => [$idStore, $idBill],
-        ]);
+            cm_model([
+                'model' => 'getbilldetail',
+                'args' => [$idStore, $idBill],
+            ]);
         }
-
     }
 
     public function setconfig($id){

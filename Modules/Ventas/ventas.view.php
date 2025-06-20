@@ -234,11 +234,6 @@ getModal('ventasModal', $data);
               <!-- Contenido FACTURAS -->
               <div class="mt-4">
 
-
-
-
-
-
                 <table class="table table-hover" width="100%" cellspacing="0" id="myTable">
                     <thead>
                         <tr>
@@ -254,11 +249,6 @@ getModal('ventasModal', $data);
                     <tbody>
                     </tbody>
                 </table>
-
-
-
-
-
 
               </div>
             </div>

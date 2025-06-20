@@ -125,35 +125,6 @@ function setBill($id){
     return $response;
 }
 
-/* function setBillItems($idStore){
-
-    $response = cm_set([
-        'type' => 'post',
-        'mysql_type' => 'insert',
-        'data' => [
-            'id' => ['required' => false, 'value' => uniqid('',true)],
-            'factura_maestro_id' => ['required' => true],
-            'producto_id' => ['required' => true],
-            'producto_codigo' => ['required' => true],
-            'cantidad' => ['required' => true],
-            'total' => ['required' => true],
-            'status' => ['required' => false, 'value' => 1],
-        ],
-        'sql' => "INSERT INTO factura_detalle(
-            id, 
-            factura_maestro_id, 
-            producto_id, 
-            producto_codigo,
-            cantidad,
-            total,
-            status
-            ) VALUES(?,?,?,?,?,?,?)
-        ",
-    ]);
-
-    return $response;
-} */
-
 function getbills($idStore){
     $response = cm_select([
         'all' => 'true',

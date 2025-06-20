@@ -1231,3 +1231,25 @@ h6 {
   font-size: 13px;
   color: #012970;
 }
+
+.accordion-danger .accordion-item {
+  background-color: #f8d7da; /* light red background */
+  border: 1px solid #f5c2c7;
+}
+
+.accordion-danger .accordion-button {
+  background-color: #f5c2c7;
+  color: #842029;
+  font-weight: bold;
+}
+
+.accordion-danger .accordion-button:not(.collapsed) {
+  background-color: #f1aeb5; /* slightly darker when open */
+  color: #842029;
+  box-shadow: inset 0 -1px 0 rgba(0,0,0,.125);
+}
+
+.accordion-danger .accordion-body {
+  background-color: #fff;
+  color: #842029;
+}

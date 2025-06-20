@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 20, 2025 at 01:43 AM
+-- Generation Time: Jun 20, 2025 at 08:55 AM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -43,7 +43,7 @@ CREATE TABLE `almacenes` (
 
 INSERT INTO `almacenes` (`id`, `modify_date`, `modify_by`, `status`, `nombre`, `descripcion`, `config`) VALUES
 ('685249663b196', '2025-06-18', '1', 1, 'Almacen la Quinta', 'Ubicado en la calle 4', '{\"title\":\"Facturita\",\"secondTitle\":\"Venta\\/Recibo\",\"documentType\":\"Resporete\",\"storeName\":\"La Quinua\",\"storeNit\":\"54654546\",\"storeAddress\":\"enrique segoviano\",\"storePhone\":\"3215666\",\"storeEmail\":\"se@dsd.co\",\"reportSuffix\":\"LQN\",\"reportFooter1\":\"jjijiji\",\"reportFooter2\":\"sdijdf\"}'),
-('68532855eb589', '2025-06-18', '1', 1, 'Visperas del Mar', 'Ubicado en Bolivia', '{\"title\":\"Recibo de Ventas\",\"secondTitle\":\"Venta\",\"documentType\":\"Recibo de venta\",\"storeName\":\"Fajas Mimi\",\"storeNit\":\"26286642\",\"storeAddress\":\"CL 12 # 7 - 49\",\"storePhone\":\"000000000\",\"storeEmail\":\"ventasfajasmimi@gmail.com\",\"reportSuffix\":\"RECIBO\",\"reportFooter1\":\"Para cualquier cambio o reclamo es indispensable presentar esta factura. Plazo para cambios o garant&iacute;as &uacute;nicamente hasta 30 d&iacute;as despu&eacute;s de la compra. Prendas en promoci&oacute;n no tienen cambio. No se hace devoluci&oacute;n de dinero. Las prendas deben conservar su ticket original, para que se pueda realizar alg&uacute;n cambio. Gracias por su compra\",\"reportFooter2\":\"Software Design and Development By 7d Studio 00000080124406-0\"}');
+('68532855eb589', '2025-06-18', '1', 1, 'Visperas del Mar', 'Ubicado en Bolivia', '{\"storeName\":\"Fajas Mimi\",\"storeNit\":\"26286642\",\"storeAddress\":\"CL 12 # 7 - 49\",\"storePhone\":\"000000000\",\"storeEmail\":\"ventasfajasmimi@gmail.com\",\"title\":\"Recibo de Ventas\",\"secondTitle\":\"Venta\",\"documentType\":\"Recibo de venta\",\"reportSuffix\":\"RECIBO\",\"reportFooter1\":\"Para cualquier cambio o reclamo es indispensable presentar esta factura. Plazo para cambios o garant&iacute;as &uacute;nicamente hasta 30 d&iacute;as despu&eacute;s de la compra. Prendas en promoci&oacute;n no tienen cambio. No se hace devoluci&oacute;n de dinero. Las prendas deben conservar su ticket original, para que se pueda realizar alg&uacute;n cambio. Gracias por su compra\",\"reportFooter2\":\"Software Design and Development By 7d Studio 00000080124406-0\"}');
 
 -- --------------------------------------------------------
 
@@ -103,10 +103,25 @@ CREATE TABLE `factura_detalle` (
   `factura_maestro_id` varchar(30) NOT NULL,
   `producto_id` varchar(30) NOT NULL,
   `producto_codigo` varchar(150) NOT NULL,
+  `producto_nombre` varchar(160) NOT NULL,
   `cantidad` int(20) NOT NULL,
   `total` double NOT NULL,
   `status` int(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `factura_detalle`
+--
+
+INSERT INTO `factura_detalle` (`id`, `factura_maestro_id`, `producto_id`, `producto_codigo`, `producto_nombre`, `cantidad`, `total`, `status`) VALUES
+('6854d7d51167b8.03883291', '6854d7d50dae24.90253356', '685461b5caa1b1.54437396', '10-45-100', 'pataconsitos', 2, 50000, 1),
+('6854d7d5135589.75621216', '6854d7d50dae24.90253356', '68524bdc27d331.70162514', '234', 'sdffds', 3, 702, 1),
+('6855031c6995a6.14610288', '6855031c5df333.93709443', '685461b5caa1b1.54437396', '10-45-100', 'pataconsitos', 7, 175000, 1),
+('6855031c7007f0.80248333', '6855031c5df333.93709443', '68524bdc27d331.70162514', '234', 'sdffds', 6, 1404, 1),
+('685504b63dd0e2.61309289', '685504b6392a80.68496731', '685461b5caa1b1.54437396', '10-45-100', 'pataconsitos', 1, 25000, 1),
+('685504b641fcf9.68887159', '685504b6392a80.68496731', '68524bdc27d331.70162514', '234', 'sdffds', 1, 234, 1),
+('6855051b22af88.76545011', '6855051b1d4592.06231587', '68524bdc27d331.70162514', '234', 'sdffds', 1, 234, 1),
+('6855051b2bcc60.80595664', '6855051b1d4592.06231587', '685461b5caa1b1.54437396', '10-45-100', 'pataconsitos', 2, 50000, 1);
 
 -- --------------------------------------------------------
 
@@ -120,6 +135,7 @@ CREATE TABLE `factura_maestro` (
   `modify_date` timestamp NOT NULL DEFAULT current_timestamp(),
   `modify_by` varchar(30) NOT NULL,
   `status` int(1) NOT NULL,
+  `almacen_id` varchar(30) NOT NULL,
   `imagen` varchar(200) DEFAULT NULL,
   `titulo` varchar(160) NOT NULL,
   `subtitulo` varchar(160) NOT NULL,
@@ -149,13 +165,11 @@ CREATE TABLE `factura_maestro` (
 -- Dumping data for table `factura_maestro`
 --
 
-INSERT INTO `factura_maestro` (`id`, `timestamp`, `modify_date`, `modify_by`, `status`, `imagen`, `titulo`, `subtitulo`, `nombre_reporte`, `nombre_almacen`, `nit`, `direccion`, `telefono`, `email`, `pagina_web`, `prefijo_consecutivo`, `numero_consecutivo`, `autor`, `cliente`, `identidad_cliente`, `telefono_cliente`, `tipo_pago`, `descuento`, `subtotal`, `iva`, `abono`, `total`, `comentario`) VALUES
-('68547aea5c9c45.33899393', '2025-06-19 21:02:34', '2025-06-19 21:02:34', '1', 1, '', 'Facturita', 'Venta/Recibo', 'Resporete', 'La Quinua', '54654546', 'enrique segoviano', '3215666', 'se@dsd.co', 'http://localhost/crud_master', 'LQN', 34, 'Root root', 'Raul', '123', '3106019959', 'Transferencia', 0, 25000, 0, 25000, 25000, 'asdsa'),
-('68547b83073073.73961584', '2025-06-19 21:05:07', '2025-06-19 21:05:07', '1', 1, '', 'Facturita', 'Venta/Recibo', 'Resporete', 'La Quinua', '54654546', 'enrique segoviano', '3215666', 'se@dsd.co', 'http://localhost/crud_master', 'LQN', 35, 'Root root', 'Raul', '123', '3106019959', 'Transferencia', 0, 25000, 0, 25000, 25000, 'asdsa'),
-('6854816caec5a2.57076631', '2025-06-19 21:30:20', '2025-06-19 21:30:20', '1', 1, '', 'Facturita', 'Venta/Recibo', 'Resporete', 'La Quinua', '54654546', 'enrique segoviano', '3215666', 'se@dsd.co', 'http://localhost/crud_master', 'LQN', 36, 'Root root', 'Raul', '123', '3106019959', 'Transferencia', 0, 25000, 0, 25000, 25000, ''),
-('685481a7193263.53986532', '2025-06-19 21:31:19', '2025-06-19 21:31:19', '1', 1, '', 'Facturita', 'Venta/Recibo', 'Resporete', 'La Quinua', '54654546', 'enrique segoviano', '3215666', 'se@dsd.co', 'http://localhost/crud_master', 'LQN', 37, 'Root root', 'Raul', '123', '3106019959', 'Transferencia', 0, 25000, 0, 25000, 25000, ''),
-('685497897eadd6.70540858', '2025-06-19 23:04:41', '2025-06-19 23:04:41', '1', 1, '', 'Facturita', 'Venta/Recibo', 'Resporete', 'La Quinua', '54654546', 'enrique segoviano', '3215666', 'se@dsd.co', 'http://localhost/crud_master', 'LQN', 38, 'Root root', 'Raul', '123', '3106019959', 'efectivo', 0, 50468, 0, 50468, 50468, ''),
-('685497ef013039.55710188', '2025-06-19 23:06:23', '2025-06-19 23:06:23', '1', 1, '', 'Facturita', 'Venta/Recibo', 'Resporete', 'La Quinua', '54654546', 'enrique segoviano', '3215666', 'se@dsd.co', 'http://localhost/crud_master', 'LQN', 39, 'Root root', 'Raul', '123', '3106019959', 'efectivo', 0, 50702, 0, 50702, 50702, 'hola :3');
+INSERT INTO `factura_maestro` (`id`, `timestamp`, `modify_date`, `modify_by`, `status`, `almacen_id`, `imagen`, `titulo`, `subtitulo`, `nombre_reporte`, `nombre_almacen`, `nit`, `direccion`, `telefono`, `email`, `pagina_web`, `prefijo_consecutivo`, `numero_consecutivo`, `autor`, `cliente`, `identidad_cliente`, `telefono_cliente`, `tipo_pago`, `descuento`, `subtotal`, `iva`, `abono`, `total`, `comentario`) VALUES
+('6854d7d50dae24.90253356', '2025-06-20 03:39:01', '2025-06-20 03:39:01', '1', 1, '68532855eb589', '', 'Recibo de Ventas', 'Venta', 'Recibo de venta', 'Fajas Mimi', '26286642', 'CL 12 # 7 - 49', '000000000', 'ventasfajasmimi@gmail.com', 'http://localhost/crud_master', 'RECIBO', 55, 'Root root', 'Raul', '123', '3106019959', 'efectivo', 0, 50702, 0, 50702, 50702, 'sdlfkj'),
+('6855031c5df333.93709443', '2025-06-20 06:43:40', '2025-06-20 06:43:40', '1', 1, '68532855eb589', '', 'Recibo de Ventas', 'Venta', 'Recibo de venta', 'Fajas Mimi', '26286642', 'CL 12 # 7 - 49', '000000000', 'ventasfajasmimi@gmail.com', 'http://localhost/crud_master', 'RECIBO', 56, 'Root root', 'Raul', '123', '3106019959', 'Transferencia', 0, 176404, 0, 176404, 176404, 'nueva venta'),
+('685504b6392a80.68496731', '2025-06-20 06:50:30', '2025-06-20 06:50:30', '1', 1, '68532855eb589', '', 'Recibo de Ventas', 'Venta', 'Recibo de venta', 'Fajas Mimi', '26286642', 'CL 12 # 7 - 49', '000000000', 'ventasfajasmimi@gmail.com', 'http://localhost/crud_master', 'RECIBO', 57, 'Root root', 'null', 'null', 'null', 'efectivo', 0, 25234, 0, 25234, 25234, 'as'),
+('6855051b1d4592.06231587', '2025-06-20 06:52:11', '2025-06-20 06:52:11', '1', 1, '68532855eb589', '', 'Recibo de Ventas', 'Venta', 'Recibo de venta', 'Fajas Mimi', '26286642', 'CL 12 # 7 - 49', '000000000', 'ventasfajasmimi@gmail.com', 'http://localhost/crud_master', 'RECIBO', 58, 'Root root', 'null', 'null', 'null', 'efectivo', 0, 50234, 0, 50234, 50234, 'cas carrillo');
 
 -- --------------------------------------------------------
 
@@ -209,15 +223,15 @@ INSERT INTO `permisos` (`id`, `rol_id`, `modulo_id`, `r`, `w`, `u`, `d`) VALUES
 ('684351423667d', '67c93a4fa0a661.10017893', 'permisos', 1, 0, 0, 0),
 ('6843514237ffe', '67c93a4fa0a661.10017893', 'roles', 1, 0, 0, 0),
 ('68435142395d5', '67c93a4fa0a661.10017893', 'usuarios', 1, 0, 0, 0),
-('68546579a1717', '67c93aa50bc6c0.23522713', 'almacenes', 1, 1, 1, 1),
-('68546579a33b5', '67c93aa50bc6c0.23522713', 'clientes', 1, 1, 1, 1),
-('68546579a7a66', '67c93aa50bc6c0.23522713', 'dashboard', 1, 1, 1, 1),
-('68546579ab363', '67c93aa50bc6c0.23522713', 'permisos', 1, 1, 1, 1),
-('68546579aee89', '67c93aa50bc6c0.23522713', 'productos', 1, 1, 1, 1),
-('68546579b2ce0', '67c93aa50bc6c0.23522713', 'registros', 1, 1, 1, 1),
-('68546579bab9e', '67c93aa50bc6c0.23522713', 'roles', 1, 1, 1, 1),
-('68546579c2364', '67c93aa50bc6c0.23522713', 'usuarios', 1, 1, 1, 1),
-('68546579c5fc9', '67c93aa50bc6c0.23522713', 'ventas', 1, 1, 1, 1);
+('685503dd1caef', '67c93aa50bc6c0.23522713', 'almacenes', 1, 1, 1, 1),
+('685503dd23c48', '67c93aa50bc6c0.23522713', 'clientes', 1, 1, 1, 1),
+('685503dd2b9f2', '67c93aa50bc6c0.23522713', 'dashboard', 1, 1, 1, 1),
+('685503dd32f37', '67c93aa50bc6c0.23522713', 'permisos', 1, 1, 1, 1),
+('685503dd3a996', '67c93aa50bc6c0.23522713', 'productos', 1, 1, 1, 1),
+('685503dd4231a', '67c93aa50bc6c0.23522713', 'registros', 1, 1, 1, 1),
+('685503dd49fbd', '67c93aa50bc6c0.23522713', 'roles', 1, 1, 1, 1),
+('685503dd51dd2', '67c93aa50bc6c0.23522713', 'usuarios', 1, 1, 1, 1),
+('685503dd590d6', '67c93aa50bc6c0.23522713', 'ventas', 1, 1, 1, 1);
 
 -- --------------------------------------------------------
 
@@ -288,6 +302,7 @@ INSERT INTO `registros` (`id`, `nombre`, `apellido`, `status`) VALUES
 ('67c618c5674430.36537717', 'sdsdsd', 'sooooosaaaaa', 0),
 ('67c626bc87b3c7.03867470', 'Sergio ', 'cazuelaz', 0),
 ('6850a42caa9871.53414582', 'ddddddddddddddddd', 'aaaaaaa', 0),
+('685503e7218106.79166013', 'ghjghj', 'ghjghj', 1),
 ('a6sd54s6d54', 'sebasttopol', 'hola', 0),
 ('a6sd54s6d54sdd', 'dfgdf', 'dfg', 0),
 ('as56d4a6sd54', 'sosobra', 'asdd', 0),
@@ -480,7 +495,7 @@ ALTER TABLE `usuarios`
 -- AUTO_INCREMENT for table `factura_maestro`
 --
 ALTER TABLE `factura_maestro`
-  MODIFY `numero_consecutivo` double NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=40;
+  MODIFY `numero_consecutivo` double NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=59;
 
 --
 -- Constraints for dumped tables

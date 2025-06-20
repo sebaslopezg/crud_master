@@ -73,6 +73,34 @@ class Ventas extends Controllers{
         ]);
     }
 
+    public function getbill($args){
+        if ($args != null) {
+            $arrParams = explode(",",$args);
+            $idStore = $arrParams[0];
+            $idBill = $arrParams[1];
+
+        cm_model([
+            'model' => 'getbill',
+            'args' => [$idStore, $idBill],
+        ]);
+        }
+
+    }
+
+    public function getbilldetail($args){
+        if ($args != null) {
+            $arrParams = explode(",",$args);
+            $idStore = $arrParams[0];
+            $idBill = $arrParams[1];
+
+        cm_model([
+            'model' => 'getbilldetail',
+            'args' => [$idStore, $idBill],
+        ]);
+        }
+
+    }
+
     public function setconfig($id){
         cm_model([
             'model' => 'setConfig',

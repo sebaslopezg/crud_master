@@ -157,7 +157,32 @@ function setBill($id){
 function getbills($idStore){
     $response = cm_select([
         'all' => 'true',
-        'sql' => "SELECT * FROM factura_maestro WHERE almacen_id = '$idStore'",
+        'sql' => "SELECT 
+            id, 
+            titulo, 
+            autor, 
+            cliente, 
+            identidad_cliente, 
+            total,
+            comentario
+            FROM factura_maestro WHERE almacen_id = '$idStore'
+        ",
+    ]);
+    return $response;
+}
+
+function getbill($idStore, $idFactura){
+    $response = cm_select([
+        'all' => 'true',
+        'sql' => "SELECT * FROM factura_maestro WHERE almacen_id = '$idStore' AND id ='$idFactura' AND status > 0",
+    ]);
+    return $response;
+}
+
+function getbilldetail($idStore, $idFactura){
+    $response = cm_select([
+        'all' => 'true',
+        'sql' => "SELECT * FROM factura_detalle WHERE factura_maestro_id ='$idFactura' AND status > 0",
     ]);
     return $response;
 }

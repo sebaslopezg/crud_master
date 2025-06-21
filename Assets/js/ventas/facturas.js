@@ -37,16 +37,21 @@ const showBillDetails = (id) =>{
     .then((response) => response.json())
     .then((rawData) => {
         let data = rawData[0]
+        console.log(data);
         
         html += `
-            <p>Fecha: ${data.timestamp}</p>
-            <p>Vendedor(a): ${data.autor}</p>
-            <p>Cliente: ${data.cliente}</p>
-            <p>Documento Cliente: ${data.identidad_cliente}</p>
-            <p>Documento Cliente: ${data.tipo_pago}</p>
-            <p>Numero Factura: ${data.numero_consecutivo}</p>
+        <ul class="list-group list-group-flush">
+        <div class="container text-center">
+        </div>
+            <li class="list-group-item"><b>Vendedor(a): </b><p>${data.autor}</p></li>
+            <li class="list-group-item"><b>Cliente: </b><p>${data.cliente}</p></li>
+            <li class="list-group-item"><b>Documento Cliente: </b><p>${data.identidad_cliente}</p></li>
+            <li class="list-group-item"><b>Tipo de pago: </b><p>${data.tipo_pago}</p></li>
+            <li class="list-group-item"><b>Numero Factura: </b><p>${data.numero_consecutivo}</p></li>
+            <li class="list-group-item"><b>Comentario: </b><p>${data.comentario}</p></li>
+        </ul>
 
-            <ol class="list-group list-group-numbered">
+        <ul class="list-group">
         `
         fetch(`${base_url}/ventas/getbilldetail/${almacenData}/${id}`)
         .then((res) => res.json())

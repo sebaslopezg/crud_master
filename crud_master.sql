@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 20, 2025 at 08:55 AM
+-- Generation Time: Jun 21, 2025 at 04:24 AM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -43,7 +43,8 @@ CREATE TABLE `almacenes` (
 
 INSERT INTO `almacenes` (`id`, `modify_date`, `modify_by`, `status`, `nombre`, `descripcion`, `config`) VALUES
 ('685249663b196', '2025-06-18', '1', 1, 'Almacen la Quinta', 'Ubicado en la calle 4', '{\"title\":\"Facturita\",\"secondTitle\":\"Venta\\/Recibo\",\"documentType\":\"Resporete\",\"storeName\":\"La Quinua\",\"storeNit\":\"54654546\",\"storeAddress\":\"enrique segoviano\",\"storePhone\":\"3215666\",\"storeEmail\":\"se@dsd.co\",\"reportSuffix\":\"LQN\",\"reportFooter1\":\"jjijiji\",\"reportFooter2\":\"sdijdf\"}'),
-('68532855eb589', '2025-06-18', '1', 1, 'Visperas del Mar', 'Ubicado en Bolivia', '{\"storeName\":\"Fajas Mimi\",\"storeNit\":\"26286642\",\"storeAddress\":\"CL 12 # 7 - 49\",\"storePhone\":\"000000000\",\"storeEmail\":\"ventasfajasmimi@gmail.com\",\"title\":\"Recibo de Ventas\",\"secondTitle\":\"Venta\",\"documentType\":\"Recibo de venta\",\"reportSuffix\":\"RECIBO\",\"reportFooter1\":\"Para cualquier cambio o reclamo es indispensable presentar esta factura. Plazo para cambios o garant&iacute;as &uacute;nicamente hasta 30 d&iacute;as despu&eacute;s de la compra. Prendas en promoci&oacute;n no tienen cambio. No se hace devoluci&oacute;n de dinero. Las prendas deben conservar su ticket original, para que se pueda realizar alg&uacute;n cambio. Gracias por su compra\",\"reportFooter2\":\"Software Design and Development By 7d Studio 00000080124406-0\"}');
+('68532855eb589', '2025-06-18', '1', 1, 'Visperas del Mar', 'Ubicado en Bolivia', '{\"storeName\":\"Fajas Mimi\",\"storeNit\":\"26286642\",\"storeAddress\":\"CL 12 # 7 - 49\",\"storePhone\":\"000000000\",\"storeEmail\":\"ventasfajasmimi@gmail.com\",\"title\":\"Recibo de Ventas\",\"secondTitle\":\"Venta\",\"documentType\":\"Recibo de venta\",\"reportSuffix\":\"RECIBO\",\"reportFooter1\":\"Para cualquier cambio o reclamo es indispensable presentar esta factura. Plazo para cambios o garant&iacute;as &uacute;nicamente hasta 30 d&iacute;as despu&eacute;s de la compra. Prendas en promoci&oacute;n no tienen cambio. No se hace devoluci&oacute;n de dinero. Las prendas deben conservar su ticket original, para que se pueda realizar alg&uacute;n cambio. Gracias por su compra\",\"reportFooter2\":\"Software Design and Development By 7d Studio 00000080124406-0\"}'),
+('6855c4212aebb', '2025-06-20', '1', 1, 'nuevo almacen', 'test nuevo almacen', '{\"title\":\"Recibo de Ventas\",\"secondTitle\":\"Venta\",\"documentType\":\"Recibo de venta\",\"storeName\":\"Fajas Mimi\",\"storeNit\":\"26286642\",\"storeAddress\":\"CL 12 # 7 - 49\",\"storePhone\":\"3104270002\",\"storeEmail\":\"ventasfajasmimi@gmail.com\",\"reportSuffix\":\"RECIBO\",\"reportFooter1\":\"Para cualquier cambio o reclamo es indispensable presentar esta factura. Plazo para cambios o garant&iacute;as &uacute;nicamente hasta 30 d&iacute;as despu&eacute;s de la compra. Prendas en promoci&oacute;n no tienen cambio. No se hace devoluci&oacute;n de dinero. Las prendas deben conservar su ticket original, para que se pueda realizar alg&uacute;n cambio. Gracias por su compra\",\"reportFooter2\":\"Software Design and Development By 7d Studio 00000080124406-0\"}');
 
 -- --------------------------------------------------------
 
@@ -121,7 +122,14 @@ INSERT INTO `factura_detalle` (`id`, `factura_maestro_id`, `producto_id`, `produ
 ('685504b63dd0e2.61309289', '685504b6392a80.68496731', '685461b5caa1b1.54437396', '10-45-100', 'pataconsitos', 1, 25000, 1),
 ('685504b641fcf9.68887159', '685504b6392a80.68496731', '68524bdc27d331.70162514', '234', 'sdffds', 1, 234, 1),
 ('6855051b22af88.76545011', '6855051b1d4592.06231587', '68524bdc27d331.70162514', '234', 'sdffds', 1, 234, 1),
-('6855051b2bcc60.80595664', '6855051b1d4592.06231587', '685461b5caa1b1.54437396', '10-45-100', 'pataconsitos', 2, 50000, 1);
+('6855051b2bcc60.80595664', '6855051b1d4592.06231587', '685461b5caa1b1.54437396', '10-45-100', 'pataconsitos', 2, 50000, 1),
+('6855a758418d48.82042945', '6855a7583d4467.59151909', '685461b5caa1b1.54437396', '10-45-100', 'pataconsitos', 1, 25000, 1),
+('6855a758474358.96155642', '6855a7583d4467.59151909', '68524bdc27d331.70162514', '234', 'sdffds', 1, 234, 1),
+('6855c6e9d42803.69303116', '6855c6e9ceac34.30653339', '6855c68a63dc62.26394732', '789-654-100', 'Ley estatutaria', 3, 60000, 1),
+('6855c8fd872818.61603020', '6855c8fd826de8.21168409', '685461b5caa1b1.54437396', '10-45-100', 'pataconsitos', 1, 25000, 1),
+('6855c8fd8e48f3.20163250', '6855c8fd826de8.21168409', '68524bdc27d331.70162514', '234', 'sdffds', 1, 234, 1),
+('6855c922160ef2.16279781', '6855c9221313d3.82702277', '68524bdc27d331.70162514', '234', 'sdffds', 1, 234, 1),
+('6855c9221b1db5.65404581', '6855c9221313d3.82702277', '6855c68a63dc62.26394732', '789-654-100', 'Ley estatutaria', 1, 20000, 1);
 
 -- --------------------------------------------------------
 
@@ -169,7 +177,11 @@ INSERT INTO `factura_maestro` (`id`, `timestamp`, `modify_date`, `modify_by`, `s
 ('6854d7d50dae24.90253356', '2025-06-20 03:39:01', '2025-06-20 03:39:01', '1', 1, '68532855eb589', '', 'Recibo de Ventas', 'Venta', 'Recibo de venta', 'Fajas Mimi', '26286642', 'CL 12 # 7 - 49', '000000000', 'ventasfajasmimi@gmail.com', 'http://localhost/crud_master', 'RECIBO', 55, 'Root root', 'Raul', '123', '3106019959', 'efectivo', 0, 50702, 0, 50702, 50702, 'sdlfkj'),
 ('6855031c5df333.93709443', '2025-06-20 06:43:40', '2025-06-20 06:43:40', '1', 1, '68532855eb589', '', 'Recibo de Ventas', 'Venta', 'Recibo de venta', 'Fajas Mimi', '26286642', 'CL 12 # 7 - 49', '000000000', 'ventasfajasmimi@gmail.com', 'http://localhost/crud_master', 'RECIBO', 56, 'Root root', 'Raul', '123', '3106019959', 'Transferencia', 0, 176404, 0, 176404, 176404, 'nueva venta'),
 ('685504b6392a80.68496731', '2025-06-20 06:50:30', '2025-06-20 06:50:30', '1', 1, '68532855eb589', '', 'Recibo de Ventas', 'Venta', 'Recibo de venta', 'Fajas Mimi', '26286642', 'CL 12 # 7 - 49', '000000000', 'ventasfajasmimi@gmail.com', 'http://localhost/crud_master', 'RECIBO', 57, 'Root root', 'null', 'null', 'null', 'efectivo', 0, 25234, 0, 25234, 25234, 'as'),
-('6855051b1d4592.06231587', '2025-06-20 06:52:11', '2025-06-20 06:52:11', '1', 1, '68532855eb589', '', 'Recibo de Ventas', 'Venta', 'Recibo de venta', 'Fajas Mimi', '26286642', 'CL 12 # 7 - 49', '000000000', 'ventasfajasmimi@gmail.com', 'http://localhost/crud_master', 'RECIBO', 58, 'Root root', 'null', 'null', 'null', 'efectivo', 0, 50234, 0, 50234, 50234, 'cas carrillo');
+('6855051b1d4592.06231587', '2025-06-20 06:52:11', '2025-06-20 06:52:11', '1', 1, '68532855eb589', '', 'Recibo de Ventas', 'Venta', 'Recibo de venta', 'Fajas Mimi', '26286642', 'CL 12 # 7 - 49', '000000000', 'ventasfajasmimi@gmail.com', 'http://localhost/crud_master', 'RECIBO', 58, 'Root root', 'null', 'null', 'null', 'efectivo', 0, 50234, 0, 50234, 50234, 'cas carrillo'),
+('6855a7583d4467.59151909', '2025-06-20 18:24:24', '2025-06-20 18:24:24', '1', 1, '68532855eb589', '', 'Recibo de Ventas', 'Venta', 'Recibo de venta', 'Fajas Mimi', '26286642', 'CL 12 # 7 - 49', '000000000', 'ventasfajasmimi@gmail.com', 'http://localhost/crud_master', 'RECIBO', 59, 'Root root', 'Raul', '123', '3106019959', 'Tarjeta Credito', 757.02, 25234, 0, 25234, 24477, 'sdfsd'),
+('6855c6e9ceac34.30653339', '2025-06-20 20:39:05', '2025-06-20 20:39:05', '1', 1, '6855c4212aebb', '', 'Recibo de Ventas', 'Venta', 'Recibo de venta', 'Fajas Mimi', '26286642', 'CL 12 # 7 - 49', '3104270002', 'ventasfajasmimi@gmail.com', 'http://localhost/crud_master', 'RECIBO', 60, 'Root root', 'Raul', '123', '3106019959', 'efectivo', 0, 60000, 0, 60000, 60000, 'hohohos'),
+('6855c8fd826de8.21168409', '2025-06-20 20:47:57', '2025-06-20 20:47:57', '1', 1, '6855c4212aebb', '', 'Recibo de Ventas', 'Venta', 'Recibo de venta', 'Fajas Mimi', '26286642', 'CL 12 # 7 - 49', '3104270002', 'ventasfajasmimi@gmail.com', 'http://localhost/crud_master', 'RECIBO', 61, 'Root root', 'Raul', '123', '3106019959', 'efectivo', 0, 25234, 0, 25234, 25234, ''),
+('6855c9221313d3.82702277', '2025-06-20 20:48:34', '2025-06-20 20:48:34', '1', 1, '6855c4212aebb', '', 'Recibo de Ventas', 'Venta', 'Recibo de venta', 'Fajas Mimi', '26286642', 'CL 12 # 7 - 49', '3104270002', 'ventasfajasmimi@gmail.com', 'http://localhost/crud_master', 'RECIBO', 62, 'Root root', 'Raul', '123', '3106019959', 'Transferencia', 0, 20234, 0, 20234, 20234, 'xzc');
 
 -- --------------------------------------------------------
 
@@ -192,6 +204,7 @@ INSERT INTO `modulos` (`id`, `nombre`, `descripcion`, `status`) VALUES
 ('almacenes', 'Almacenes', 'Almacenes del sistema', 1),
 ('clientes', 'Clientes', '', 1),
 ('dashboard', 'Dashboard', 'Dashboard del sitio', 1),
+('perfil', 'Perfil', 'perfil', 1),
 ('permisos', 'Permisos', '', 1),
 ('productos', 'Productos', '', 1),
 ('registros', 'Registros', '', 1),
@@ -223,15 +236,16 @@ INSERT INTO `permisos` (`id`, `rol_id`, `modulo_id`, `r`, `w`, `u`, `d`) VALUES
 ('684351423667d', '67c93a4fa0a661.10017893', 'permisos', 1, 0, 0, 0),
 ('6843514237ffe', '67c93a4fa0a661.10017893', 'roles', 1, 0, 0, 0),
 ('68435142395d5', '67c93a4fa0a661.10017893', 'usuarios', 1, 0, 0, 0),
-('685503dd1caef', '67c93aa50bc6c0.23522713', 'almacenes', 1, 1, 1, 1),
-('685503dd23c48', '67c93aa50bc6c0.23522713', 'clientes', 1, 1, 1, 1),
-('685503dd2b9f2', '67c93aa50bc6c0.23522713', 'dashboard', 1, 1, 1, 1),
-('685503dd32f37', '67c93aa50bc6c0.23522713', 'permisos', 1, 1, 1, 1),
-('685503dd3a996', '67c93aa50bc6c0.23522713', 'productos', 1, 1, 1, 1),
-('685503dd4231a', '67c93aa50bc6c0.23522713', 'registros', 1, 1, 1, 1),
-('685503dd49fbd', '67c93aa50bc6c0.23522713', 'roles', 1, 1, 1, 1),
-('685503dd51dd2', '67c93aa50bc6c0.23522713', 'usuarios', 1, 1, 1, 1),
-('685503dd590d6', '67c93aa50bc6c0.23522713', 'ventas', 1, 1, 1, 1);
+('6855c24096b8e', '67c93aa50bc6c0.23522713', 'almacenes', 1, 1, 1, 1),
+('6855c2409c5c5', '67c93aa50bc6c0.23522713', 'clientes', 1, 1, 1, 1),
+('6855c240a0404', '67c93aa50bc6c0.23522713', 'dashboard', 1, 1, 1, 1),
+('6855c240a44a6', '67c93aa50bc6c0.23522713', 'perfil', 1, 1, 1, 1),
+('6855c240a89cf', '67c93aa50bc6c0.23522713', 'permisos', 1, 1, 1, 1),
+('6855c240b026a', '67c93aa50bc6c0.23522713', 'productos', 1, 1, 1, 1),
+('6855c240b713a', '67c93aa50bc6c0.23522713', 'registros', 1, 1, 1, 1),
+('6855c240bada2', '67c93aa50bc6c0.23522713', 'roles', 1, 1, 1, 1),
+('6855c240bf646', '67c93aa50bc6c0.23522713', 'usuarios', 1, 1, 1, 1),
+('6855c240c6775', '67c93aa50bc6c0.23522713', 'ventas', 1, 1, 1, 1);
 
 -- --------------------------------------------------------
 
@@ -257,7 +271,8 @@ CREATE TABLE `productos` (
 INSERT INTO `productos` (`id`, `timestamp`, `modificado`, `codigo`, `nombre`, `precio`, `descripcion`, `status`) VALUES
 ('6850f0d07bda43.09319168', '2025-06-18 05:07:44', '2025-06-16 23:36:32', '123-789-4441', 'productoso', 10000, 'descripcion descripciosa', 0),
 ('68524bdc27d331.70162514', '2025-06-18 05:17:16', '2025-06-18 00:17:16', '234', 'sdffds', 234, 'dfsdf', 1),
-('685461b5caa1b1.54437396', '2025-06-19 19:15:01', '2025-06-19 14:15:01', '10-45-100', 'pataconsitos', 25000, 'los pata cones', 1);
+('685461b5caa1b1.54437396', '2025-06-19 19:15:01', '2025-06-19 14:15:01', '10-45-100', 'pataconsitos', 25000, 'los pata cones', 1),
+('6855c68a63dc62.26394732', '2025-06-20 20:37:30', '2025-06-20 15:37:30', '789-654-100', 'Ley estatutaria', 20000, 'ley de cosas raras', 1);
 
 -- --------------------------------------------------------
 
@@ -495,7 +510,7 @@ ALTER TABLE `usuarios`
 -- AUTO_INCREMENT for table `factura_maestro`
 --
 ALTER TABLE `factura_maestro`
-  MODIFY `numero_consecutivo` double NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=59;
+  MODIFY `numero_consecutivo` double NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=63;
 
 --
 -- Constraints for dumped tables

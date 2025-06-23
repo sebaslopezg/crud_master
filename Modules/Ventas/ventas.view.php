@@ -332,8 +332,12 @@ getModal('ventasModal', $data);
               </div>
             </div>
           </div>
+                <div class="">
+                  <button type="submit" class="btn btn-primary">Guardar</button>
+                </div>
+              </form>
 
-          <div class="accordion accordion-danger" id="zonaPeligro">
+          <div class="accordion accordion-danger mt-4" id="zonaPeligro">
             <div class="accordion-item">
               <h2 class="accordion-header">
                 <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapsePeligro" aria-expanded="false" aria-controls="collapsePeligro">
@@ -343,17 +347,12 @@ getModal('ventasModal', $data);
               <div id="collapsePeligro" class="accordion-collapse collapse" data-bs-parent="#zonaPeligro">
                 <div class="accordion-body">
                   <div class="">
-                    <button id='btnDeleteStore' class="btn btn-danger">Eliminar almacén</button>
+                    <button data-action='deleteStore' class="btn btn-danger">Eliminar almacén</button>
                   </div>
                 </div>
               </div>
             </div>
           </div>
-                <div class="">
-                  <button type="submit" class="btn btn-primary">Guardar</button>
-                </div>
-
-              </form>
             </div>
         </div>
 

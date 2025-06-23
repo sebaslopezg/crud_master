@@ -3,6 +3,9 @@ import {
     showBillDetails,
     reloadTableFacturas
 } from './ventas/facturas.js'
+
+import {eliminarAlmacen} from './ventas/configurar.js'
+
 const displayProducts = document.getElementById('displayProducts')
 const codigo = document.querySelector('#codigo')
 const subTotal = document.querySelector('#subTotal')
@@ -53,6 +56,9 @@ document.addEventListener('click', ({target}) => {
     }
     if (target.dataset.action == 'addClientModal') {
         printClientOnDisplay()
+    }
+    if (target.dataset.action == 'deleteStore') {
+        eliminarAlmacen(almacenData)
     }
 })
 

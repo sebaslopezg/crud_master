@@ -24,6 +24,8 @@
   <!-- dataTables-->
   <script src="<?= media() ?>/vendor/datatables/jquery.dataTables.min.js"></script>
   <script src="<?= media() ?>/vendor/datatables/dataTables.bootstrap4.min.js"></script>
+<!-- CHARTS -->
+  <script src="assets/vendor/chart.js/chart.umd.js"></script>
 <!--
   <script src="<?= media() ?>/vendor/simple-datatables/simple-datatables.js"></script>
   <script src="assets/vendor/apexcharts/apexcharts.min.js"></script>

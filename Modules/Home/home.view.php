@@ -190,7 +190,7 @@
 <div class='parallax-section outro-screen' id='outro'>
   <section class='hidden'>
     <h1 class="animated-text">Contacto</h1>
-    <h1 class="animated-text"><i class="bi bi-whatsapp"></i> +57 312 7692 907</h1>
+    <h1 class="animated-text"><i class="bi bi-whatsapp"></i> +57 310 601 9959</h1>
   </section>
 </div>
 <!--END OUTRO SECTION-->

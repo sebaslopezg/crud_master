@@ -255,9 +255,6 @@ getModal('ventasModal', $data);
 
             <div class="tab-pane fade" id="content-config" role="tabpanel">
               <!-- Contenido CONFIG -->
-              <div class="alert alert-primary" role="alert">
-                Configurar reporte resultante de la venta
-              </div>
               <form method="post" class="row g-3" id="configBillReport">
 
           <div class="accordion" id="datosTienda">
@@ -346,7 +343,7 @@ getModal('ventasModal', $data);
               <div id="collapsePeligro" class="accordion-collapse collapse" data-bs-parent="#zonaPeligro">
                 <div class="accordion-body">
                   <div class="">
-                    <button type="" class="btn btn-danger">Eliminar almacén</button>
+                    <button id='btnDeleteStore' class="btn btn-danger">Eliminar almacén</button>
                   </div>
                 </div>
               </div>

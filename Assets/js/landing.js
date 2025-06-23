@@ -99,4 +99,21 @@ document.querySelectorAll('.nav-link').forEach(link => {
     }
   });
 });
+
+const outroSection = document.querySelector('#outro');
+const outroTexts = outroSection.querySelectorAll('.animated-text');
+
+const outroObserver = new IntersectionObserver(entries => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      outroTexts.forEach((el, i) => {
+        setTimeout(() => {
+          el.classList.add('visible');
+        }, i * 300); // Staggered delay for effect
+      });
+    }
+  });
+}, observerOptions);
+
+outroObserver.observe(outroSection);
 })

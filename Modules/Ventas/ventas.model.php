@@ -86,8 +86,15 @@ function setBill($id){
         ]);
 
         $response = $master;
+        $masterStatus = false;
 
-        if (isset($_POST['items'])) {
+        if (array_key_exists('status', $response)) {
+            $masterStatus = false;
+        }else{
+            $masterStatus = true;
+        }
+
+        if (isset($_POST['items']) && $masterStatus) {
             $items = $_POST['items'];
             $items = json_decode($items,true);
 

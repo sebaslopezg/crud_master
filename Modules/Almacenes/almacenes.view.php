@@ -56,9 +56,6 @@ getModal("AlmacenesModal",$data);
           role="tabpanel" 
           aria-labelledby="contact-tab"
           >
-          <div class="alert alert-primary" role="alert">
-            Configurar reporte resultante de la venta
-          </div>
           <form method="post" class="row g-3" id="configBillReport">
 
           <div class="accordion" id="datosTienda">

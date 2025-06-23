@@ -40,17 +40,28 @@ const showBillDetails = (id) =>{
         console.log(data);
         
         html += `
-        <ul class="list-group list-group-flush">
-        <div class="container text-center">
-        </div>
-            <li class="list-group-item"><b>Vendedor(a): </b><p>${data.autor}</p></li>
-            <li class="list-group-item"><b>Cliente: </b><p>${data.cliente}</p></li>
-            <li class="list-group-item"><b>Documento Cliente: </b><p>${data.identidad_cliente}</p></li>
-            <li class="list-group-item"><b>Tipo de pago: </b><p>${data.tipo_pago}</p></li>
-            <li class="list-group-item"><b>Numero Factura: </b><p>${data.numero_consecutivo}</p></li>
-            <li class="list-group-item"><b>Comentario: </b><p>${data.comentario}</p></li>
-        </ul>
-
+            <div class="card">
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item">
+                        <strong>Vendedor(a):</strong> ${data.autor}
+                    </li>
+                    <li class="list-group-item">
+                        <strong>Cliente:</strong> ${data.cliente}
+                    </li>
+                    <li class="list-group-item">
+                        <strong>Documento Cliente:</strong> ${data.identidad_cliente}
+                    </li>
+                    <li class="list-group-item">
+                        <strong>Tipo de pago:</strong> ${data.tipo_pago}
+                    </li>
+                    <li class="list-group-item">
+                        <strong>Numero Factura:</strong> ${data.numero_consecutivo}
+                    </li>
+                    <li class="list-group-item">
+                        <strong>Total:</strong> $${data.total}
+                    </li>
+                </ul>
+            </div>
         <ul class="list-group">
         `
         fetch(`${base_url}/ventas/getbilldetail/${almacenData}/${id}`)

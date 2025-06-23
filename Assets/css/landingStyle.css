@@ -95,6 +95,7 @@ section {
   place-items: center;
   align-content: center;
   scroll-margin-top: 80px;
+  height: 100%;
 }
 
 .card-bg {

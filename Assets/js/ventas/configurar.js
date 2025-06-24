@@ -25,4 +25,40 @@ const eliminarAlmacen = (idAlmacen) =>{
     })    
 }
 
-export{eliminarAlmacen}
+const getForm = () =>{
+    setForms([{
+        form:'configBillReport',
+        uri: `/ventas/getconfig/${almacenData}`,
+        dataKey:'config',
+        setValues:{
+        ids:[
+            'title',
+            'secondTitle',
+            'documentType',
+            'storeName',
+            'storeNit',
+            'storeAddress',
+            'storeEmail',
+            'reportSuffix',
+            'reportFooter1',
+            'reportFooter2',
+            'storePhone',
+            ],
+        values:[
+            'title',
+            'secondTitle',
+            'documentType',
+            'storeName',
+            'storeNit',
+            'storeAddress',
+            'storeEmail',
+            'reportSuffix',
+            'reportFooter1',
+            'reportFooter2',
+            'storePhone',
+            ]
+        },
+    }])
+}
+
+export{eliminarAlmacen, getForm}

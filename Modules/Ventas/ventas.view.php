@@ -212,7 +212,185 @@ getModal('ventasModal', $data);
             <div class="tab-pane fade" id="content-enar" role="tabpanel">
               <!-- Contenido ENAR -->
               <div class="mt-4">
-                <span class="text-secondary">El módulo <b>Encargo/Arreglos</b> está en proceso de implementación...</span>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+              <!-- Contenido de VENTAS -->
+              <div class="container mt-4">
+                <div class="row g-3">
+                    <div class="col-6">
+                    <div class="row">
+                      <div class="col-4">
+                        <button type="button" class="btn btn-secondary mb-2" data-action="addClient_enar">
+                          <i class="bi bi-person-fill"></i>
+                          Agregar Cliente
+                        </button>
+                      </div>
+                      <div class="col">
+                        <div id="displayClient_enar"></div>                        
+                      </div>
+                    </div>
+                      <div class="row mb-2">
+                        <div class="col-sm-6">
+                          <input type="text" id="codigo_enar" placeholder="CODIGO" class="form-control" />
+                        </div>
+                        <div class="col-sm-6">
+                          <button class="btn btn-primary" data-action="getproductByCode_enar">Buscar</button>
+                        </div>
+                      </div>
+                      <div class="col-11">
+                        <div id="displayProducts_enar"></div>
+                      </div>
+                    </div>
+                    <div class="col-6">
+
+                      <div class="row mb-2">
+                        <label class="col-sm-4 col-form-label">Abono</label>
+                        <div class="col-sm-8">
+                            <div class="input-group">
+                              <span class="input-group-text">$</span>
+                              <input id="totalAbono_enar" type="text" class="form-control" value="" onkeypress="return controlTag(event)">
+                            </div>
+                        </div>
+                      </div>
+                      <div class="row mb-2">
+                        <label class="col-sm-4 col-form-label">Total Recibido</label>
+                        <div class="col-sm-8">
+                          <div class="input-group">
+                            <span class="input-group-text">$</span>
+                            <input id="totalRecibido_enar" type="text" class="form-control" value="" onkeypress="return controlTag(event)">
+                          </div>
+                        </div>
+                      </div>
+                      <div class="row mb-2">
+                        <label class="col-sm-4 col-form-label">Descuento</label>
+                        <div class="col-sm-8">
+                            <div class="input-group">
+                              <span class="input-group-text">%</span>
+                              <input type="text" id="descuento_enar" class="form-control" value="0" onkeypress="return controlTag(event)">
+                            </div>
+                        </div>
+                      </div>
+
+                      <div class="row mb-2">
+                        <label class="col-sm-4 col-form-label">Metodo de pago</label>
+                        <div class="col-sm-8">
+                          <select id="metodoPago_enar" class="form-control">
+                            <option value="0">----</option>
+                            <option value="efectivo">Efectivo</option>
+                            <option value="Transferencia">Transferencia</option>
+                            <option value="Tarjeta Credito">Tarjeta Credito</option>
+                            <option value="Tarjeta Debito">Tarjeta Debito</option>
+                          </select>
+                        </div>
+                      </div>
+
+                      <div class="row mb-2">
+                        <label class="col-sm-4 col-form-label">Comentarios</label>
+                        <div class="col-sm-8">
+                          <textarea id="comentarios_enar" class="form-control"  rows="2"></textarea>
+                        </div>
+                      </div>
+                      
+                      <hr class="bg-danger border-2 border-top border-secondary" />
+
+                      <div class="row mb-2">
+                        <label class="col-sm-4 col-form-label"><b>Total A Pagar</b></label>
+                        <div class="col-sm-8">
+                          <div class="input-group">
+                            <span class="input-group-text">$</span>
+                            <input type="text" class="form-control" id="totalToPay_enar" value="0" disabled="">
+                          </div>
+                        </div>
+                      </div>
+
+                      <div class="accordion accordion-flush" id="accordionFlushExample_enar">
+                        <div class="accordion-item">
+                          <h2 class="accordion-header" id="flush-headingOne_enar">
+                            <button 
+                              class="accordion-button collapsed" 
+                              type="button" data-bs-toggle="collapse" 
+                              data-bs-target="#detallesTotal_enar" 
+                              aria-expanded="false" 
+                              aria-controls="flush-collapseOne_enar"
+                              >
+                              Detalles del total
+                            </button>
+                          </h2>
+                          <div 
+                            id="flush-collapseOne_enar" 
+                            class="accordion-collapse collapse" 
+                            aria-labelledby="flush-headingOne" 
+                            data-bs-parent="#detallesTotal_enar" 
+                            style=""
+                            >
+                            <div class="accordion-body">
+
+                            <div class="row mb-2">
+                              <label class="col-sm-4 col-form-label"><b>Sub total</b></label>
+                              <div class="col-sm-8">
+                                <div class="input-group">
+                                  <span class="input-group-text">$</span>
+                                  <input type="text" id="subTotal_enar" class="form-control" value="0" disabled="">
+                                </div>
+                              </div>
+                            </div>
+                            <div class="row mb-2">
+                              <label class="col-sm-4 col-form-label">Valor descontado</label>
+                              <div class="col-sm-8">
+                                  <div class="input-group">
+                                    <span class="input-group-text">$</span>
+                                    <input type="text" id="totalDescuento_enar" class="form-control" value="0" disabled="">
+                                  </div>
+                              </div>
+                            </div>
+                            <div class="row mb-2">
+                              <label class="col-sm-4 col-form-label">Total Impuesto</label>
+                              <div class="col-sm-8">
+                                <div class="input-group">
+                                  <span class="input-group-text">$</span>
+                                  <input type="text" id="totalImpuesto_enar" class="form-control" value="0" disabled="">
+                                </div>
+                              </div>
+                            </div>
+
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+
+                      <div class="row mb-2">
+                        <form id="setBillForm_enar" action="post">
+                          <button id="btnSetPayment_enar" class="col-sm-12 btn btn-primary">Pagar</button>
+                        </form>
+                      </div>
+                    </div>
+                </div>
+              </div>
+
+
+
+
+
+
+
+
+
+
+
+
               </div>
             </div>
 

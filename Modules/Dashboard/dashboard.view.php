@@ -93,7 +93,7 @@
                 </div>
 
                 <div class="card-body">
-                  <h5 class="card-title">Clientes <span>| Este</span></h5>
+                  <h5 class="card-title">Clientes <span></span></h5>
 
                   <div class="d-flex align-items-center">
                     <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">

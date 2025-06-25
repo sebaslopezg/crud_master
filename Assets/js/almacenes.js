@@ -62,6 +62,7 @@ function getAlmacenes(){
     .then((res) => res.json())
     .then((data) =>{
         let html = ''
+        almacenesList.innerHTML = ''
         data.forEach(almacen => {        
             html = ''
 

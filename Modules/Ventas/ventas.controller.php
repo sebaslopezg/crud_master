@@ -120,4 +120,21 @@ class Ventas extends Controllers{
             ],
         ]);
     }
+
+    public function anulargeneral($factura){
+        cm_model([
+            'model' => 'anulargeneral',
+            'args' => [$factura],
+            'return' => [
+                'true' => [
+                    'msg' => 'Se ha anulado la factura',
+                    'showData' => 'false'
+                ],
+                'false' => [
+                    'msg' => 'Error al intentar anular la factura',
+                    'showData' => 'true'
+                ],
+            ],
+        ]);
+    }
 }

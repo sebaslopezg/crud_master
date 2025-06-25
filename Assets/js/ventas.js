@@ -10,6 +10,7 @@ import {
 
 import {agregarItem} from './ventas/ventas.js'
 import {eliminarAlmacen, getForm} from './ventas/configurar.js'
+import {anular} from './ventas/anulaciones.js'
 
 const codigo = document.querySelector('#codigo')
 const documentClientModal = document.querySelector('#cedulaClienteModal')
@@ -45,6 +46,9 @@ document.addEventListener('click', ({target}) => {
     if (target.dataset.action == 'deleteStore') {
         eliminarAlmacen(almacenData)
     }
+    if (target.dataset.action == 'getBillAnulation') {
+        anular(almacenData)
+    }
 })
 
 documentClientModal.addEventListener('change', ({target}) => {
@@ -52,7 +56,7 @@ documentClientModal.addEventListener('change', ({target}) => {
 })
 
 cedulaClienteModal.addEventListener('keydown', (e) =>{
-    if (e.key == 'Enter') {
+    if (e.key == 'Enter'){
         const clientDocument = document.querySelector('#cedulaClienteModal')
         getClientByDocument(clientDocument.value)
     }

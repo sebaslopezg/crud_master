@@ -2,12 +2,18 @@
 
 function setBill($id){
 
+    $facturaLocal = cm_select([
+        'all' => 'true',
+        'sql' => "SELECT factura_local FROM almacenes WHERE id = '$id'"
+    ]);
+
     $config = cm_select([
         'all' => 'true',
         'sql' => "SELECT config FROM almacenes WHERE id = '$id'",
     ]);
 
     $config = $config[0]['config'];
+    $facturaLocal = $facturaLocal[0]['factura_local'];
 
     if (!empty($config)) {
 
@@ -191,4 +197,12 @@ function getconfig($id){
     ]);
 
     return $query;
+}
+
+function anulargeneral($factura){
+    $deleteUsuario = cm_update([
+        'sql' => "UPDATE factura_maestro SET status = ? WHERE id = '$factura'",
+        'arrData' => array(2),
+    ]);
+    return $deleteUsuario;
 }

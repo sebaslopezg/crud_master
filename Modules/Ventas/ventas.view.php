@@ -29,16 +29,16 @@ getModal('ventasModal', $data);
               Encargo/Arreglo
             </button>
           </li>
-          <li class="nav-item flex-fill" role="presentation">
+<!--           <li class="nav-item flex-fill" role="presentation">
             <button class="nav-link w-100" id="abono-tab" data-bs-target="#content-abono" data-section="abono" data-bs-toggle="tab" type="button" role="tab">
               <i class="bi bi-cash-coin"></i>
               Abono
             </button>
-          </li>
+          </li> -->
           <li class="nav-item flex-fill" role="presentation">
             <button class="nav-link w-100" id="cambio-tab" data-bs-target="#content-cambio" data-section="cambio" data-bs-toggle="tab" type="button" role="tab">
-              <i class="bi bi-arrow-left-right"></i> 
-              Cambio/Devolucion
+              <i class="bi bi-x-octagon"></i> 
+              Anulaciones
             </button>
           </li>
           <li class="nav-item flex-fill" role="presentation">
@@ -213,20 +213,6 @@ getModal('ventasModal', $data);
               <!-- Contenido ENAR -->
               <div class="mt-4">
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
               <!-- Contenido de VENTAS -->
               <div class="container mt-4">
                 <div class="row g-3">
@@ -383,14 +369,6 @@ getModal('ventasModal', $data);
 
 
 
-
-
-
-
-
-
-
-
               </div>
             </div>
 
@@ -404,7 +382,24 @@ getModal('ventasModal', $data);
             <div class="tab-pane fade" id="content-cambio" role="tabpanel">
               <!-- Contenido CAMBIOS -->
               <div class="mt-4">
-                <span class="text-secondary">El módulo <b>Cambio/Devolución</b> está en proceso de implementación...</span>
+                <!-- ANULACIONES -->
+
+                <div class="col-6">
+                  <div class="row">
+                  </div>
+                    <div class="row mb-2">
+                      <div class="col-sm-6">
+                        <input type="text" id="facuraAnular" placeholder="FACTURA" class="form-control">
+                      </div>
+                      <div class="col-sm-6">
+                        <button class="btn btn-primary" data-action="getBillAnulation">Anular</button>
+                      </div>
+                    </div>
+                    <div class="col-11">
+                      <div id="displayFactura"></div>
+                    </div>
+                </div>
+
               </div>
             </div>
 

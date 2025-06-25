@@ -89,3 +89,11 @@ function getconfig(){
 
     return $query;
 }
+
+function deleteOne($id){
+    $response = cm_update([
+        'sql' => "UPDATE almacenes SET status = ? WHERE id = '$id'",
+        'arrData' => array(0),
+    ]);
+    return $response;
+}

@@ -68,4 +68,21 @@ class Almacenes extends Controllers{
             ],
         ]);
     }
+
+    public function deleteone($id){
+        cm_model([
+            'model' => 'deleteOne',
+            'args' => [$id],
+            'return' => [
+                'true' => [
+                    'msg' => 'Se ha eliminado el almacen de manera exitosa',
+                    'showData' => 'false'
+                ],
+                'false' => [
+                    'msg' => 'Error al intentar eliminar el almacen',
+                    'showData' => 'true'
+                ],
+            ],
+        ]);
+    }
 }

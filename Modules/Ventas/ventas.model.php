@@ -88,7 +88,7 @@ function setBill($id){
         $response = $master;
         $masterStatus = false;
 
-        if (array_key_exists('status', $response)) {
+        if (is_array($response)) {
             $masterStatus = false;
         }else{
             $masterStatus = true;

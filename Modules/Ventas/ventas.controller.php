@@ -11,19 +11,23 @@ class Ventas extends Controllers{
             $id = $arrParams[0];
             $almacenDataRaw = cm_select([
                 'all' => 'true',
-                'sql' => "SELECT * FROM almacenes WHERE id='$id'",
+                'sql' => "SELECT * FROM almacenes WHERE id='$id' AND status > 0",
             ]);
-            $almacenData = $almacenDataRaw[0];
-            $nombreAlmacen = $almacenData['nombre'];
-            cm_page([
-                'class' => $this,
-                'page_title' => "Almacen: $nombreAlmacen",
-                'page_id' => 'almacenes',
-                'view' => 'ventas',
-                'script' => 'ventas',
-                'data' => $almacenData,
-            ]);
-            
+
+            if (!empty($almacenDataRaw)) {
+                $almacenData = $almacenDataRaw[0];
+                $nombreAlmacen = $almacenData['nombre'];
+                cm_page([
+                    'class' => $this,
+                    'page_title' => "Almacen: $nombreAlmacen",
+                    'page_id' => 'almacenes',
+                    'view' => 'ventas',
+                    'script' => 'ventas',
+                    'data' => $almacenData,
+                ]);
+            }else{
+                header('Location: ' . base_url()."/almacenes" );
+            }
         }else{
             header('Location: ' . base_url()."/almacenes" );
         }

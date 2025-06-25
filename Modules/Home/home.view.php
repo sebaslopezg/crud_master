@@ -43,6 +43,33 @@
 </nav>
 <!--END NAVBAR-->
 
+  <div class="image-container">
+    <!-- Glassmorphic Top Text -->
+    <div class="glass-text-top">
+      <h1>Integración modular</h1>
+      <p>¿Qué es?</p>
+    </div>
+  </div>
+
+<div class="parallax-group group-2 text-center d-flex flex-column justify-content-between">
+  <!-- H1 text container -->
+  <div class="container pt-4">
+    <h1 class="mx-auto w-75">
+      Nuestro sistema está dividido por módulos que cumplen funciones específicas dependiendo de la necesidad del negocio
+    </h1>
+  </div>
+
+  <!-- Overlapping image container -->
+  <div class="container image-overlap d-flex justify-content-center">
+    <div class="background-image-box"></div>
+  </div>
+
+  <!-- H3 at the bottom -->
+  <div class="container pb-4">
+    <h3>Ejemplos:</h3>
+  </div>
+</div>
+
 <!--SECOND SECTION-->
 <div class='parallax-group group-1' id="group-1">
   <div class='parallax-layer mid-layer'>

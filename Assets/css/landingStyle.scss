@@ -1,5 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&display=swap');
 
+$background-color: #0c0c0c;
+
 *{
     margin: 0;
     padding: 0;
@@ -19,7 +21,7 @@ body{
     font-family: "Outfit", sans-serif;
     font-optical-sizing: auto;
     font-style: normal;
-    background-image: url('../img/bg1.jpg');
+    background-image: url('../img/bg2.jpg');
     background-attachment: fixed;
     background-size: cover;
 
@@ -30,14 +32,14 @@ body{
 
         .intro-screen{
             height: 100vh;
-            background-color: black;
+            background-color: $background-color;
             @include align-center;
             color: white;
         }
 
         .outro-screen{
             height: 100vh;
-            background-color: black;
+            background-color: $background-color;
             @include align-center;           
             color: white;
         }
@@ -81,7 +83,7 @@ body{
         }
         .group-2{
             z-index: 0;
-            background-color: black;
+            background-color: $background-color;
             color: white;
         }
     }
@@ -197,13 +199,12 @@ section{
 }
 
 .nav-bg{
-  background-color: rgba(0, 0, 0);
+  background-color: $background-color;
 }
 
-/* Smooth underline on hover */
 .navbar-nav .nav-link {
   position: relative;
-  color: #fff; /* Or your desired text color */
+  color: #fff; 
   transition: color 0.3s ease;
 }
 
@@ -214,7 +215,7 @@ section{
   bottom: 0;
   height: 2px;
   width: 0%;
-  background-color: #00d1ff; /* Accent color */
+  background-color: #00d1ff; 
   transition: width 0.3s ease;
 }
 
@@ -224,12 +225,66 @@ section{
 }
 
 .navbar-nav .nav-link:hover {
-  color: #00d1ff; /* Optional: color change on hover */
+  color: #00d1ff; 
 }
 
 .navbar-nav .nav-link.active {
   color: #00d1ff;
   font-weight: 600;
+}
+
+.image-container {
+  position: relative;
+  background-color: $background-color;
+  background-image: url('../img/modulos.png'); 
+  background-size: cover;
+  background-position: center;
+  height: 100vh;
+  color: white;
+}
+
+.glass-text-top {
+  position: absolute;
+  top: 0;
+  width: 100%;
+  padding: 2rem;
+  backdrop-filter: blur(10px);
+  background: rgba(255, 255, 255, 0.15);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+  color: #fff;
+  text-align: center;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+}
+
+.glass-text-top h1,
+.glass-text-top p {
+  margin: 0;
+  text-shadow: 0 0 4px rgba(0, 0, 0, 0.4);
+}
+
+.background-image-box {
+  width: 400px;
+  height: 250px;
+  background-image: url('../img/modulos2.jpg');
+  background-size: cover;
+  background-position: center;
+  border-radius: 20px;
+  box-shadow: 0 12px 25px rgba(0, 0, 0, 0.2);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.background-image-box:hover {
+  transform: scale(1.03);
+  box-shadow: 0 16px 35px rgba(0, 0, 0, 0.25);
+}
+
+.image-overlap {
+  margin-top: -40px; /* Adjust for desired overlap */
+}
+
+.container {
+  padding-top: 1rem;
+  padding-bottom: 1rem;
 }
 
 /* *** *** *** *** *** *** *** *** ANIMATION SECTION *** *** *** *** *** *** *** *** */

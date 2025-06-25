@@ -214,12 +214,12 @@
 <!--END FIFTH SECTION-->
 
 <!--OUTRO SECTION-->
-<div class='parallax-section outro-screen' id='outro'>
+<!-- <div class='parallax-section outro-screen' id='outro'>
   <section class='hidden'>
     <h1 class="animated-text">Contacto</h1>
     <h1 class="animated-text"><i class="bi bi-whatsapp"></i> +57 310 601 9959</h1>
   </section>
-</div>
+</div> -->
 <!--END OUTRO SECTION-->
 
 <!--END INTRO SECTION-->

@@ -46,7 +46,7 @@ function schema(){
 
     $isEmpty = $query[0]['COUNT'];
     
-    if (!$isEmpty) {
+    if(!$isEmpty){
         cm_set([
             'type' => 'post',
             'mysql_type' => 'insert',
